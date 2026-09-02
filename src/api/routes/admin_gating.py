@@ -45,13 +45,23 @@ def _verify_admin_token(x_admin_token: Optional[str] = Header(None, alias="X-Adm
     """Verify administrator authentication token securely."""
     expected_token = os.environ.get("ADMIN_AUTH_TOKEN", "").strip()
     if not expected_token:
-        logger.error("[Admin Gating] ADMIN_AUTH_TOKEN is not configured in the environment.")
+        try:
+            from dotenv import load_dotenv
+            load_dotenv()
+            expected_token = os.environ.get("ADMIN_AUTH_TOKEN", "").strip()
+        except Exception:
+            pass
+
+    if not expected_token:
+        logger.error("[Admin Gating] ADMIN_AUTH_TOKEN is not configured in the environment or .env.")
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Admin authentication token not configured on server",
         )
 
-    if not x_admin_token or not secrets.compare_digest(x_admin_token, expected_token):
+    if not x_admin_token or not secrets.compare_digest(
+        x_admin_token.encode("utf-8"), expected_token.encode("utf-8")
+    ):
         logger.warning("[Admin Gating] Unauthorized access attempt to admin gating endpoint.")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
