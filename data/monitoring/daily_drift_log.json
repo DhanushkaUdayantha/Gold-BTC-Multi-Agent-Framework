@@ -1,0 +1,53 @@
+[
+  {
+    "snapshot_timestamp_utc": "2026-09-02T20:38:53.469862+00:00",
+    "btc_monitoring": {
+      "drift": {
+        "asset": "BTC/USD",
+        "feature_drift_level": "LOW",
+        "probability_drift_level": "LOW",
+        "outcome_drift_level": "LOW",
+        "regime_drift_level": "LOW",
+        "overall_drift_status": "LOW_DRIFT",
+        "drift_notes": "PSI < 0.10 across all canonical feature distributions between Train, OOS, and Holdout."
+      },
+      "degradation": {
+        "asset": "BTC/USD",
+        "rolling_30d_ev_r": 0.365,
+        "rolling_90d_ev_r": 0.325,
+        "rolling_30d_profit_factor": 1.76,
+        "rolling_90d_profit_factor": 1.65,
+        "current_drawdown_r": 5.5,
+        "degradation_status": "NORMAL",
+        "advisory_recommendation": "Strategy operating within expected nominal statistical performance bands."
+      }
+    },
+    "xau_monitoring": {
+      "drift": {
+        "asset": "XAU/USD",
+        "feature_drift_level": "LOW",
+        "probability_drift_level": "LOW",
+        "outcome_drift_level": "MEDIUM",
+        "regime_drift_level": "MEDIUM",
+        "overall_drift_status": "MEDIUM_DRIFT",
+        "drift_notes": "Asian session and range chop regimes exhibit higher variance in win rate outcomes."
+      },
+      "degradation": {
+        "asset": "XAU/USD",
+        "rolling_30d_ev_r": 0.245,
+        "rolling_90d_ev_r": 0.265,
+        "rolling_30d_profit_factor": 1.48,
+        "rolling_90d_profit_factor": 1.55,
+        "current_drawdown_r": 4.0,
+        "degradation_status": "NORMAL",
+        "advisory_recommendation": "Performance stable; Asian session filtering recommended for research shadow testing."
+      }
+    },
+    "system_invariants": {
+      "automatic_retraining": false,
+      "automatic_threshold_optimization": false,
+      "production_gating_xau": false
+    },
+    "disclaimer": "Monitoring only. Zero automatic production action."
+  }
+]
