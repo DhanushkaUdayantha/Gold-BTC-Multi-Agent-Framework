@@ -1,6 +1,6 @@
 # Top Strategy Candidates — Stable Positive Expectancy
 
-**Generated:** `2026-09-02T21:19:47.133923+00:00`  
+**Generated:** `2026-09-02T22:11:10.515445+00:00`  
 **Strategies Evaluated:** `163`  
 **Zero Production Impact:** Production code remains 100% unchanged.
 

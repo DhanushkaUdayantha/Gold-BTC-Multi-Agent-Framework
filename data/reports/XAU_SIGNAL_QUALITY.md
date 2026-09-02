@@ -1,6 +1,6 @@
 # XAU (Gold) Signal Quality & Directional Report
 
-**Generated:** 2026-09-02T21:18:42.249511+00:00
+**Generated:** 2026-09-02T22:08:28.571776+00:00
 **Asset:** XAU/USD (Strictly Isolated — Zero BTC Data)
 
 ## Directional Performance Summary

@@ -1,6 +1,6 @@
 # Final Signal Quality Governance Report — Phase 4
 
-**Generated:** 2026-09-02T21:19:39.093761+00:00
+**Generated:** 2026-09-02T22:11:00.770323+00:00
 
 ## 🎯 Master Governance Decision: `KEEP_ADVISORY`
 

@@ -1,6 +1,6 @@
 # BTC Failure Patterns & Root-Cause Attribution
 
-**Generated:** 2026-09-02T21:18:42.249511+00:00
+**Generated:** 2026-09-02T22:08:28.571776+00:00
 **Asset:** BTC/USD (Strictly Isolated)
 
 ## Failure Taxonomy Decomposition

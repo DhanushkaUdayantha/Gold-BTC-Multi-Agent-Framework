@@ -1,6 +1,6 @@
 # Regime-Aware Sequential Validation Research Report
 
-**Generated:** `2026-09-02T21:19:38.675520+00:00`  
+**Generated:** `2026-09-02T22:11:00.372372+00:00`  
 **Engine Version:** `1.0.0-regime-aware-sequential-validation`  
 **Production Decision Logic:** **100% UNCHANGED (Zero production modifications)**  
 **Audited Point-in-Time Signals:** `2,438`

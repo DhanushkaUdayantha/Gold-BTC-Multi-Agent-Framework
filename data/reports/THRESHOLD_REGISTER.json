@@ -1,7 +1,7 @@
 {
   "research_policy_version": "1.0",
   "threshold_spec_version": "1.0",
-  "generated_at": "2026-09-02T21:19:51.366082+00:00",
+  "generated_at": "2026-09-02T22:11:15.349633+00:00",
   "total_thresholds_defined": 19,
   "thresholds": {
     "MINIMUM_RESEARCH_SAMPLE": {

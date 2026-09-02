@@ -1,7 +1,7 @@
 # Master Research Threshold Register
 
 **Research Policy Version:** `1.0`  |  **Threshold Spec Version:** `1.0`
-**Generated:** 2026-09-02T21:19:51.366082+00:00
+**Generated:** 2026-09-02T22:11:15.349633+00:00
 **Total Thresholds Defined:** 19
 
 > **NON-NEGOTIABLE RULE:** Every research threshold has an explicit mathematical formula, input variables, minimum sample size, and unrounded boundary operator. Magic numbers are strictly prohibited.
