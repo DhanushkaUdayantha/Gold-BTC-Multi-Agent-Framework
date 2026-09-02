@@ -1,0 +1,152 @@
+{
+  "rejected_winners": {
+    "cohort_name": "REJECTED_WINNERS",
+    "count": 908,
+    "win_rate_pct": 100.0,
+    "expectancy_r": 1.5,
+    "total_r": 1362.0,
+    "avg_probability": 0.417,
+    "avg_confluence": 58.7,
+    "common_regimes": [
+      "LOW_VOLATILITY",
+      "TRENDING",
+      "RANGING"
+    ],
+    "common_sessions": [
+      "OVERLAP",
+      "ASIA",
+      "NEW_YORK"
+    ],
+    "pct_htf_aligned": 90.4,
+    "pct_vwap_aligned": 87.4,
+    "pct_ema_aligned": 88.4,
+    "pct_sr_aligned": 30.4,
+    "pct_mom_aligned": 93.4,
+    "avg_confirmation": 4.9
+  },
+  "retained_winners": {
+    "cohort_name": "RETAINED_WINNERS",
+    "count": 0,
+    "win_rate_pct": 0.0,
+    "expectancy_r": 0.0,
+    "total_r": 0.0,
+    "avg_probability": 0.0,
+    "avg_confluence": 0.0,
+    "common_regimes": [],
+    "common_sessions": [],
+    "pct_htf_aligned": 0.0,
+    "pct_vwap_aligned": 0.0,
+    "pct_ema_aligned": 0.0,
+    "pct_sr_aligned": 0.0,
+    "pct_mom_aligned": 0.0,
+    "avg_confirmation": 0.0
+  },
+  "rejected_losers": {
+    "cohort_name": "REJECTED_LOSERS",
+    "count": 1141,
+    "win_rate_pct": 0.0,
+    "expectancy_r": -1.0,
+    "total_r": -1140.46,
+    "avg_probability": 0.415,
+    "avg_confluence": 58.4,
+    "common_regimes": [
+      "LOW_VOLATILITY",
+      "TRENDING",
+      "RANGING"
+    ],
+    "common_sessions": [
+      "ASIA",
+      "OVERLAP",
+      "NEW_YORK"
+    ],
+    "pct_htf_aligned": 89.3,
+    "pct_vwap_aligned": 86.0,
+    "pct_ema_aligned": 87.5,
+    "pct_sr_aligned": 32.7,
+    "pct_mom_aligned": 92.4,
+    "avg_confirmation": 4.8
+  },
+  "retained_losers": {
+    "cohort_name": "RETAINED_LOSERS",
+    "count": 0,
+    "win_rate_pct": 0.0,
+    "expectancy_r": 0.0,
+    "total_r": 0.0,
+    "avg_probability": 0.0,
+    "avg_confluence": 0.0,
+    "common_regimes": [],
+    "common_sessions": [],
+    "pct_htf_aligned": 0.0,
+    "pct_vwap_aligned": 0.0,
+    "pct_ema_aligned": 0.0,
+    "pct_sr_aligned": 0.0,
+    "pct_mom_aligned": 0.0,
+    "avg_confirmation": 0.0
+  },
+  "winner_retention_pct": 0.0,
+  "loser_reduction_pct": 100.0,
+  "winner_r_lost": 1362.0,
+  "loser_r_saved": 1140.46,
+  "net_r_impact": -221.54,
+  "selectivity_score": 1.0,
+  "benefit_cost_ratio": 0.84,
+  "feature_diff": {},
+  "filter_inspections": [
+    {
+      "filter_name": "VWAP_ALIGNMENT",
+      "missed_winners_rejected_by_this": 114,
+      "missed_winners_passed_by_this": 794,
+      "rejection_pct": 12.6,
+      "justification": "Signal direction not confirmed by VWAP"
+    },
+    {
+      "filter_name": "EMA_ALIGNMENT",
+      "missed_winners_rejected_by_this": 105,
+      "missed_winners_passed_by_this": 803,
+      "rejection_pct": 11.6,
+      "justification": "EMA stack not aligned with signal"
+    },
+    {
+      "filter_name": "HTF_ALIGNMENT",
+      "missed_winners_rejected_by_this": 87,
+      "missed_winners_passed_by_this": 821,
+      "rejection_pct": 9.6,
+      "justification": "Higher-timeframe trend disagrees"
+    },
+    {
+      "filter_name": "MOMENTUM",
+      "missed_winners_rejected_by_this": 60,
+      "missed_winners_passed_by_this": 848,
+      "rejection_pct": 6.6,
+      "justification": "Momentum indicator not aligned"
+    },
+    {
+      "filter_name": "SR_ALIGNMENT",
+      "missed_winners_rejected_by_this": 632,
+      "missed_winners_passed_by_this": 276,
+      "rejection_pct": 69.6,
+      "justification": "S/R not in favour of signal"
+    }
+  ],
+  "top_rejecting_filters": [
+    "SR_ALIGNMENT",
+    "VWAP_ALIGNMENT",
+    "EMA_ALIGNMENT"
+  ],
+  "common_characteristics": [
+    "Low avg AI probability (41.70%) \u2014 below 45% threshold",
+    "Most common regime: LOW_VOLATILITY",
+    "Most common session: OVERLAP"
+  ],
+  "policy_classification": "OVERLY_RESTRICTIVE",
+  "evidence": [
+    "BCR=0.84 \u2014 removes more winner R than loser R",
+    "Winner rejection 100.0% \u2248 loser reduction 100.0%"
+  ],
+  "recommendations": [
+    "Policy A may be over-filtering; investigate VWAP and HTF conditions separately",
+    "Consider regime-specific relaxation for TRENDING markets"
+  ],
+  "btc_missed_count": 504,
+  "xau_missed_count": 404
+}

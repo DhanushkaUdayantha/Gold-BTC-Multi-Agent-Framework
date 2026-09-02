@@ -1,0 +1,11 @@
+{
+  "audited_at": "2026-09-01T18:41:07.802332+00:00",
+  "btc_isolation_status": "PASS",
+  "xau_isolation_status": "PASS",
+  "btc_leakage_count": 0,
+  "xau_leakage_count": 0,
+  "database_queries_scoped": true,
+  "api_endpoints_scoped": true,
+  "cache_keys_scoped": true,
+  "frontend_state_isolated": true
+}

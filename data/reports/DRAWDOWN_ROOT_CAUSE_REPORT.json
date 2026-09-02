@@ -1,0 +1,4005 @@
+{
+  "generated_at": "2026-09-01T17:59:18.493594+00:00",
+  "total_trades": 2049,
+  "total_r": 221.54,
+  "overall_max_drawdown_r": 21.462,
+  "overall_expectancy_r": 0.1081,
+  "largest_episode": {
+    "episode_id": 32,
+    "start_index": 464,
+    "end_index": 710,
+    "start_timestamp": "2024-07-27T19:30:00+00:00",
+    "end_timestamp": "2024-10-27T12:00:00+00:00",
+    "peak_r": 58.5,
+    "trough_r": 37.04,
+    "drawdown_r": 21.46,
+    "duration_bars": 247,
+    "assets_involved": [
+      "XAU/USD",
+      "BTC/USD"
+    ],
+    "regimes_involved": [
+      "TRENDING",
+      "LOW_VOLATILITY",
+      "RANGING"
+    ],
+    "sessions_involved": [
+      "ASIA",
+      "LONDON",
+      "NEW_YORK",
+      "OVERLAP"
+    ],
+    "directions_involved": [
+      "SELL",
+      "BUY"
+    ],
+    "loss_count": 149,
+    "win_count": 98
+  },
+  "by_asset": [
+    {
+      "dimension_name": "asset",
+      "slice_value": "BTC/USD",
+      "trade_count": 1143,
+      "win_count": 504,
+      "loss_count": 639,
+      "win_rate_pct": 44.1,
+      "expectancy_r": 0.1024,
+      "profit_factor": 1.18,
+      "total_r": 117.0,
+      "max_drawdown_r": 22.0,
+      "dd_contribution_pct": 102.5
+    },
+    {
+      "dimension_name": "asset",
+      "slice_value": "XAU/USD",
+      "trade_count": 906,
+      "win_count": 404,
+      "loss_count": 502,
+      "win_rate_pct": 44.6,
+      "expectancy_r": 0.1154,
+      "profit_factor": 1.21,
+      "total_r": 104.54,
+      "max_drawdown_r": 13.5,
+      "dd_contribution_pct": 62.9
+    }
+  ],
+  "by_direction": [
+    {
+      "dimension_name": "decision",
+      "slice_value": "BUY",
+      "trade_count": 1196,
+      "win_count": 510,
+      "loss_count": 686,
+      "win_rate_pct": 42.6,
+      "expectancy_r": 0.0661,
+      "profit_factor": 1.12,
+      "total_r": 79.0,
+      "max_drawdown_r": 23.5,
+      "dd_contribution_pct": 109.5
+    },
+    {
+      "dimension_name": "decision",
+      "slice_value": "SELL",
+      "trade_count": 853,
+      "win_count": 398,
+      "loss_count": 455,
+      "win_rate_pct": 46.7,
+      "expectancy_r": 0.1671,
+      "profit_factor": 1.31,
+      "total_r": 142.54,
+      "max_drawdown_r": 15.0,
+      "dd_contribution_pct": 69.9
+    }
+  ],
+  "by_regime": [
+    {
+      "dimension_name": "regime",
+      "slice_value": "HIGH_VOLATILITY",
+      "trade_count": 6,
+      "win_count": 1,
+      "loss_count": 5,
+      "win_rate_pct": 16.7,
+      "expectancy_r": -0.5833,
+      "profit_factor": 0.3,
+      "total_r": -3.5,
+      "max_drawdown_r": 4.0,
+      "dd_contribution_pct": 18.6
+    },
+    {
+      "dimension_name": "regime",
+      "slice_value": "LOW_VOLATILITY",
+      "trade_count": 1347,
+      "win_count": 603,
+      "loss_count": 744,
+      "win_rate_pct": 44.8,
+      "expectancy_r": 0.1196,
+      "profit_factor": 1.22,
+      "total_r": 161.04,
+      "max_drawdown_r": 15.0,
+      "dd_contribution_pct": 69.9
+    },
+    {
+      "dimension_name": "regime",
+      "slice_value": "RANGING",
+      "trade_count": 38,
+      "win_count": 16,
+      "loss_count": 22,
+      "win_rate_pct": 42.1,
+      "expectancy_r": 0.0526,
+      "profit_factor": 1.09,
+      "total_r": 2.0,
+      "max_drawdown_r": 8.0,
+      "dd_contribution_pct": 37.3
+    },
+    {
+      "dimension_name": "regime",
+      "slice_value": "TRENDING",
+      "trade_count": 658,
+      "win_count": 288,
+      "loss_count": 370,
+      "win_rate_pct": 43.8,
+      "expectancy_r": 0.0942,
+      "profit_factor": 1.17,
+      "total_r": 62.0,
+      "max_drawdown_r": 26.0,
+      "dd_contribution_pct": 121.1
+    }
+  ],
+  "by_session": [
+    {
+      "dimension_name": "session",
+      "slice_value": "ASIA",
+      "trade_count": 623,
+      "win_count": 283,
+      "loss_count": 340,
+      "win_rate_pct": 45.4,
+      "expectancy_r": 0.1356,
+      "profit_factor": 1.25,
+      "total_r": 84.5,
+      "max_drawdown_r": 18.0,
+      "dd_contribution_pct": 83.9
+    },
+    {
+      "dimension_name": "session",
+      "slice_value": "LONDON",
+      "trade_count": 389,
+      "win_count": 165,
+      "loss_count": 224,
+      "win_rate_pct": 42.4,
+      "expectancy_r": 0.0604,
+      "profit_factor": 1.1,
+      "total_r": 23.5,
+      "max_drawdown_r": 15.0,
+      "dd_contribution_pct": 69.9
+    },
+    {
+      "dimension_name": "session",
+      "slice_value": "NEW_YORK",
+      "trade_count": 432,
+      "win_count": 169,
+      "loss_count": 263,
+      "win_rate_pct": 39.1,
+      "expectancy_r": -0.0207,
+      "profit_factor": 0.97,
+      "total_r": -8.96,
+      "max_drawdown_r": 24.46,
+      "dd_contribution_pct": 114.0
+    },
+    {
+      "dimension_name": "session",
+      "slice_value": "OVERLAP",
+      "trade_count": 605,
+      "win_count": 291,
+      "loss_count": 314,
+      "win_rate_pct": 48.1,
+      "expectancy_r": 0.2025,
+      "profit_factor": 1.39,
+      "total_r": 122.5,
+      "max_drawdown_r": 12.5,
+      "dd_contribution_pct": 58.2
+    }
+  ],
+  "by_day_of_week": [
+    {
+      "dimension_name": "day_of_week",
+      "slice_value": "FRI",
+      "trade_count": 260,
+      "win_count": 115,
+      "loss_count": 145,
+      "win_rate_pct": 44.2,
+      "expectancy_r": 0.1078,
+      "profit_factor": 1.19,
+      "total_r": 28.04,
+      "max_drawdown_r": 14.0,
+      "dd_contribution_pct": 65.2
+    },
+    {
+      "dimension_name": "day_of_week",
+      "slice_value": "MON",
+      "trade_count": 547,
+      "win_count": 245,
+      "loss_count": 302,
+      "win_rate_pct": 44.8,
+      "expectancy_r": 0.1197,
+      "profit_factor": 1.22,
+      "total_r": 65.5,
+      "max_drawdown_r": 23.5,
+      "dd_contribution_pct": 109.5
+    },
+    {
+      "dimension_name": "day_of_week",
+      "slice_value": "SAT",
+      "trade_count": 66,
+      "win_count": 26,
+      "loss_count": 40,
+      "win_rate_pct": 39.4,
+      "expectancy_r": -0.0152,
+      "profit_factor": 0.97,
+      "total_r": -1.0,
+      "max_drawdown_r": 7.0,
+      "dd_contribution_pct": 32.6
+    },
+    {
+      "dimension_name": "day_of_week",
+      "slice_value": "SUN",
+      "trade_count": 197,
+      "win_count": 85,
+      "loss_count": 112,
+      "win_rate_pct": 43.1,
+      "expectancy_r": 0.0787,
+      "profit_factor": 1.14,
+      "total_r": 15.5,
+      "max_drawdown_r": 17.0,
+      "dd_contribution_pct": 79.2
+    },
+    {
+      "dimension_name": "day_of_week",
+      "slice_value": "THU",
+      "trade_count": 349,
+      "win_count": 165,
+      "loss_count": 184,
+      "win_rate_pct": 47.3,
+      "expectancy_r": 0.1819,
+      "profit_factor": 1.35,
+      "total_r": 63.5,
+      "max_drawdown_r": 10.5,
+      "dd_contribution_pct": 48.9
+    },
+    {
+      "dimension_name": "day_of_week",
+      "slice_value": "TUE",
+      "trade_count": 311,
+      "win_count": 136,
+      "loss_count": 175,
+      "win_rate_pct": 43.7,
+      "expectancy_r": 0.0932,
+      "profit_factor": 1.17,
+      "total_r": 29.0,
+      "max_drawdown_r": 19.0,
+      "dd_contribution_pct": 88.5
+    },
+    {
+      "dimension_name": "day_of_week",
+      "slice_value": "WED",
+      "trade_count": 319,
+      "win_count": 136,
+      "loss_count": 183,
+      "win_rate_pct": 42.6,
+      "expectancy_r": 0.0658,
+      "profit_factor": 1.11,
+      "total_r": 21.0,
+      "max_drawdown_r": 23.0,
+      "dd_contribution_pct": 107.2
+    }
+  ],
+  "by_hour_bucket": [
+    {
+      "dimension_name": "hour_bucket",
+      "slice_value": "00-04",
+      "trade_count": 218,
+      "win_count": 106,
+      "loss_count": 112,
+      "win_rate_pct": 48.6,
+      "expectancy_r": 0.2156,
+      "profit_factor": 1.42,
+      "total_r": 47.0,
+      "max_drawdown_r": 8.5,
+      "dd_contribution_pct": 39.6
+    },
+    {
+      "dimension_name": "hour_bucket",
+      "slice_value": "04-08",
+      "trade_count": 238,
+      "win_count": 111,
+      "loss_count": 127,
+      "win_rate_pct": 46.6,
+      "expectancy_r": 0.166,
+      "profit_factor": 1.31,
+      "total_r": 39.5,
+      "max_drawdown_r": 10.5,
+      "dd_contribution_pct": 48.9
+    },
+    {
+      "dimension_name": "hour_bucket",
+      "slice_value": "08-12",
+      "trade_count": 323,
+      "win_count": 138,
+      "loss_count": 185,
+      "win_rate_pct": 42.7,
+      "expectancy_r": 0.0681,
+      "profit_factor": 1.12,
+      "total_r": 22.0,
+      "max_drawdown_r": 20.0,
+      "dd_contribution_pct": 93.2
+    },
+    {
+      "dimension_name": "hour_bucket",
+      "slice_value": "12-16",
+      "trade_count": 605,
+      "win_count": 291,
+      "loss_count": 314,
+      "win_rate_pct": 48.1,
+      "expectancy_r": 0.2025,
+      "profit_factor": 1.39,
+      "total_r": 122.5,
+      "max_drawdown_r": 12.5,
+      "dd_contribution_pct": 58.2
+    },
+    {
+      "dimension_name": "hour_bucket",
+      "slice_value": "16-20",
+      "trade_count": 353,
+      "win_count": 143,
+      "loss_count": 210,
+      "win_rate_pct": 40.5,
+      "expectancy_r": 0.0143,
+      "profit_factor": 1.02,
+      "total_r": 5.04,
+      "max_drawdown_r": 15.96,
+      "dd_contribution_pct": 74.4
+    },
+    {
+      "dimension_name": "hour_bucket",
+      "slice_value": "20-24",
+      "trade_count": 312,
+      "win_count": 119,
+      "loss_count": 193,
+      "win_rate_pct": 38.1,
+      "expectancy_r": -0.0465,
+      "profit_factor": 0.92,
+      "total_r": -14.5,
+      "max_drawdown_r": 39.5,
+      "dd_contribution_pct": 184.0
+    }
+  ],
+  "by_probability_bucket": [
+    {
+      "dimension_name": "probability_bucket",
+      "slice_value": "30-40%",
+      "trade_count": 603,
+      "win_count": 244,
+      "loss_count": 359,
+      "win_rate_pct": 40.5,
+      "expectancy_r": 0.0116,
+      "profit_factor": 1.02,
+      "total_r": 7.0,
+      "max_drawdown_r": 33.5,
+      "dd_contribution_pct": 156.1
+    },
+    {
+      "dimension_name": "probability_bucket",
+      "slice_value": "40-50%",
+      "trade_count": 1446,
+      "win_count": 664,
+      "loss_count": 782,
+      "win_rate_pct": 45.9,
+      "expectancy_r": 0.1484,
+      "profit_factor": 1.27,
+      "total_r": 214.54,
+      "max_drawdown_r": 19.46,
+      "dd_contribution_pct": 90.7
+    }
+  ],
+  "by_mtf_alignment": [
+    {
+      "dimension_name": "mtf_alignment",
+      "slice_value": "FULLY_ALIGNED",
+      "trade_count": 807,
+      "win_count": 352,
+      "loss_count": 455,
+      "win_rate_pct": 43.6,
+      "expectancy_r": 0.0905,
+      "profit_factor": 1.16,
+      "total_r": 73.0,
+      "max_drawdown_r": 21.0,
+      "dd_contribution_pct": 97.8
+    },
+    {
+      "dimension_name": "mtf_alignment",
+      "slice_value": "PARTIAL_ALIGNMENT",
+      "trade_count": 1139,
+      "win_count": 509,
+      "loss_count": 630,
+      "win_rate_pct": 44.7,
+      "expectancy_r": 0.1177,
+      "profit_factor": 1.21,
+      "total_r": 134.04,
+      "max_drawdown_r": 23.5,
+      "dd_contribution_pct": 109.5
+    },
+    {
+      "dimension_name": "mtf_alignment",
+      "slice_value": "WEAK_ALIGNMENT",
+      "trade_count": 103,
+      "win_count": 47,
+      "loss_count": 56,
+      "win_rate_pct": 45.6,
+      "expectancy_r": 0.1408,
+      "profit_factor": 1.26,
+      "total_r": 14.5,
+      "max_drawdown_r": 9.5,
+      "dd_contribution_pct": 44.3
+    }
+  ],
+  "all_episodes": [
+    {
+      "episode_id": 0,
+      "start_index": 0,
+      "end_index": 124,
+      "start_timestamp": "2023-01-06T20:00:00+00:00",
+      "end_timestamp": "2024-03-04T14:00:00+00:00",
+      "peak_r": 0.0,
+      "trough_r": -14.0,
+      "drawdown_r": 14.0,
+      "duration_bars": 125,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "HIGH_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 75,
+      "win_count": 50
+    },
+    {
+      "episode_id": 1,
+      "start_index": 126,
+      "end_index": 131,
+      "start_timestamp": "2024-03-04T16:00:00+00:00",
+      "end_timestamp": "2024-03-11T08:30:00+00:00",
+      "peak_r": 1.5,
+      "trough_r": -2.5,
+      "drawdown_r": 4.0,
+      "duration_bars": 6,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 4,
+      "win_count": 2
+    },
+    {
+      "episode_id": 2,
+      "start_index": 133,
+      "end_index": 148,
+      "start_timestamp": "2024-03-11T19:30:00+00:00",
+      "end_timestamp": "2024-03-17T18:00:00+00:00",
+      "peak_r": 2.0,
+      "trough_r": -1.0,
+      "drawdown_r": 3.0,
+      "duration_bars": 16,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 10,
+      "win_count": 6
+    },
+    {
+      "episode_id": 3,
+      "start_index": 150,
+      "end_index": 160,
+      "start_timestamp": "2024-03-18T12:15:00+00:00",
+      "end_timestamp": "2024-03-25T11:45:00+00:00",
+      "peak_r": 2.5,
+      "trough_r": -1.5,
+      "drawdown_r": 4.0,
+      "duration_bars": 11,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 4,
+      "start_index": 162,
+      "end_index": 172,
+      "start_timestamp": "2024-03-25T13:45:00+00:00",
+      "end_timestamp": "2024-04-02T10:45:00+00:00",
+      "peak_r": 3.0,
+      "trough_r": -0.5,
+      "drawdown_r": 3.5,
+      "duration_bars": 11,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 5,
+      "start_index": 174,
+      "end_index": 174,
+      "start_timestamp": "2024-04-04T12:30:00+00:00",
+      "end_timestamp": "2024-04-04T12:30:00+00:00",
+      "peak_r": 3.5,
+      "trough_r": 2.5,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 6,
+      "start_index": 177,
+      "end_index": 177,
+      "start_timestamp": "2024-04-05T10:15:00+00:00",
+      "end_timestamp": "2024-04-05T10:15:00+00:00",
+      "peak_r": 5.5,
+      "trough_r": 4.5,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 7,
+      "start_index": 179,
+      "end_index": 236,
+      "start_timestamp": "2024-04-05T14:30:00+00:00",
+      "end_timestamp": "2024-04-30T06:30:00+00:00",
+      "peak_r": 6.0,
+      "trough_r": -5.5,
+      "drawdown_r": 11.5,
+      "duration_bars": 58,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 35,
+      "win_count": 23
+    },
+    {
+      "episode_id": 8,
+      "start_index": 238,
+      "end_index": 238,
+      "start_timestamp": "2024-04-30T08:30:00+00:00",
+      "end_timestamp": "2024-04-30T08:30:00+00:00",
+      "peak_r": 7.0,
+      "trough_r": 6.0,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 9,
+      "start_index": 242,
+      "end_index": 322,
+      "start_timestamp": "2024-04-30T12:45:00+00:00",
+      "end_timestamp": "2024-06-05T16:15:00+00:00",
+      "peak_r": 10.5,
+      "trough_r": 0.0,
+      "drawdown_r": 10.5,
+      "duration_bars": 81,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 49,
+      "win_count": 32
+    },
+    {
+      "episode_id": 10,
+      "start_index": 325,
+      "end_index": 325,
+      "start_timestamp": "2024-06-07T12:45:00+00:00",
+      "end_timestamp": "2024-06-07T12:45:00+00:00",
+      "peak_r": 12.5,
+      "trough_r": 11.5,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 11,
+      "start_index": 329,
+      "end_index": 331,
+      "start_timestamp": "2024-06-07T18:00:00+00:00",
+      "end_timestamp": "2024-06-11T06:30:00+00:00",
+      "peak_r": 16.0,
+      "trough_r": 14.0,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 12,
+      "start_index": 333,
+      "end_index": 342,
+      "start_timestamp": "2024-06-12T20:00:00+00:00",
+      "end_timestamp": "2024-06-17T06:15:00+00:00",
+      "peak_r": 17.0,
+      "trough_r": 12.0,
+      "drawdown_r": 5.0,
+      "duration_bars": 10,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 6,
+      "win_count": 4
+    },
+    {
+      "episode_id": 13,
+      "start_index": 346,
+      "end_index": 351,
+      "start_timestamp": "2024-06-17T13:45:00+00:00",
+      "end_timestamp": "2024-06-20T04:00:00+00:00",
+      "peak_r": 21.5,
+      "trough_r": 18.5,
+      "drawdown_r": 3.0,
+      "duration_bars": 6,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 4,
+      "win_count": 2
+    },
+    {
+      "episode_id": 14,
+      "start_index": 353,
+      "end_index": 353,
+      "start_timestamp": "2024-06-20T11:00:00+00:00",
+      "end_timestamp": "2024-06-20T11:00:00+00:00",
+      "peak_r": 22.0,
+      "trough_r": 21.0,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 15,
+      "start_index": 358,
+      "end_index": 358,
+      "start_timestamp": "2024-06-21T07:45:00+00:00",
+      "end_timestamp": "2024-06-21T07:45:00+00:00",
+      "peak_r": 27.0,
+      "trough_r": 26.0,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 16,
+      "start_index": 363,
+      "end_index": 363,
+      "start_timestamp": "2024-06-23T17:00:00+00:00",
+      "end_timestamp": "2024-06-23T17:00:00+00:00",
+      "peak_r": 32.0,
+      "trough_r": 31.0,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 17,
+      "start_index": 365,
+      "end_index": 369,
+      "start_timestamp": "2024-06-24T00:15:00+00:00",
+      "end_timestamp": "2024-06-26T04:30:00+00:00",
+      "peak_r": 32.5,
+      "trough_r": 30.5,
+      "drawdown_r": 2.0,
+      "duration_bars": 5,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 3,
+      "win_count": 2
+    },
+    {
+      "episode_id": 18,
+      "start_index": 371,
+      "end_index": 376,
+      "start_timestamp": "2024-06-26T05:45:00+00:00",
+      "end_timestamp": "2024-06-27T19:30:00+00:00",
+      "peak_r": 34.0,
+      "trough_r": 31.0,
+      "drawdown_r": 3.0,
+      "duration_bars": 6,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 4,
+      "win_count": 2
+    },
+    {
+      "episode_id": 19,
+      "start_index": 378,
+      "end_index": 398,
+      "start_timestamp": "2024-06-28T10:30:00+00:00",
+      "end_timestamp": "2024-07-03T05:00:00+00:00",
+      "peak_r": 34.5,
+      "trough_r": 26.5,
+      "drawdown_r": 8.0,
+      "duration_bars": 21,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 13,
+      "win_count": 8
+    },
+    {
+      "episode_id": 20,
+      "start_index": 401,
+      "end_index": 401,
+      "start_timestamp": "2024-07-03T13:00:00+00:00",
+      "end_timestamp": "2024-07-03T13:00:00+00:00",
+      "peak_r": 36.5,
+      "trough_r": 35.5,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 21,
+      "start_index": 403,
+      "end_index": 403,
+      "start_timestamp": "2024-07-03T14:30:00+00:00",
+      "end_timestamp": "2024-07-03T14:30:00+00:00",
+      "peak_r": 37.0,
+      "trough_r": 36.0,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 22,
+      "start_index": 405,
+      "end_index": 405,
+      "start_timestamp": "2024-07-03T22:00:00+00:00",
+      "end_timestamp": "2024-07-03T22:00:00+00:00",
+      "peak_r": 37.5,
+      "trough_r": 36.5,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 23,
+      "start_index": 407,
+      "end_index": 407,
+      "start_timestamp": "2024-07-05T02:15:00+00:00",
+      "end_timestamp": "2024-07-05T02:15:00+00:00",
+      "peak_r": 38.0,
+      "trough_r": 37.0,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 24,
+      "start_index": 409,
+      "end_index": 409,
+      "start_timestamp": "2024-07-05T13:45:00+00:00",
+      "end_timestamp": "2024-07-05T13:45:00+00:00",
+      "peak_r": 38.5,
+      "trough_r": 37.5,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 25,
+      "start_index": 414,
+      "end_index": 414,
+      "start_timestamp": "2024-07-08T01:15:00+00:00",
+      "end_timestamp": "2024-07-08T01:15:00+00:00",
+      "peak_r": 43.5,
+      "trough_r": 42.5,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 26,
+      "start_index": 416,
+      "end_index": 426,
+      "start_timestamp": "2024-07-08T08:45:00+00:00",
+      "end_timestamp": "2024-07-11T11:45:00+00:00",
+      "peak_r": 44.0,
+      "trough_r": 39.5,
+      "drawdown_r": 4.5,
+      "duration_bars": 11,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 27,
+      "start_index": 430,
+      "end_index": 430,
+      "start_timestamp": "2024-07-15T10:15:00+00:00",
+      "end_timestamp": "2024-07-15T10:15:00+00:00",
+      "peak_r": 47.5,
+      "trough_r": 46.5,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 28,
+      "start_index": 432,
+      "end_index": 432,
+      "start_timestamp": "2024-07-15T16:00:00+00:00",
+      "end_timestamp": "2024-07-15T16:00:00+00:00",
+      "peak_r": 48.0,
+      "trough_r": 47.0,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 29,
+      "start_index": 435,
+      "end_index": 435,
+      "start_timestamp": "2024-07-16T11:00:00+00:00",
+      "end_timestamp": "2024-07-16T11:00:00+00:00",
+      "peak_r": 50.0,
+      "trough_r": 49.0,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 30,
+      "start_index": 438,
+      "end_index": 457,
+      "start_timestamp": "2024-07-17T11:45:00+00:00",
+      "end_timestamp": "2024-07-25T22:00:00+00:00",
+      "peak_r": 52.0,
+      "trough_r": 44.5,
+      "drawdown_r": 7.5,
+      "duration_bars": 20,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 12,
+      "win_count": 8
+    },
+    {
+      "episode_id": 31,
+      "start_index": 460,
+      "end_index": 460,
+      "start_timestamp": "2024-07-26T13:45:00+00:00",
+      "end_timestamp": "2024-07-26T13:45:00+00:00",
+      "peak_r": 55.0,
+      "trough_r": 54.0,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 32,
+      "start_index": 464,
+      "end_index": 710,
+      "start_timestamp": "2024-07-27T19:30:00+00:00",
+      "end_timestamp": "2024-10-27T12:00:00+00:00",
+      "peak_r": 58.5,
+      "trough_r": 37.04,
+      "drawdown_r": 21.46,
+      "duration_bars": 247,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 149,
+      "win_count": 98
+    },
+    {
+      "episode_id": 33,
+      "start_index": 712,
+      "end_index": 712,
+      "start_timestamp": "2024-10-27T17:45:00+00:00",
+      "end_timestamp": "2024-10-27T17:45:00+00:00",
+      "peak_r": 58.54,
+      "trough_r": 57.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 34,
+      "start_index": 714,
+      "end_index": 724,
+      "start_timestamp": "2024-10-27T22:00:00+00:00",
+      "end_timestamp": "2024-10-28T16:45:00+00:00",
+      "peak_r": 59.04,
+      "trough_r": 55.54,
+      "drawdown_r": 3.5,
+      "duration_bars": 11,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 35,
+      "start_index": 728,
+      "end_index": 745,
+      "start_timestamp": "2024-11-01T13:45:00+00:00",
+      "end_timestamp": "2024-11-11T11:00:00+00:00",
+      "peak_r": 62.54,
+      "trough_r": 53.54,
+      "drawdown_r": 9.0,
+      "duration_bars": 18,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 11,
+      "win_count": 7
+    },
+    {
+      "episode_id": 36,
+      "start_index": 747,
+      "end_index": 761,
+      "start_timestamp": "2024-11-17T09:15:00+00:00",
+      "end_timestamp": "2024-11-22T05:00:00+00:00",
+      "peak_r": 63.54,
+      "trough_r": 59.04,
+      "drawdown_r": 4.5,
+      "duration_bars": 15,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 9,
+      "win_count": 6
+    },
+    {
+      "episode_id": 37,
+      "start_index": 763,
+      "end_index": 842,
+      "start_timestamp": "2024-11-22T09:45:00+00:00",
+      "end_timestamp": "2024-12-29T18:15:00+00:00",
+      "peak_r": 65.04,
+      "trough_r": 49.54,
+      "drawdown_r": 15.5,
+      "duration_bars": 80,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "HIGH_VOLATILITY",
+        "TRENDING",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 48,
+      "win_count": 32
+    },
+    {
+      "episode_id": 38,
+      "start_index": 844,
+      "end_index": 851,
+      "start_timestamp": "2024-12-30T08:30:00+00:00",
+      "end_timestamp": "2025-01-02T01:15:00+00:00",
+      "peak_r": 66.54,
+      "trough_r": 63.04,
+      "drawdown_r": 3.5,
+      "duration_bars": 8,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 5,
+      "win_count": 3
+    },
+    {
+      "episode_id": 39,
+      "start_index": 854,
+      "end_index": 864,
+      "start_timestamp": "2025-01-02T10:30:00+00:00",
+      "end_timestamp": "2025-01-06T02:15:00+00:00",
+      "peak_r": 69.04,
+      "trough_r": 65.04,
+      "drawdown_r": 4.0,
+      "duration_bars": 11,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 40,
+      "start_index": 866,
+      "end_index": 866,
+      "start_timestamp": "2025-01-06T07:45:00+00:00",
+      "end_timestamp": "2025-01-06T07:45:00+00:00",
+      "peak_r": 69.54,
+      "trough_r": 68.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 41,
+      "start_index": 869,
+      "end_index": 884,
+      "start_timestamp": "2025-01-06T11:30:00+00:00",
+      "end_timestamp": "2025-01-13T06:45:00+00:00",
+      "peak_r": 71.54,
+      "trough_r": 68.04,
+      "drawdown_r": 3.5,
+      "duration_bars": 16,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 10,
+      "win_count": 6
+    },
+    {
+      "episode_id": 42,
+      "start_index": 888,
+      "end_index": 888,
+      "start_timestamp": "2025-01-13T16:00:00+00:00",
+      "end_timestamp": "2025-01-13T16:00:00+00:00",
+      "peak_r": 75.04,
+      "trough_r": 74.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 43,
+      "start_index": 890,
+      "end_index": 890,
+      "start_timestamp": "2025-01-15T01:30:00+00:00",
+      "end_timestamp": "2025-01-15T01:30:00+00:00",
+      "peak_r": 75.54,
+      "trough_r": 74.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 44,
+      "start_index": 893,
+      "end_index": 893,
+      "start_timestamp": "2025-01-15T07:45:00+00:00",
+      "end_timestamp": "2025-01-15T07:45:00+00:00",
+      "peak_r": 77.54,
+      "trough_r": 76.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 45,
+      "start_index": 899,
+      "end_index": 899,
+      "start_timestamp": "2025-01-17T02:15:00+00:00",
+      "end_timestamp": "2025-01-17T02:15:00+00:00",
+      "peak_r": 84.04,
+      "trough_r": 83.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 46,
+      "start_index": 901,
+      "end_index": 945,
+      "start_timestamp": "2025-01-19T09:45:00+00:00",
+      "end_timestamp": "2025-02-03T08:15:00+00:00",
+      "peak_r": 84.54,
+      "trough_r": 74.54,
+      "drawdown_r": 10.0,
+      "duration_bars": 45,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "HIGH_VOLATILITY",
+        "LOW_VOLATILITY",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 27,
+      "win_count": 18
+    },
+    {
+      "episode_id": 47,
+      "start_index": 947,
+      "end_index": 947,
+      "start_timestamp": "2025-02-03T14:45:00+00:00",
+      "end_timestamp": "2025-02-03T14:45:00+00:00",
+      "peak_r": 86.04,
+      "trough_r": 85.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 48,
+      "start_index": 950,
+      "end_index": 952,
+      "start_timestamp": "2025-02-07T01:15:00+00:00",
+      "end_timestamp": "2025-02-09T11:00:00+00:00",
+      "peak_r": 88.04,
+      "trough_r": 86.04,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 49,
+      "start_index": 954,
+      "end_index": 966,
+      "start_timestamp": "2025-02-09T13:30:00+00:00",
+      "end_timestamp": "2025-02-11T15:00:00+00:00",
+      "peak_r": 89.04,
+      "trough_r": 84.04,
+      "drawdown_r": 5.0,
+      "duration_bars": 13,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 8,
+      "win_count": 5
+    },
+    {
+      "episode_id": 50,
+      "start_index": 968,
+      "end_index": 995,
+      "start_timestamp": "2025-02-11T23:00:00+00:00",
+      "end_timestamp": "2025-02-20T12:45:00+00:00",
+      "peak_r": 90.04,
+      "trough_r": 84.54,
+      "drawdown_r": 5.5,
+      "duration_bars": 28,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 17,
+      "win_count": 11
+    },
+    {
+      "episode_id": 51,
+      "start_index": 997,
+      "end_index": 997,
+      "start_timestamp": "2025-02-20T14:15:00+00:00",
+      "end_timestamp": "2025-02-20T14:15:00+00:00",
+      "peak_r": 91.04,
+      "trough_r": 90.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 52,
+      "start_index": 999,
+      "end_index": 1099,
+      "start_timestamp": "2025-02-21T15:30:00+00:00",
+      "end_timestamp": "2025-04-21T00:45:00+00:00",
+      "peak_r": 91.54,
+      "trough_r": 78.54,
+      "drawdown_r": 13.0,
+      "duration_bars": 101,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 61,
+      "win_count": 40
+    },
+    {
+      "episode_id": 53,
+      "start_index": 1101,
+      "end_index": 1111,
+      "start_timestamp": "2025-04-22T16:30:00+00:00",
+      "end_timestamp": "2025-04-28T14:15:00+00:00",
+      "peak_r": 92.04,
+      "trough_r": 88.04,
+      "drawdown_r": 4.0,
+      "duration_bars": 11,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 54,
+      "start_index": 1113,
+      "end_index": 1115,
+      "start_timestamp": "2025-04-28T23:45:00+00:00",
+      "end_timestamp": "2025-05-01T09:00:00+00:00",
+      "peak_r": 92.54,
+      "trough_r": 90.54,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 55,
+      "start_index": 1117,
+      "end_index": 1171,
+      "start_timestamp": "2025-05-03T14:30:00+00:00",
+      "end_timestamp": "2025-05-20T14:15:00+00:00",
+      "peak_r": 93.54,
+      "trough_r": 83.04,
+      "drawdown_r": 10.5,
+      "duration_bars": 55,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 33,
+      "win_count": 22
+    },
+    {
+      "episode_id": 56,
+      "start_index": 1174,
+      "end_index": 1174,
+      "start_timestamp": "2025-05-21T04:45:00+00:00",
+      "end_timestamp": "2025-05-21T04:45:00+00:00",
+      "peak_r": 96.54,
+      "trough_r": 95.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 57,
+      "start_index": 1177,
+      "end_index": 1181,
+      "start_timestamp": "2025-05-22T01:30:00+00:00",
+      "end_timestamp": "2025-05-25T22:00:00+00:00",
+      "peak_r": 98.54,
+      "trough_r": 95.54,
+      "drawdown_r": 3.0,
+      "duration_bars": 5,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 3,
+      "win_count": 2
+    },
+    {
+      "episode_id": 58,
+      "start_index": 1183,
+      "end_index": 1183,
+      "start_timestamp": "2025-05-26T17:00:00+00:00",
+      "end_timestamp": "2025-05-26T17:00:00+00:00",
+      "peak_r": 100.04,
+      "trough_r": 99.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 59,
+      "start_index": 1185,
+      "end_index": 1195,
+      "start_timestamp": "2025-05-27T13:15:00+00:00",
+      "end_timestamp": "2025-06-02T12:15:00+00:00",
+      "peak_r": 100.54,
+      "trough_r": 97.04,
+      "drawdown_r": 3.5,
+      "duration_bars": 11,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 60,
+      "start_index": 1197,
+      "end_index": 1199,
+      "start_timestamp": "2025-06-02T13:45:00+00:00",
+      "end_timestamp": "2025-06-05T16:30:00+00:00",
+      "peak_r": 101.04,
+      "trough_r": 99.04,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 61,
+      "start_index": 1202,
+      "end_index": 1224,
+      "start_timestamp": "2025-06-05T20:30:00+00:00",
+      "end_timestamp": "2025-06-16T06:30:00+00:00",
+      "peak_r": 103.54,
+      "trough_r": 98.54,
+      "drawdown_r": 5.0,
+      "duration_bars": 23,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 14,
+      "win_count": 9
+    },
+    {
+      "episode_id": 62,
+      "start_index": 1226,
+      "end_index": 1231,
+      "start_timestamp": "2025-06-17T16:30:00+00:00",
+      "end_timestamp": "2025-06-20T20:15:00+00:00",
+      "peak_r": 104.54,
+      "trough_r": 101.54,
+      "drawdown_r": 3.0,
+      "duration_bars": 6,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 4,
+      "win_count": 2
+    },
+    {
+      "episode_id": 63,
+      "start_index": 1233,
+      "end_index": 1237,
+      "start_timestamp": "2025-06-23T11:15:00+00:00",
+      "end_timestamp": "2025-06-24T04:30:00+00:00",
+      "peak_r": 105.04,
+      "trough_r": 103.04,
+      "drawdown_r": 2.0,
+      "duration_bars": 5,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 3,
+      "win_count": 2
+    },
+    {
+      "episode_id": 64,
+      "start_index": 1239,
+      "end_index": 1239,
+      "start_timestamp": "2025-06-24T06:45:00+00:00",
+      "end_timestamp": "2025-06-24T06:45:00+00:00",
+      "peak_r": 106.54,
+      "trough_r": 105.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 65,
+      "start_index": 1243,
+      "end_index": 1243,
+      "start_timestamp": "2025-06-25T13:30:00+00:00",
+      "end_timestamp": "2025-06-25T13:30:00+00:00",
+      "peak_r": 110.04,
+      "trough_r": 109.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 66,
+      "start_index": 1245,
+      "end_index": 1255,
+      "start_timestamp": "2025-06-26T06:30:00+00:00",
+      "end_timestamp": "2025-06-30T11:00:00+00:00",
+      "peak_r": 110.54,
+      "trough_r": 108.54,
+      "drawdown_r": 2.0,
+      "duration_bars": 11,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 67,
+      "start_index": 1257,
+      "end_index": 1259,
+      "start_timestamp": "2025-07-01T12:30:00+00:00",
+      "end_timestamp": "2025-07-02T05:15:00+00:00",
+      "peak_r": 111.04,
+      "trough_r": 109.04,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 68,
+      "start_index": 1261,
+      "end_index": 1263,
+      "start_timestamp": "2025-07-02T08:15:00+00:00",
+      "end_timestamp": "2025-07-02T13:45:00+00:00",
+      "peak_r": 112.04,
+      "trough_r": 110.04,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 69,
+      "start_index": 1265,
+      "end_index": 1290,
+      "start_timestamp": "2025-07-02T20:15:00+00:00",
+      "end_timestamp": "2025-07-11T00:15:00+00:00",
+      "peak_r": 113.04,
+      "trough_r": 105.54,
+      "drawdown_r": 7.5,
+      "duration_bars": 26,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 16,
+      "win_count": 10
+    },
+    {
+      "episode_id": 70,
+      "start_index": 1294,
+      "end_index": 1294,
+      "start_timestamp": "2025-07-14T00:15:00+00:00",
+      "end_timestamp": "2025-07-14T00:15:00+00:00",
+      "peak_r": 116.54,
+      "trough_r": 115.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 71,
+      "start_index": 1296,
+      "end_index": 1340,
+      "start_timestamp": "2025-07-14T08:15:00+00:00",
+      "end_timestamp": "2025-07-31T23:00:00+00:00",
+      "peak_r": 117.04,
+      "trough_r": 108.04,
+      "drawdown_r": 9.0,
+      "duration_bars": 45,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 27,
+      "win_count": 18
+    },
+    {
+      "episode_id": 72,
+      "start_index": 1344,
+      "end_index": 1344,
+      "start_timestamp": "2025-08-01T13:45:00+00:00",
+      "end_timestamp": "2025-08-01T13:45:00+00:00",
+      "peak_r": 121.54,
+      "trough_r": 120.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 73,
+      "start_index": 1346,
+      "end_index": 1346,
+      "start_timestamp": "2025-08-03T22:15:00+00:00",
+      "end_timestamp": "2025-08-03T22:15:00+00:00",
+      "peak_r": 122.04,
+      "trough_r": 121.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 74,
+      "start_index": 1349,
+      "end_index": 1379,
+      "start_timestamp": "2025-08-04T13:15:00+00:00",
+      "end_timestamp": "2025-08-18T00:45:00+00:00",
+      "peak_r": 124.04,
+      "trough_r": 112.54,
+      "drawdown_r": 11.5,
+      "duration_bars": 31,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 19,
+      "win_count": 12
+    },
+    {
+      "episode_id": 75,
+      "start_index": 1383,
+      "end_index": 1387,
+      "start_timestamp": "2025-08-19T01:15:00+00:00",
+      "end_timestamp": "2025-08-21T10:15:00+00:00",
+      "peak_r": 127.54,
+      "trough_r": 124.54,
+      "drawdown_r": 3.0,
+      "duration_bars": 5,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 3,
+      "win_count": 2
+    },
+    {
+      "episode_id": 76,
+      "start_index": 1389,
+      "end_index": 1399,
+      "start_timestamp": "2025-08-22T14:45:00+00:00",
+      "end_timestamp": "2025-08-29T13:30:00+00:00",
+      "peak_r": 129.04,
+      "trough_r": 123.54,
+      "drawdown_r": 5.5,
+      "duration_bars": 11,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 77,
+      "start_index": 1401,
+      "end_index": 1405,
+      "start_timestamp": "2025-08-31T04:15:00+00:00",
+      "end_timestamp": "2025-09-01T00:45:00+00:00",
+      "peak_r": 129.54,
+      "trough_r": 127.54,
+      "drawdown_r": 2.0,
+      "duration_bars": 5,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 3,
+      "win_count": 2
+    },
+    {
+      "episode_id": 78,
+      "start_index": 1408,
+      "end_index": 1408,
+      "start_timestamp": "2025-09-01T02:30:00+00:00",
+      "end_timestamp": "2025-09-01T02:30:00+00:00",
+      "peak_r": 132.54,
+      "trough_r": 131.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 79,
+      "start_index": 1410,
+      "end_index": 1412,
+      "start_timestamp": "2025-09-01T07:45:00+00:00",
+      "end_timestamp": "2025-09-02T11:30:00+00:00",
+      "peak_r": 133.04,
+      "trough_r": 131.04,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 80,
+      "start_index": 1414,
+      "end_index": 1414,
+      "start_timestamp": "2025-09-02T12:45:00+00:00",
+      "end_timestamp": "2025-09-02T12:45:00+00:00",
+      "peak_r": 134.04,
+      "trough_r": 133.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 81,
+      "start_index": 1416,
+      "end_index": 1420,
+      "start_timestamp": "2025-09-02T14:15:00+00:00",
+      "end_timestamp": "2025-09-04T10:00:00+00:00",
+      "peak_r": 134.54,
+      "trough_r": 131.54,
+      "drawdown_r": 3.0,
+      "duration_bars": 5,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 3,
+      "win_count": 2
+    },
+    {
+      "episode_id": 82,
+      "start_index": 1422,
+      "end_index": 1492,
+      "start_timestamp": "2025-09-04T13:45:00+00:00",
+      "end_timestamp": "2025-10-06T09:30:00+00:00",
+      "peak_r": 136.04,
+      "trough_r": 123.54,
+      "drawdown_r": 12.5,
+      "duration_bars": 71,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 43,
+      "win_count": 28
+    },
+    {
+      "episode_id": 83,
+      "start_index": 1497,
+      "end_index": 1497,
+      "start_timestamp": "2025-10-09T21:30:00+00:00",
+      "end_timestamp": "2025-10-09T21:30:00+00:00",
+      "peak_r": 141.04,
+      "trough_r": 140.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 84,
+      "start_index": 1499,
+      "end_index": 1499,
+      "start_timestamp": "2025-10-12T23:15:00+00:00",
+      "end_timestamp": "2025-10-12T23:15:00+00:00",
+      "peak_r": 141.54,
+      "trough_r": 140.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 85,
+      "start_index": 1501,
+      "end_index": 1501,
+      "start_timestamp": "2025-10-13T05:30:00+00:00",
+      "end_timestamp": "2025-10-13T05:30:00+00:00",
+      "peak_r": 142.04,
+      "trough_r": 141.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 86,
+      "start_index": 1505,
+      "end_index": 1505,
+      "start_timestamp": "2025-10-20T12:45:00+00:00",
+      "end_timestamp": "2025-10-20T12:45:00+00:00",
+      "peak_r": 145.54,
+      "trough_r": 144.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 87,
+      "start_index": 1509,
+      "end_index": 1521,
+      "start_timestamp": "2025-10-22T11:45:00+00:00",
+      "end_timestamp": "2025-10-28T13:00:00+00:00",
+      "peak_r": 149.04,
+      "trough_r": 142.54,
+      "drawdown_r": 6.5,
+      "duration_bars": 13,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 8,
+      "win_count": 5
+    },
+    {
+      "episode_id": 88,
+      "start_index": 1523,
+      "end_index": 1552,
+      "start_timestamp": "2025-10-28T14:30:00+00:00",
+      "end_timestamp": "2025-11-09T13:30:00+00:00",
+      "peak_r": 150.04,
+      "trough_r": 143.54,
+      "drawdown_r": 6.5,
+      "duration_bars": 30,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 18,
+      "win_count": 12
+    },
+    {
+      "episode_id": 89,
+      "start_index": 1559,
+      "end_index": 1563,
+      "start_timestamp": "2025-11-11T21:00:00+00:00",
+      "end_timestamp": "2025-11-13T15:15:00+00:00",
+      "peak_r": 159.04,
+      "trough_r": 156.04,
+      "drawdown_r": 3.0,
+      "duration_bars": 5,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 3,
+      "win_count": 2
+    },
+    {
+      "episode_id": 90,
+      "start_index": 1565,
+      "end_index": 1565,
+      "start_timestamp": "2025-11-13T18:15:00+00:00",
+      "end_timestamp": "2025-11-13T18:15:00+00:00",
+      "peak_r": 160.54,
+      "trough_r": 159.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 91,
+      "start_index": 1568,
+      "end_index": 1595,
+      "start_timestamp": "2025-11-18T16:00:00+00:00",
+      "end_timestamp": "2025-11-30T21:30:00+00:00",
+      "peak_r": 162.54,
+      "trough_r": 156.54,
+      "drawdown_r": 6.0,
+      "duration_bars": 28,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 17,
+      "win_count": 11
+    },
+    {
+      "episode_id": 92,
+      "start_index": 1599,
+      "end_index": 1609,
+      "start_timestamp": "2025-12-01T02:00:00+00:00",
+      "end_timestamp": "2025-12-05T16:15:00+00:00",
+      "peak_r": 166.54,
+      "trough_r": 161.04,
+      "drawdown_r": 5.5,
+      "duration_bars": 11,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 93,
+      "start_index": 1612,
+      "end_index": 1612,
+      "start_timestamp": "2025-12-08T09:15:00+00:00",
+      "end_timestamp": "2025-12-08T09:15:00+00:00",
+      "peak_r": 168.54,
+      "trough_r": 167.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 94,
+      "start_index": 1616,
+      "end_index": 1635,
+      "start_timestamp": "2025-12-08T15:30:00+00:00",
+      "end_timestamp": "2025-12-16T12:45:00+00:00",
+      "peak_r": 172.04,
+      "trough_r": 167.04,
+      "drawdown_r": 5.0,
+      "duration_bars": 20,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 12,
+      "win_count": 8
+    },
+    {
+      "episode_id": 95,
+      "start_index": 1637,
+      "end_index": 1652,
+      "start_timestamp": "2025-12-16T14:30:00+00:00",
+      "end_timestamp": "2025-12-22T07:00:00+00:00",
+      "peak_r": 173.54,
+      "trough_r": 165.04,
+      "drawdown_r": 8.5,
+      "duration_bars": 16,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 10,
+      "win_count": 6
+    },
+    {
+      "episode_id": 96,
+      "start_index": 1654,
+      "end_index": 1654,
+      "start_timestamp": "2025-12-22T20:30:00+00:00",
+      "end_timestamp": "2025-12-22T20:30:00+00:00",
+      "peak_r": 174.04,
+      "trough_r": 173.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 97,
+      "start_index": 1657,
+      "end_index": 1662,
+      "start_timestamp": "2025-12-24T10:15:00+00:00",
+      "end_timestamp": "2025-12-26T01:15:00+00:00",
+      "peak_r": 176.04,
+      "trough_r": 173.04,
+      "drawdown_r": 3.0,
+      "duration_bars": 6,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 4,
+      "win_count": 2
+    },
+    {
+      "episode_id": 98,
+      "start_index": 1664,
+      "end_index": 1664,
+      "start_timestamp": "2025-12-26T02:30:00+00:00",
+      "end_timestamp": "2025-12-26T02:30:00+00:00",
+      "peak_r": 176.54,
+      "trough_r": 175.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 99,
+      "start_index": 1667,
+      "end_index": 1706,
+      "start_timestamp": "2025-12-26T15:00:00+00:00",
+      "end_timestamp": "2026-01-12T09:15:00+00:00",
+      "peak_r": 178.54,
+      "trough_r": 170.54,
+      "drawdown_r": 8.0,
+      "duration_bars": 40,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 24,
+      "win_count": 16
+    },
+    {
+      "episode_id": 100,
+      "start_index": 1708,
+      "end_index": 1708,
+      "start_timestamp": "2026-01-12T16:30:00+00:00",
+      "end_timestamp": "2026-01-12T16:30:00+00:00",
+      "peak_r": 180.04,
+      "trough_r": 179.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 101,
+      "start_index": 1710,
+      "end_index": 1710,
+      "start_timestamp": "2026-01-13T09:30:00+00:00",
+      "end_timestamp": "2026-01-13T09:30:00+00:00",
+      "peak_r": 180.54,
+      "trough_r": 179.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 102,
+      "start_index": 1712,
+      "end_index": 1712,
+      "start_timestamp": "2026-01-13T18:00:00+00:00",
+      "end_timestamp": "2026-01-13T18:00:00+00:00",
+      "peak_r": 181.04,
+      "trough_r": 180.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 103,
+      "start_index": 1714,
+      "end_index": 1749,
+      "start_timestamp": "2026-01-14T11:15:00+00:00",
+      "end_timestamp": "2026-02-05T21:00:00+00:00",
+      "peak_r": 181.54,
+      "trough_r": 172.54,
+      "drawdown_r": 9.0,
+      "duration_bars": 36,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "HIGH_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 22,
+      "win_count": 14
+    },
+    {
+      "episode_id": 104,
+      "start_index": 1752,
+      "end_index": 1874,
+      "start_timestamp": "2026-02-09T00:45:00+00:00",
+      "end_timestamp": "2026-04-13T19:15:00+00:00",
+      "peak_r": 183.54,
+      "trough_r": 165.54,
+      "drawdown_r": 18.0,
+      "duration_bars": 123,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 74,
+      "win_count": 49
+    },
+    {
+      "episode_id": 105,
+      "start_index": 1876,
+      "end_index": 1886,
+      "start_timestamp": "2026-04-15T01:15:00+00:00",
+      "end_timestamp": "2026-04-17T12:00:00+00:00",
+      "peak_r": 184.54,
+      "trough_r": 180.04,
+      "drawdown_r": 4.5,
+      "duration_bars": 11,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 106,
+      "start_index": 1889,
+      "end_index": 1891,
+      "start_timestamp": "2026-04-19T13:45:00+00:00",
+      "end_timestamp": "2026-04-20T06:45:00+00:00",
+      "peak_r": 186.54,
+      "trough_r": 184.54,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 107,
+      "start_index": 1893,
+      "end_index": 1898,
+      "start_timestamp": "2026-04-20T18:30:00+00:00",
+      "end_timestamp": "2026-04-21T11:00:00+00:00",
+      "peak_r": 187.54,
+      "trough_r": 185.54,
+      "drawdown_r": 2.0,
+      "duration_bars": 6,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 4,
+      "win_count": 2
+    },
+    {
+      "episode_id": 108,
+      "start_index": 1901,
+      "end_index": 1911,
+      "start_timestamp": "2026-04-21T19:45:00+00:00",
+      "end_timestamp": "2026-04-27T13:45:00+00:00",
+      "peak_r": 189.54,
+      "trough_r": 185.54,
+      "drawdown_r": 4.0,
+      "duration_bars": 11,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 7,
+      "win_count": 4
+    },
+    {
+      "episode_id": 109,
+      "start_index": 1913,
+      "end_index": 1915,
+      "start_timestamp": "2026-04-27T15:00:00+00:00",
+      "end_timestamp": "2026-04-28T01:15:00+00:00",
+      "peak_r": 190.04,
+      "trough_r": 188.04,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 110,
+      "start_index": 1918,
+      "end_index": 1918,
+      "start_timestamp": "2026-04-29T09:45:00+00:00",
+      "end_timestamp": "2026-04-29T09:45:00+00:00",
+      "peak_r": 192.54,
+      "trough_r": 191.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 111,
+      "start_index": 1921,
+      "end_index": 1925,
+      "start_timestamp": "2026-04-29T18:15:00+00:00",
+      "end_timestamp": "2026-05-01T12:15:00+00:00",
+      "peak_r": 194.54,
+      "trough_r": 191.54,
+      "drawdown_r": 3.0,
+      "duration_bars": 5,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 3,
+      "win_count": 2
+    },
+    {
+      "episode_id": 112,
+      "start_index": 1927,
+      "end_index": 1929,
+      "start_timestamp": "2026-05-02T22:15:00+00:00",
+      "end_timestamp": "2026-05-04T06:00:00+00:00",
+      "peak_r": 196.04,
+      "trough_r": 194.04,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 113,
+      "start_index": 1931,
+      "end_index": 1950,
+      "start_timestamp": "2026-05-04T10:15:00+00:00",
+      "end_timestamp": "2026-05-11T14:15:00+00:00",
+      "peak_r": 197.04,
+      "trough_r": 192.04,
+      "drawdown_r": 5.0,
+      "duration_bars": 20,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 12,
+      "win_count": 8
+    },
+    {
+      "episode_id": 114,
+      "start_index": 1953,
+      "end_index": 1953,
+      "start_timestamp": "2026-05-12T23:45:00+00:00",
+      "end_timestamp": "2026-05-12T23:45:00+00:00",
+      "peak_r": 200.04,
+      "trough_r": 199.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 115,
+      "start_index": 1958,
+      "end_index": 1978,
+      "start_timestamp": "2026-05-18T00:45:00+00:00",
+      "end_timestamp": "2026-05-23T04:45:00+00:00",
+      "peak_r": 205.04,
+      "trough_r": 199.04,
+      "drawdown_r": 6.0,
+      "duration_bars": 21,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY",
+        "RANGING"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 13,
+      "win_count": 8
+    },
+    {
+      "episode_id": 116,
+      "start_index": 1981,
+      "end_index": 1981,
+      "start_timestamp": "2026-05-24T14:15:00+00:00",
+      "end_timestamp": "2026-05-24T14:15:00+00:00",
+      "peak_r": 207.04,
+      "trough_r": 206.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 117,
+      "start_index": 1983,
+      "end_index": 1990,
+      "start_timestamp": "2026-05-25T20:45:00+00:00",
+      "end_timestamp": "2026-05-26T20:45:00+00:00",
+      "peak_r": 207.54,
+      "trough_r": 203.54,
+      "drawdown_r": 4.0,
+      "duration_bars": 8,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY",
+        "TRENDING"
+      ],
+      "sessions_involved": [
+        "LONDON",
+        "NEW_YORK",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 5,
+      "win_count": 3
+    },
+    {
+      "episode_id": 118,
+      "start_index": 1996,
+      "end_index": 1996,
+      "start_timestamp": "2026-05-29T11:00:00+00:00",
+      "end_timestamp": "2026-05-29T11:00:00+00:00",
+      "peak_r": 214.54,
+      "trough_r": 213.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "BUY"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 119,
+      "start_index": 1998,
+      "end_index": 2003,
+      "start_timestamp": "2026-05-29T15:00:00+00:00",
+      "end_timestamp": "2026-06-01T04:45:00+00:00",
+      "peak_r": 215.04,
+      "trough_r": 212.54,
+      "drawdown_r": 2.5,
+      "duration_bars": 6,
+      "assets_involved": [
+        "BTC/USD",
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 4,
+      "win_count": 2
+    },
+    {
+      "episode_id": 120,
+      "start_index": 2005,
+      "end_index": 2005,
+      "start_timestamp": "2026-06-01T08:00:00+00:00",
+      "end_timestamp": "2026-06-01T08:00:00+00:00",
+      "peak_r": 215.54,
+      "trough_r": 214.54,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "LONDON"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 121,
+      "start_index": 2008,
+      "end_index": 2028,
+      "start_timestamp": "2026-06-04T20:15:00+00:00",
+      "end_timestamp": "2026-06-22T22:15:00+00:00",
+      "peak_r": 217.54,
+      "trough_r": 213.04,
+      "drawdown_r": 4.5,
+      "duration_bars": 21,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "LONDON",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 13,
+      "win_count": 8
+    },
+    {
+      "episode_id": 122,
+      "start_index": 2030,
+      "end_index": 2030,
+      "start_timestamp": "2026-06-27T19:30:00+00:00",
+      "end_timestamp": "2026-06-27T19:30:00+00:00",
+      "peak_r": 218.04,
+      "trough_r": 217.04,
+      "drawdown_r": 1.0,
+      "duration_bars": 1,
+      "assets_involved": [
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL"
+      ],
+      "loss_count": 1,
+      "win_count": 0
+    },
+    {
+      "episode_id": 123,
+      "start_index": 2034,
+      "end_index": 2036,
+      "start_timestamp": "2026-06-29T03:00:00+00:00",
+      "end_timestamp": "2026-08-12T06:45:00+00:00",
+      "peak_r": 221.54,
+      "trough_r": 219.54,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "XAU/USD",
+        "BTC/USD"
+      ],
+      "regimes_involved": [
+        "TRENDING",
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 124,
+      "start_index": 2038,
+      "end_index": 2040,
+      "start_timestamp": "2026-08-13T06:15:00+00:00",
+      "end_timestamp": "2026-08-17T00:30:00+00:00",
+      "peak_r": 222.54,
+      "trough_r": 220.54,
+      "drawdown_r": 2.0,
+      "duration_bars": 3,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 2,
+      "win_count": 1
+    },
+    {
+      "episode_id": 125,
+      "start_index": 2044,
+      "end_index": 2048,
+      "start_timestamp": "2026-08-25T13:00:00+00:00",
+      "end_timestamp": "2026-08-27T17:15:00+00:00",
+      "peak_r": 226.54,
+      "trough_r": 221.54,
+      "drawdown_r": 5.0,
+      "duration_bars": 5,
+      "assets_involved": [
+        "XAU/USD"
+      ],
+      "regimes_involved": [
+        "LOW_VOLATILITY"
+      ],
+      "sessions_involved": [
+        "ASIA",
+        "OVERLAP",
+        "NEW_YORK"
+      ],
+      "directions_involved": [
+        "SELL",
+        "BUY"
+      ],
+      "loss_count": 5,
+      "win_count": 0
+    }
+  ],
+  "clustering": {
+    "autocorrelation_lag1": 0.036,
+    "is_autocorrelated": false,
+    "max_consecutive_losses": 9,
+    "avg_consecutive_losses": 2.3,
+    "rolling_50_negative_pct": 21.5,
+    "loss_concentration_score": 0.077,
+    "interpretation": "Losses appear INDEPENDENT (lag1=0.036). Consistent with random sampling from a distribution."
+  },
+  "primary_dd_source": "TRENDING",
+  "secondary_dd_source": "NEW_YORK",
+  "findings": [
+    "Largest per-asset DD: BTC/USD (22.0R, 102% of total)",
+    "Worst regime for DD: TRENDING (26.0R DD, 43.8% WR)",
+    "Worst session for DD: NEW_YORK (24.5R DD)",
+    "Worst direction for DD: BUY (23.5R DD)",
+    "Losses appear INDEPENDENT (lag1=0.036). DD is likely inherent to the strategy's win rate distribution.",
+    "Largest single DD episode: 21.5R (247 bars, 2024-07-27 \u2192 2024-10-27)"
+  ],
+  "recommendations": []
+}

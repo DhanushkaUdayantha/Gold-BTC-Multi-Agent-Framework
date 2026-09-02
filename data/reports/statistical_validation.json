@@ -1,0 +1,44 @@
+{
+  "sample_size_base": 2438,
+  "sample_size_shadow": 906,
+  "base_win_rate_pct": 42.82,
+  "base_win_rate_wilson_ci": {
+    "point_estimate": 42.82,
+    "ci_lower": 40.87,
+    "ci_upper": 44.8,
+    "confidence_level": 0.95
+  },
+  "shadow_win_rate_pct": 49.34,
+  "shadow_win_rate_wilson_ci": {
+    "point_estimate": 49.34,
+    "ci_lower": 46.09,
+    "ci_upper": 52.59,
+    "confidence_level": 0.95
+  },
+  "base_expectancy_r": 0.0708,
+  "base_expectancy_bootstrap_ci": {
+    "point_estimate": 0.0708,
+    "ci_lower": 0.0218,
+    "ci_upper": 0.12,
+    "confidence_level": 0.95
+  },
+  "shadow_expectancy_r": 0.2334,
+  "shadow_expectancy_bootstrap_ci": {
+    "point_estimate": 0.2334,
+    "ci_lower": 0.1507,
+    "ci_upper": 0.3135,
+    "confidence_level": 0.95
+  },
+  "paired_expectancy_delta_r": 0.1627,
+  "expectancy_delta_bootstrap_ci": {
+    "point_estimate": 0.1627,
+    "ci_lower": 0.0681,
+    "ci_upper": 0.2571,
+    "confidence_level": 0.95
+  },
+  "cohens_d": 0.131,
+  "effect_size_magnitude": "NEGLIGIBLE",
+  "permutation_p_value": 0.0008,
+  "is_statistically_significant": true,
+  "multiple_comparison_risk_notice": "MULTIPLE COMPARISONS RISK NOTICE: Multiple policies, thresholds, regimes, and ablation combinations were tested in this research phase. While the primary validated strategies BTC-SELL-P40-REGIME_LOW_VOL and XAU-BUY-P42-VWAP_ALIGNED were pre-specified prior to gating tests, family-wise selection bias is mitigated by out-of-sample chronological walk-forward and untouched holdout verification."
+}

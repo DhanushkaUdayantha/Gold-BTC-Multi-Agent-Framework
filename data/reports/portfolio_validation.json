@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-09-02T19:27:40.406579+00:00",
+  "primary_portfolio": {
+    "portfolio_id": "PORTFOLIO_PRIMARY_BTC_LOW_VOL_AND_XAU_VWAP",
+    "asset_components": [
+      "BTC-SELL",
+      "XAU-BUY"
+    ],
+    "total_trades_count": 775,
+    "combined_expectancy_r": 0.294,
+    "combined_win_rate_pct": 51.7,
+    "combined_profit_factor": 1.61,
+    "combined_total_r": 227.5,
+    "combined_max_drawdown_r": 10.5,
+    "btc_standalone_max_dd_r": 12.0,
+    "xau_standalone_max_dd_r": 14.0,
+    "sum_standalone_dd_r": 26.0,
+    "diversification_benefit_pct": 59.6,
+    "trade_correlation_rho": 0.062,
+    "simultaneous_signals_count": 28,
+    "simultaneous_double_losses_count": 9,
+    "concentration_risk_grade": "MODERATE",
+    "portfolio_verdict": "Diversification Benefit: 59.6% reduction in max DD vs standalone sum."
+  },
+  "secondary_portfolio": {
+    "portfolio_id": "PORTFOLIO_SECONDARY_BTC_HTF_SR_AND_XAU_EMA",
+    "asset_components": [
+      "BTC-SELL",
+      "XAU-BUY"
+    ],
+    "total_trades_count": 727,
+    "combined_expectancy_r": 0.2,
+    "combined_win_rate_pct": 48.0,
+    "combined_profit_factor": 1.38,
+    "combined_total_r": 145.5,
+    "combined_max_drawdown_r": 30.0,
+    "btc_standalone_max_dd_r": 30.0,
+    "xau_standalone_max_dd_r": 16.0,
+    "sum_standalone_dd_r": 46.0,
+    "diversification_benefit_pct": 34.8,
+    "trade_correlation_rho": 0.35,
+    "simultaneous_signals_count": 19,
+    "simultaneous_double_losses_count": 7,
+    "concentration_risk_grade": "HIGH CONCENTRATION RISK",
+    "portfolio_verdict": "Diversification Benefit: 34.8% reduction in max DD vs standalone sum."
+  }
+}

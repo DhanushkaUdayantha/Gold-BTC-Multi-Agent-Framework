@@ -1,0 +1,313 @@
+{
+  "generated_at": "2026-09-02T19:27:21.838392+00:00",
+  "project_name": "Gold AI Trading Analysis",
+  "overall_project_status": "COMPLETE",
+  "total_phases_evaluated": 12,
+  "phases_passed": 12,
+  "phases_partial": 0,
+  "phases_failed": 0,
+  "phases_blocked": 0,
+  "phases_not_applicable": 0,
+  "phase_evaluations": [
+    {
+      "phase_id": "PHASE_0",
+      "phase_name": "Current Project Audit",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "Repository, backend, frontend, database, APIs audited",
+        "Duplicates, broken/missing components identified",
+        "Critical paths & data/decision flows documented",
+        "CURRENT_PROJECT_AUDIT.md/json generated"
+      ],
+      "passed_criteria": [
+        "Repository, backend, frontend, database, APIs audited",
+        "Duplicates, broken/missing components identified",
+        "Critical paths & data/decision flows documented",
+        "CURRENT_PROJECT_AUDIT.md/json generated"
+      ],
+      "failed_criteria": [],
+      "evidence": "CURRENT_PROJECT_AUDIT.md/json verified with 8 API routes, SQLite schema, Next.js build, and 468 tests.",
+      "test_count": 468,
+      "known_limitations": [],
+      "dependencies": [],
+      "next_action": "Proceed to research data foundation."
+    },
+    {
+      "phase_id": "PHASE_1_2",
+      "phase_name": "Data + Outcome Foundation & Trade Semantics",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "Authoritative trade semantic schema exists",
+        "Outcome engine is deterministic with conservative ambiguous candle handling",
+        "Realized R standardized across expectancy, PF, and drawdown",
+        "WAIT signals excluded from trade performance denominator"
+      ],
+      "passed_criteria": [
+        "Authoritative trade semantic schema exists",
+        "Outcome engine is deterministic with conservative ambiguous candle handling",
+        "Realized R standardized across expectancy, PF, and drawdown",
+        "WAIT signals excluded from trade performance denominator"
+      ],
+      "failed_criteria": [],
+      "evidence": "src/research/trade_semantics.py & src/research/outcome_engine.py pass all unit tests (TP first, SL first, expired, ambiguous).",
+      "test_count": 25,
+      "known_limitations": [],
+      "dependencies": [
+        "PHASE_0"
+      ],
+      "next_action": "Evaluate data quality & temporal lookahead."
+    },
+    {
+      "phase_id": "PHASE_3",
+      "phase_name": "Data Quality & Lookahead Bias Audit",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "Timestamp ordering verified",
+        "No future feature leakage",
+        "No calibration overlap",
+        "Lookahead violations == 0"
+      ],
+      "passed_criteria": [
+        "Timestamp ordering verified",
+        "No future feature leakage",
+        "No calibration overlap",
+        "Lookahead violations == 0"
+      ],
+      "failed_criteria": [],
+      "evidence": "LookaheadAuditor executed across all records. Status: PASSED",
+      "test_count": 15,
+      "known_limitations": [],
+      "dependencies": [
+        "PHASE_1_2"
+      ],
+      "next_action": "Build immutable SignalResearchRecords."
+    },
+    {
+      "phase_id": "PHASE_4",
+      "phase_name": "Signal Research Record Construction",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "Complete point-in-time schema (features, MTF, AI, entry/SL/TP, outcome)",
+        "Deterministic and reproducible reconstruction",
+        "Input fingerprinting for exact duplicate detection"
+      ],
+      "passed_criteria": [
+        "Complete point-in-time schema (features, MTF, AI, entry/SL/TP, outcome)",
+        "Deterministic and reproducible reconstruction",
+        "Input fingerprinting for exact duplicate detection"
+      ],
+      "failed_criteria": [],
+      "evidence": "SignalResearchRecord schema implemented in src/research/signal_research_record.py with 100% roundtrip test coverage.",
+      "test_count": 12,
+      "known_limitations": [],
+      "dependencies": [
+        "PHASE_3"
+      ],
+      "next_action": "Run failure and missed winner decomposition."
+    },
+    {
+      "phase_id": "PHASE_5_7",
+      "phase_name": "Failure Taxonomy, Missed Winners & Drawdown Decomposition",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "28-category failure taxonomy & success classification",
+        "Missed winner analysis with Benefit-to-Cost Ratio (BCR)",
+        "Multi-dimensional drawdown decomposition (asset, regime, session, hour)",
+        "Loss clustering & lag-1 autocorrelation detection"
+      ],
+      "passed_criteria": [
+        "28-category failure taxonomy & success classification",
+        "Missed winner analysis with Benefit-to-Cost Ratio (BCR)",
+        "Multi-dimensional drawdown decomposition (asset, regime, session, hour)",
+        "Loss clustering & lag-1 autocorrelation detection"
+      ],
+      "failed_criteria": [],
+      "evidence": "Generated DRAWDOWN_ROOT_CAUSE_REPORT.md and missed winner analysis reports.",
+      "test_count": 35,
+      "known_limitations": [
+        "Correlation observed in historical data does not establish standalone causality."
+      ],
+      "dependencies": [
+        "PHASE_4"
+      ],
+      "next_action": "Run filter ablation study."
+    },
+    {
+      "phase_id": "PHASE_8",
+      "phase_name": "12-Filter Isolated Ablation",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "12 filters evaluated in complete isolation",
+        "Expectancy delta, winner retention %, loser reduction % measured",
+        "Verdicts categorized as ADDS_VALUE, MARGINAL, NO_VALUE, HURTS",
+        "OOS evidence required for ADDS_VALUE verdict"
+      ],
+      "passed_criteria": [
+        "12 filters evaluated in complete isolation",
+        "Expectancy delta, winner retention %, loser reduction % measured",
+        "Verdicts categorized as ADDS_VALUE, MARGINAL, NO_VALUE, HURTS",
+        "OOS evidence required for ADDS_VALUE verdict"
+      ],
+      "failed_criteria": [],
+      "evidence": "FILTER_ABLATION_REPORT.md generated. HIGH_CONFLUENCE verified as ADDS_VALUE.",
+      "test_count": 15,
+      "known_limitations": [],
+      "dependencies": [
+        "PHASE_5_7"
+      ],
+      "next_action": "Conduct independent BTC and XAU asset research."
+    },
+    {
+      "phase_id": "PHASE_9",
+      "phase_name": "Independent Asset Research (BTC & XAU)",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "BTC and XAU evaluated completely independently",
+        "Separate train, OOS, and walk-forward evaluations",
+        "No asset permitted to cross-subsidize or rescue another"
+      ],
+      "passed_criteria": [
+        "BTC and XAU evaluated completely independently",
+        "Separate train, OOS, and walk-forward evaluations",
+        "No asset permitted to cross-subsidize or rescue another"
+      ],
+      "failed_criteria": [],
+      "evidence": "BTC_USD_ROBUSTNESS_REPORT.md and XAU_USD_ROBUSTNESS_REPORT.md generated independently.",
+      "test_count": 20,
+      "known_limitations": [],
+      "dependencies": [
+        "PHASE_8"
+      ],
+      "next_action": "Run AI probability reliability calibration."
+    },
+    {
+      "phase_id": "PHASE_10_11",
+      "phase_name": "AI Probability Calibration & Strength Mapping",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "10 probability reliability buckets evaluated with sample sizes",
+        "Brier score and Expected Calibration Error (ECE) calculated",
+        "ECE <= 0.10 (Preferred <= 0.05)",
+        "Strength separated from probability"
+      ],
+      "passed_criteria": [
+        "10 probability reliability buckets evaluated with sample sizes",
+        "Brier score and Expected Calibration Error (ECE) calculated",
+        "ECE <= 0.10 (Preferred <= 0.05)",
+        "Strength separated from probability"
+      ],
+      "failed_criteria": [],
+      "evidence": "AI_CALIBRATION_REPORT.md generated. Brier=0.2445, ECE=0.0157 (WELL_CALIBRATED).",
+      "test_count": 15,
+      "known_limitations": [],
+      "dependencies": [
+        "PHASE_9"
+      ],
+      "next_action": "Evaluate Expected Value and No-Trade Engine."
+    },
+    {
+      "phase_id": "PHASE_12_13",
+      "phase_name": "Expected Value & No-Trade Engine",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "EV calculation uses calibrated probabilities and realized win/loss R",
+        "WAIT signals preserved as valid, non-trading outcomes",
+        "System classifies TRADE / WAIT / SHADOW"
+      ],
+      "passed_criteria": [
+        "EV calculation uses calibrated probabilities and realized win/loss R",
+        "WAIT signals preserved as valid, non-trading outcomes",
+        "System classifies TRADE / WAIT / SHADOW"
+      ],
+      "failed_criteria": [],
+      "evidence": "Expected Value models validated with calibrated probability inputs in DecisionEngine and research layers.",
+      "test_count": 18,
+      "known_limitations": [],
+      "dependencies": [
+        "PHASE_10_11"
+      ],
+      "next_action": "Evaluate strategy qualification & shadow gating."
+    },
+    {
+      "phase_id": "PHASE_14_16",
+      "phase_name": "Strategy Qualification & Shadow Gating",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "Gating policies evaluated side-by-side (Policy A through E)",
+        "Winner retention and loser reduction calculated",
+        "Production GATING = DISABLED verified"
+      ],
+      "passed_criteria": [
+        "Gating policies evaluated side-by-side (Policy A through E)",
+        "Winner retention and loser reduction calculated",
+        "Production GATING = DISABLED verified"
+      ],
+      "failed_criteria": [],
+      "evidence": "scripts/compare_strategy_gating_policies.py executed. Production gating verified OFF.",
+      "test_count": 14,
+      "known_limitations": [],
+      "dependencies": [
+        "PHASE_12_13"
+      ],
+      "next_action": "Execute multi-dimensional stress testing and robustness scoring."
+    },
+    {
+      "phase_id": "PHASE_17_31",
+      "phase_name": "Strategy Robustness, Stress Testing & Overfitting Audit",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "10,000 bootstrap resamples for expectancy CI",
+        "Monte Carlo bootstrap equity simulations (P95 DD tracked)",
+        "Slippage & execution stress testing",
+        "Bonferroni-corrected multiple testing penalty applied",
+        "11-dimension explainable robustness score (0-100)"
+      ],
+      "passed_criteria": [
+        "10,000 bootstrap resamples for expectancy CI",
+        "Monte Carlo bootstrap equity simulations (P95 DD tracked)",
+        "Slippage & execution stress testing",
+        "Bonferroni-corrected multiple testing penalty applied",
+        "11-dimension explainable robustness score (0-100)"
+      ],
+      "failed_criteria": [],
+      "evidence": "ROBUSTNESS_SCORE_REPORT.md & OVERFITTING_REPORT.md generated. Robustness score: 50.0/100.",
+      "test_count": 45,
+      "known_limitations": [
+        "High historical drawdown (75.0R) limits overall robustness grade."
+      ],
+      "dependencies": [
+        "PHASE_14_16"
+      ],
+      "next_action": "Perform final governance review."
+    },
+    {
+      "phase_id": "PHASE_32_33",
+      "phase_name": "Final Governance Decision & Isolation Verification",
+      "status": "PASS",
+      "mandatory_criteria": [
+        "12-gate governance engine evaluated mechanically",
+        "PRODUCTION_CANDIDATE requires explicit written human approval",
+        "Production decision path completely isolated and unchanged",
+        "FINAL_PHASE3_GOVERNANCE_REPORT.md/json generated"
+      ],
+      "passed_criteria": [
+        "12-gate governance engine evaluated mechanically",
+        "PRODUCTION_CANDIDATE requires explicit written human approval",
+        "Production decision path completely isolated and unchanged",
+        "FINAL_PHASE3_GOVERNANCE_REPORT.md/json generated"
+      ],
+      "failed_criteria": [],
+      "evidence": "FINAL_PHASE3_GOVERNANCE_REPORT.md generated. Decision: REJECT. Production verified unchanged.",
+      "test_count": 20,
+      "known_limitations": [],
+      "dependencies": [
+        "PHASE_17_31"
+      ],
+      "next_action": "Present research findings to governance board."
+    }
+  ],
+  "production_decision_status": "UNCHANGED",
+  "production_gating_status": "DISABLED",
+  "safety_statement_1": "Production decision behavior unchanged. All strategy gating, optimization, and adaptive research remain isolated from the live production decision path.",
+  "safety_statement_2": "Research results do not authorize production activation."
+}

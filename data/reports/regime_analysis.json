@@ -1,0 +1,90 @@
+{
+  "regimes": {
+    "LOW_VOLATILITY": {
+      "base_trades": 1474,
+      "shadow_trades": 796,
+      "base_expectancy_r": 0.0858,
+      "shadow_expectancy_r": 0.2594,
+      "delta_expectancy_r": 0.174,
+      "shadow_profit_factor": 1.523,
+      "shadow_max_dd_r": 12.0,
+      "shadow_total_r": 206.5,
+      "classification": "STABLE"
+    },
+    "TRENDING": {
+      "base_trades": 919,
+      "shadow_trades": 106,
+      "base_expectancy_r": 0.0528,
+      "shadow_expectancy_r": 0.0613,
+      "delta_expectancy_r": 0.009,
+      "shadow_profit_factor": 1.107,
+      "shadow_max_dd_r": 30.0,
+      "shadow_total_r": 6.5,
+      "classification": "INSUFFICIENT_SAMPLE"
+    },
+    "RANGING": {
+      "base_trades": 39,
+      "shadow_trades": 4,
+      "base_expectancy_r": 0.0256,
+      "shadow_expectancy_r": -0.375,
+      "delta_expectancy_r": -0.401,
+      "shadow_profit_factor": 0.5,
+      "shadow_max_dd_r": 2.0,
+      "shadow_total_r": -1.5,
+      "classification": "UNSTABLE"
+    },
+    "HIGH_VOLATILITY": {
+      "base_trades": 6,
+      "shadow_trades": 0,
+      "base_expectancy_r": -0.5833,
+      "shadow_expectancy_r": 0.0,
+      "delta_expectancy_r": 0.583,
+      "shadow_profit_factor": 1.0,
+      "shadow_max_dd_r": 0.0,
+      "shadow_total_r": 0.0,
+      "classification": "INSUFFICIENT_SAMPLE"
+    }
+  },
+  "sessions": {
+    "LONDON": {
+      "base_trades": 449,
+      "shadow_trades": 192,
+      "base_expectancy_r": 0.0913,
+      "shadow_expectancy_r": 0.1068,
+      "delta_expectancy_r": 0.015,
+      "shadow_profit_factor": 1.192,
+      "shadow_max_dd_r": 10.0,
+      "shadow_total_r": 20.5
+    },
+    "NEW_YORK": {
+      "base_trades": 519,
+      "shadow_trades": 171,
+      "base_expectancy_r": -0.0308,
+      "shadow_expectancy_r": 0.0819,
+      "delta_expectancy_r": 0.113,
+      "shadow_profit_factor": 1.144,
+      "shadow_max_dd_r": 12.5,
+      "shadow_total_r": 14.0
+    },
+    "ASIA": {
+      "base_trades": 783,
+      "shadow_trades": 269,
+      "base_expectancy_r": 0.0377,
+      "shadow_expectancy_r": 0.3104,
+      "delta_expectancy_r": 0.273,
+      "shadow_profit_factor": 1.652,
+      "shadow_max_dd_r": 20.0,
+      "shadow_total_r": 83.5
+    },
+    "OVERLAP": {
+      "base_trades": 687,
+      "shadow_trades": 274,
+      "base_expectancy_r": 0.1718,
+      "shadow_expectancy_r": 0.3412,
+      "delta_expectancy_r": 0.169,
+      "shadow_profit_factor": 1.736,
+      "shadow_max_dd_r": 10.0,
+      "shadow_total_r": 93.5
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "brier_score": 0.2507,
+  "expected_calibration_error": 0.0593,
+  "buckets": [
+    {
+      "bucket_range": "0.00 - 0.45",
+      "label": "<45%",
+      "n": 72,
+      "mean_predicted_prob_pct": 41.38,
+      "actual_win_rate_pct": 44.44,
+      "expectancy_r": 0.1111,
+      "calibration_gap_pct": 3.07
+    },
+    {
+      "bucket_range": "0.45 - 0.50",
+      "label": "45-50%",
+      "n": 70,
+      "mean_predicted_prob_pct": 47.69,
+      "actual_win_rate_pct": 38.57,
+      "expectancy_r": -0.0357,
+      "calibration_gap_pct": 9.12
+    },
+    {
+      "bucket_range": "0.50 - 0.55",
+      "label": "50-55%",
+      "n": 35,
+      "mean_predicted_prob_pct": 52.16,
+      "actual_win_rate_pct": 45.71,
+      "expectancy_r": 0.1429,
+      "calibration_gap_pct": 6.44
+    },
+    {
+      "bucket_range": "0.55 - 0.60",
+      "label": "55-60%",
+      "n": 7,
+      "mean_predicted_prob_pct": 57.99,
+      "actual_win_rate_pct": 57.14,
+      "expectancy_r": 0.4286,
+      "calibration_gap_pct": 0.85
+    },
+    {
+      "bucket_range": "0.60 - 0.65",
+      "label": "60-65%",
+      "n": 0,
+      "mean_predicted_prob_pct": 0.0,
+      "actual_win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "calibration_gap_pct": 0.0
+    },
+    {
+      "bucket_range": "0.65 - 0.70",
+      "label": "65-70%",
+      "n": 0,
+      "mean_predicted_prob_pct": 0.0,
+      "actual_win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "calibration_gap_pct": 0.0
+    },
+    {
+      "bucket_range": "0.70 - 1.00",
+      "label": "70%+",
+      "n": 0,
+      "mean_predicted_prob_pct": 0.0,
+      "actual_win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "calibration_gap_pct": 0.0
+    }
+  ]
+}

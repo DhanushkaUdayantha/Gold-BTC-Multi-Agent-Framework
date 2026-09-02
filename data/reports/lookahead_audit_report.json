@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-09-02T19:27:33.852034+00:00",
+  "engine_version": "PointInTimeValidator-v2.0",
+  "btc_audit": {
+    "symbol": "BTC/USD",
+    "total_signals_audited": 1519,
+    "lookahead_violations_count": 0,
+    "future_timestamp_violations": 0,
+    "future_trade_violations": 0,
+    "future_outcome_violations": 0,
+    "future_calibration_violations": 0,
+    "is_clean": true,
+    "audit_verdict": "PASSED (ZERO LOOKAHEAD)",
+    "notes": [
+      "Audited 1,519 signals against strict point-in-time criteria.",
+      "Verified latest observation timestamp <= signal entry timestamp for 100% of samples.",
+      "Zero future trade outcomes or calibration parameters accessed."
+    ]
+  },
+  "xau_audit": {
+    "symbol": "XAU/USD",
+    "total_signals_audited": 919,
+    "lookahead_violations_count": 0,
+    "future_timestamp_violations": 0,
+    "future_trade_violations": 0,
+    "future_outcome_violations": 0,
+    "future_calibration_violations": 0,
+    "is_clean": true,
+    "audit_verdict": "PASSED (ZERO LOOKAHEAD)",
+    "notes": [
+      "Audited 919 signals against strict point-in-time criteria.",
+      "Verified latest observation timestamp <= signal entry timestamp for 100% of samples.",
+      "Zero future trade outcomes or calibration parameters accessed."
+    ]
+  },
+  "audit_verdict": "100% CLEAN - ZERO LOOKAHEAD BIAS DETECTED"
+}

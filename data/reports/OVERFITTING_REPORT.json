@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-09-01T16:06:34.015106+00:00",
+  "total_experiments": 9,
+  "total_comparisons": 77,
+  "total_filters_tested": 1,
+  "total_policies_tested": 0,
+  "total_candidates_tested": 2,
+  "family_alpha": 0.05,
+  "bonferroni_threshold": 0.000649,
+  "adjusted_threshold_note": "With 77 total comparisons, Bonferroni-corrected \u03b1 = 0.0006. A result is significant only if p < 0.0006.",
+  "multiple_testing_risk": "HIGH",
+  "significant_at_bonferroni": 0,
+  "significant_at_nominal": 0,
+  "experiments": [
+    {
+      "experiment_id": "EXP_LA",
+      "experiment_type": "LOOKAHEAD_AUDIT",
+      "description": "Temporal leakage audit",
+      "n_comparisons": 5,
+      "p_value": null,
+      "is_significant": null,
+      "bonferroni_threshold": 0.0006493506493506494,
+      "registered_at": "2026-09-01T16:06:33.129761+00:00"
+    },
+    {
+      "experiment_id": "EXP_FAIL_TAX",
+      "experiment_type": "FAILURE_TAXONOMY",
+      "description": "Failure reason attribution",
+      "n_comparisons": 28,
+      "p_value": null,
+      "is_significant": null,
+      "bonferroni_threshold": 0.0006493506493506494,
+      "registered_at": "2026-09-01T16:06:33.131837+00:00"
+    },
+    {
+      "experiment_id": "EXP_MISSED_WINNERS",
+      "experiment_type": "MISSED_WINNER_ANALYSIS",
+      "description": "Policy A missed winner audit",
+      "n_comparisons": 1,
+      "p_value": null,
+      "is_significant": null,
+      "bonferroni_threshold": 0.0006493506493506494,
+      "registered_at": "2026-09-01T16:06:33.165094+00:00"
+    },
+    {
+      "experiment_id": "EXP_DD_DECOMP",
+      "experiment_type": "DRAWDOWN_DECOMP",
+      "description": "Drawdown attribution",
+      "n_comparisons": 8,
+      "p_value": null,
+      "is_significant": null,
+      "bonferroni_threshold": 0.0006493506493506494,
+      "registered_at": "2026-09-01T16:06:33.211675+00:00"
+    },
+    {
+      "experiment_id": "EXP_ASSET_BTC_USD",
+      "experiment_type": "ASSET_RESEARCH",
+      "description": "Independent research: BTC/USD",
+      "n_comparisons": 4,
+      "p_value": null,
+      "is_significant": null,
+      "bonferroni_threshold": 0.0006493506493506494,
+      "registered_at": "2026-09-01T16:06:33.287093+00:00"
+    },
+    {
+      "experiment_id": "EXP_ASSET_XAU_USD",
+      "experiment_type": "ASSET_RESEARCH",
+      "description": "Independent research: XAU/USD",
+      "n_comparisons": 4,
+      "p_value": null,
+      "is_significant": null,
+      "bonferroni_threshold": 0.0006493506493506494,
+      "registered_at": "2026-09-01T16:06:33.288755+00:00"
+    },
+    {
+      "experiment_id": "EXP_FILTER_ABLATION",
+      "experiment_type": "FILTER_ABLATION",
+      "description": "12-filter ablation",
+      "n_comparisons": 12,
+      "p_value": null,
+      "is_significant": null,
+      "bonferroni_threshold": 0.0006493506493506494,
+      "registered_at": "2026-09-01T16:06:33.405613+00:00"
+    },
+    {
+      "experiment_id": "EXP_AI_CALIB",
+      "experiment_type": "AI_CALIBRATION",
+      "description": "AI probability calibration",
+      "n_comparisons": 10,
+      "p_value": null,
+      "is_significant": null,
+      "bonferroni_threshold": 0.0006493506493506494,
+      "registered_at": "2026-09-01T16:06:33.420800+00:00"
+    },
+    {
+      "experiment_id": "EXP_STRESS_TEST",
+      "experiment_type": "STRESS_TEST",
+      "description": "Monte Carlo + slippage",
+      "n_comparisons": 5,
+      "p_value": null,
+      "is_significant": null,
+      "bonferroni_threshold": 0.0006493506493506494,
+      "registered_at": "2026-09-01T16:06:34.014899+00:00"
+    }
+  ],
+  "findings": [
+    "Total comparisons made: 77 across 9 experiments",
+    "Multiple-testing risk: HIGH",
+    "Nominal \u03b1=0.05 threshold: 0 experiment(s) would pass",
+    "Bonferroni \u03b1=0.0006 threshold: 0 experiment(s) pass",
+    "WARNING: High multiple-testing risk. Any 'statistically significant' result may be a false positive. All findings require independent OOS confirmation."
+  ],
+  "recommendations": []
+}

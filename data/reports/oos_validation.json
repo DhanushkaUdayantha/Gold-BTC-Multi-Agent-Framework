@@ -1,0 +1,38 @@
+{
+  "train_60pct": {
+    "signals": 1462,
+    "base_trades": 1462,
+    "shadow_trades": 488,
+    "base_expectancy_r": 0.0246,
+    "shadow_expectancy_r": 0.209,
+    "delta_expectancy_r": 0.1844,
+    "base_profit_factor": 1.042,
+    "shadow_profit_factor": 1.405,
+    "shadow_max_drawdown_r": 30.0,
+    "shadow_total_r": 102.0
+  },
+  "validation_20pct": {
+    "signals": 488,
+    "base_trades": 488,
+    "shadow_trades": 214,
+    "base_expectancy_r": 0.1475,
+    "shadow_expectancy_r": 0.3435,
+    "delta_expectancy_r": 0.196,
+    "base_profit_factor": 1.273,
+    "shadow_profit_factor": 1.742,
+    "shadow_max_drawdown_r": 11.0,
+    "shadow_total_r": 73.5
+  },
+  "untouched_holdout_20pct": {
+    "signals": 488,
+    "base_trades": 488,
+    "shadow_trades": 204,
+    "base_expectancy_r": 0.1322,
+    "shadow_expectancy_r": 0.1765,
+    "delta_expectancy_r": 0.0443,
+    "base_profit_factor": 1.242,
+    "shadow_profit_factor": 1.333,
+    "shadow_max_drawdown_r": 12.0,
+    "shadow_total_r": 36.0
+  }
+}

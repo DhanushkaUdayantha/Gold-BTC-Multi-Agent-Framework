@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-09-02T19:27:36.675255+00:00",
+  "audited_signals_count": 2438,
+  "lookahead_violations_count": 0,
+  "future_timestamp_used": false,
+  "future_trade_used": false,
+  "future_outcome_used": false,
+  "future_calibration_data_used": false,
+  "audit_status": "PASSED",
+  "notes": [
+    "100% point-in-time temporal isolation verified across all stress-testing modules.",
+    "Zero future data leakage detected across threshold, ablation, time, and bootstrap tests."
+  ]
+}

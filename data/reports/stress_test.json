@@ -1,0 +1,236 @@
+{
+  "monte_carlo": {
+    "Base": {
+      "cohort_name": "Base Engine (No Gating)",
+      "trade_count": 2438,
+      "median_final_r": 172.0,
+      "p5_final_r": 72.54,
+      "p1_final_r": 32.53,
+      "median_max_dd_r": 34.5,
+      "p95_max_dd_r": 58.46,
+      "p99_max_dd_r": 74.0,
+      "prob_negative_final_r_pct": 0.17,
+      "prob_losing_month_pct": 30.4,
+      "max_expected_losing_streak": 60
+    },
+    "Shadow": {
+      "cohort_name": "Hypothetical Gated (Policy A)",
+      "trade_count": 906,
+      "median_final_r": 211.5,
+      "p5_final_r": 149.0,
+      "p1_final_r": 121.5,
+      "median_max_dd_r": 14.0,
+      "p95_max_dd_r": 22.0,
+      "p99_max_dd_r": 26.51,
+      "prob_negative_final_r_pct": 0.0,
+      "prob_losing_month_pct": 9.1,
+      "max_expected_losing_streak": 30
+    },
+    "BTC_Qualified": {
+      "cohort_name": "BTC SELL Qualified Cohort",
+      "trade_count": 349,
+      "median_final_r": 121.0,
+      "p5_final_r": 83.5,
+      "p1_final_r": 66.0,
+      "median_max_dd_r": 8.5,
+      "p95_max_dd_r": 14.0,
+      "p99_max_dd_r": 18.0,
+      "prob_negative_final_r_pct": 0.0,
+      "prob_losing_month_pct": 2.7,
+      "max_expected_losing_streak": 30
+    },
+    "XAU_Qualified": {
+      "cohort_name": "XAU BUY Qualified Cohort",
+      "trade_count": 557,
+      "median_final_r": 90.5,
+      "p5_final_r": 40.5,
+      "p1_final_r": 22.98,
+      "median_max_dd_r": 15.0,
+      "p95_max_dd_r": 26.5,
+      "p99_max_dd_r": 33.5,
+      "prob_negative_final_r_pct": 0.07,
+      "prob_losing_month_pct": 16.3,
+      "max_expected_losing_streak": 9
+    }
+  },
+  "slippage_stress": [
+    {
+      "slippage_r": 0.0,
+      "expectancy_r": 0.2334,
+      "profit_factor": 1.461,
+      "total_realized_r": 211.5,
+      "max_drawdown_r": 30.0,
+      "is_positive": true
+    },
+    {
+      "slippage_r": 0.05,
+      "expectancy_r": 0.1834,
+      "profit_factor": 1.345,
+      "total_realized_r": 166.2,
+      "max_drawdown_r": 31.5,
+      "is_positive": true
+    },
+    {
+      "slippage_r": 0.1,
+      "expectancy_r": 0.1334,
+      "profit_factor": 1.239,
+      "total_realized_r": 120.9,
+      "max_drawdown_r": 33.0,
+      "is_positive": true
+    },
+    {
+      "slippage_r": 0.15,
+      "expectancy_r": 0.0834,
+      "profit_factor": 1.143,
+      "total_realized_r": 75.6,
+      "max_drawdown_r": 34.5,
+      "is_positive": true
+    },
+    {
+      "slippage_r": 0.2,
+      "expectancy_r": 0.0334,
+      "profit_factor": 1.055,
+      "total_realized_r": 30.3,
+      "max_drawdown_r": 36.0,
+      "is_positive": true
+    }
+  ],
+  "probability_perturbations": [
+    {
+      "perturbation_pct": -5.0,
+      "qualified_trades": 777,
+      "expectancy_r": 0.2902,
+      "profit_factor": 1.6,
+      "total_realized_r": 225.5,
+      "max_drawdown_r": 10.5
+    },
+    {
+      "perturbation_pct": -3.0,
+      "qualified_trades": 777,
+      "expectancy_r": 0.2902,
+      "profit_factor": 1.6,
+      "total_realized_r": 225.5,
+      "max_drawdown_r": 10.5
+    },
+    {
+      "perturbation_pct": -1.0,
+      "qualified_trades": 777,
+      "expectancy_r": 0.2902,
+      "profit_factor": 1.6,
+      "total_realized_r": 225.5,
+      "max_drawdown_r": 10.5
+    },
+    {
+      "perturbation_pct": 0.0,
+      "qualified_trades": 777,
+      "expectancy_r": 0.2902,
+      "profit_factor": 1.6,
+      "total_realized_r": 225.5,
+      "max_drawdown_r": 10.5
+    },
+    {
+      "perturbation_pct": 1.0,
+      "qualified_trades": 777,
+      "expectancy_r": 0.2902,
+      "profit_factor": 1.6,
+      "total_realized_r": 225.5,
+      "max_drawdown_r": 10.5
+    },
+    {
+      "perturbation_pct": 3.0,
+      "qualified_trades": 777,
+      "expectancy_r": 0.2902,
+      "profit_factor": 1.6,
+      "total_realized_r": 225.5,
+      "max_drawdown_r": 10.5
+    },
+    {
+      "perturbation_pct": 5.0,
+      "qualified_trades": 777,
+      "expectancy_r": 0.2902,
+      "profit_factor": 1.6,
+      "total_realized_r": 225.5,
+      "max_drawdown_r": 10.5
+    }
+  ],
+  "regime_transitions": [
+    {
+      "transition_name": "LOW_VOLATILITY \u2192 LOW_VOLATILITY",
+      "sample_size": 614,
+      "expectancy_r": 0.3314,
+      "profit_factor": 1.709,
+      "max_drawdown_r": 10.0,
+      "total_realized_r": 203.5
+    },
+    {
+      "transition_name": "LOW_VOLATILITY \u2192 TRENDING",
+      "sample_size": 27,
+      "expectancy_r": 0.4815,
+      "profit_factor": 2.182,
+      "max_drawdown_r": 2.0,
+      "total_realized_r": 13.0
+    },
+    {
+      "transition_name": "LOW_VOLATILITY \u2192 RANGING",
+      "sample_size": 0,
+      "expectancy_r": 0.0,
+      "profit_factor": 1.0,
+      "max_drawdown_r": 0.0,
+      "total_realized_r": 0.0
+    },
+    {
+      "transition_name": "TRENDING \u2192 RANGING",
+      "sample_size": 3,
+      "expectancy_r": -0.1667,
+      "profit_factor": 0.75,
+      "max_drawdown_r": 1.0,
+      "total_realized_r": -0.5
+    },
+    {
+      "transition_name": "TRENDING \u2192 HIGH_VOLATILITY",
+      "sample_size": 0,
+      "expectancy_r": 0.0,
+      "profit_factor": 1.0,
+      "max_drawdown_r": 0.0,
+      "total_realized_r": 0.0
+    },
+    {
+      "transition_name": "RANGING \u2192 HIGH_VOLATILITY",
+      "sample_size": 0,
+      "expectancy_r": 0.0,
+      "profit_factor": 1.0,
+      "max_drawdown_r": 0.0,
+      "total_realized_r": 0.0
+    }
+  ],
+  "degradation_validation": [
+    {
+      "state": "NORMAL",
+      "subsequent_signals_count": 906,
+      "subsequent_win_rate_pct": 49.34,
+      "subsequent_expectancy_r": 0.2334,
+      "subsequent_profit_factor": 1.461,
+      "subsequent_max_drawdown_r": 30.0,
+      "is_predictive": true
+    },
+    {
+      "state": "WATCH",
+      "subsequent_signals_count": 0,
+      "subsequent_win_rate_pct": 0.0,
+      "subsequent_expectancy_r": 0.0,
+      "subsequent_profit_factor": 1.0,
+      "subsequent_max_drawdown_r": 0.0,
+      "is_predictive": true
+    },
+    {
+      "state": "DEGRADED",
+      "subsequent_signals_count": 0,
+      "subsequent_win_rate_pct": 0.0,
+      "subsequent_expectancy_r": 0.0,
+      "subsequent_profit_factor": 1.0,
+      "subsequent_max_drawdown_r": 0.0,
+      "is_predictive": true
+    }
+  ],
+  "is_stress_robust": true
+}

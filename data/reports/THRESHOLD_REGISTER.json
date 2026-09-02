@@ -1,0 +1,379 @@
+{
+  "research_policy_version": "1.0",
+  "threshold_spec_version": "1.0",
+  "generated_at": "2026-09-02T19:27:53.234311+00:00",
+  "total_thresholds_defined": 19,
+  "thresholds": {
+    "MINIMUM_RESEARCH_SAMPLE": {
+      "threshold_name": "MINIMUM_RESEARCH_SAMPLE",
+      "threshold_value": 500.0,
+      "preferred_value": 750.0,
+      "unit": "trades",
+      "input_variables": [
+        "valid_resolved_trades"
+      ],
+      "calculation_method": "count(BUY/SELL trades with valid entry, SL, TP and resolved outcome)",
+      "denominator": "All valid resolved trades (WAIT/INVALID excluded)",
+      "measurement_window": "Full evaluation cohort",
+      "minimum_sample": 500,
+      "boundary_operator": ">=",
+      "pass_condition": "N >= 500",
+      "fail_condition": "N < 500",
+      "insufficient_data_behavior": "Automatic INSUFFICIENT_SAMPLE status",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "EXPECTANCY_MINIMUM": {
+      "threshold_name": "EXPECTANCY_MINIMUM",
+      "threshold_value": 0.15,
+      "preferred_value": 0.2,
+      "unit": "R",
+      "input_variables": [
+        "realized_r_series"
+      ],
+      "calculation_method": "sum(realized_R) / N",
+      "denominator": "N = valid resolved trades",
+      "measurement_window": "Full evaluation cohort",
+      "minimum_sample": 500,
+      "boundary_operator": ">=",
+      "pass_condition": "Expectancy >= +0.15R and 95% Bootstrap CI evaluated",
+      "fail_condition": "Expectancy < +0.15R",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "PROFIT_FACTOR_MINIMUM": {
+      "threshold_name": "PROFIT_FACTOR_MINIMUM",
+      "threshold_value": 1.2,
+      "preferred_value": 1.3,
+      "unit": "ratio",
+      "input_variables": [
+        "positive_realized_r",
+        "negative_realized_r"
+      ],
+      "calculation_method": "sum(realized_R > 0) / abs(sum(realized_R < 0))",
+      "denominator": "Total gross loss R (if 0, marked NO-LOSS-SAMPLE)",
+      "measurement_window": "Full evaluation cohort",
+      "minimum_sample": 500,
+      "boundary_operator": ">=",
+      "pass_condition": "PF >= 1.20",
+      "fail_condition": "PF < 1.20",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "TOTAL_R_MINIMUM": {
+      "threshold_name": "TOTAL_R_MINIMUM",
+      "threshold_value": 0.0,
+      "preferred_value": 50.0,
+      "unit": "R",
+      "input_variables": [
+        "cumulative_realized_r"
+      ],
+      "calculation_method": "sum(realized_R_1 ... realized_R_t)",
+      "denominator": "Full trade sequence",
+      "measurement_window": "Full evaluation cohort",
+      "minimum_sample": 100,
+      "boundary_operator": ">",
+      "pass_condition": "Total R > 0",
+      "fail_condition": "Total R <= 0",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "MAX_DRAWDOWN_BENCHMARK_RATIO": {
+      "threshold_name": "MAX_DRAWDOWN_BENCHMARK_RATIO",
+      "threshold_value": 1.25,
+      "preferred_value": 1.0,
+      "unit": "multiplier",
+      "input_variables": [
+        "observed_max_dd_r",
+        "benchmark_max_dd_r"
+      ],
+      "calculation_method": "observed_max_dd_r / benchmark_max_dd_r",
+      "denominator": "Validated historical benchmark drawdown",
+      "measurement_window": "Full chronological equity curve",
+      "minimum_sample": 500,
+      "boundary_operator": "<=",
+      "pass_condition": "ObservedDD <= 1.25 * BenchmarkDD",
+      "fail_condition": "ObservedDD > 1.25 * BenchmarkDD",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "DRAWDOWN_CONCENTRATION_THRESHOLD": {
+      "threshold_name": "DRAWDOWN_CONCENTRATION_THRESHOLD",
+      "threshold_value": 0.5,
+      "preferred_value": 0.35,
+      "unit": "ratio",
+      "input_variables": [
+        "category_drawdown_r",
+        "total_max_drawdown_r"
+      ],
+      "calculation_method": "category_drawdown_r / total_max_drawdown_r",
+      "denominator": "Total portfolio maximum drawdown in R",
+      "measurement_window": "Drawdown episodes",
+      "minimum_sample": 30,
+      "boundary_operator": "<",
+      "pass_condition": "Category contribution < 50%",
+      "fail_condition": "Category contribution >= 50% (triggers concentration warning)",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "ROLLING_NEGATIVE_RATIO_MAX": {
+      "threshold_name": "ROLLING_NEGATIVE_RATIO_MAX",
+      "threshold_value": 0.1,
+      "preferred_value": 0.05,
+      "unit": "ratio",
+      "input_variables": [
+        "rolling_50_expectancies"
+      ],
+      "calculation_method": "count(rolling_50_exp < 0) / count(valid_50_windows)",
+      "denominator": "All valid 50-trade sliding windows",
+      "measurement_window": "50-trade rolling windows",
+      "minimum_sample": 200,
+      "boundary_operator": "<=",
+      "pass_condition": "NegativeWindowRatio <= 10%",
+      "fail_condition": "NegativeWindowRatio > 10%",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "WALK_FORWARD_POSITIVE_RATIO": {
+      "threshold_name": "WALK_FORWARD_POSITIVE_RATIO",
+      "threshold_value": 0.75,
+      "preferred_value": 0.8,
+      "unit": "ratio",
+      "input_variables": [
+        "oos_fold_expectancies"
+      ],
+      "calculation_method": "count(oos_fold_exp > 0) / count(total_oos_folds)",
+      "denominator": "Total chronological OOS folds",
+      "measurement_window": "Chronological walk-forward folds",
+      "minimum_sample": 4,
+      "boundary_operator": ">=",
+      "pass_condition": "WFPositiveRatio >= 75%",
+      "fail_condition": "WFPositiveRatio < 75%",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "OOS_EXPECTANCY_MINIMUM": {
+      "threshold_name": "OOS_EXPECTANCY_MINIMUM",
+      "threshold_value": 0.0,
+      "preferred_value": 0.1,
+      "unit": "R",
+      "input_variables": [
+        "oos_realized_r_series"
+      ],
+      "calculation_method": "sum(oos_realized_r) / N_oos",
+      "denominator": "Out-of-sample trade count",
+      "measurement_window": "20% chronological out-of-sample window",
+      "minimum_sample": 100,
+      "boundary_operator": ">",
+      "pass_condition": "OOS Expectancy > 0.0R",
+      "fail_condition": "OOS Expectancy <= 0.0R",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "HOLDOUT_EXPECTANCY_MINIMUM": {
+      "threshold_name": "HOLDOUT_EXPECTANCY_MINIMUM",
+      "threshold_value": 0.0,
+      "preferred_value": 0.05,
+      "unit": "R",
+      "input_variables": [
+        "holdout_realized_r_series"
+      ],
+      "calculation_method": "sum(holdout_realized_r) / N_holdout",
+      "denominator": "Untouched holdout trade count",
+      "measurement_window": "15-20% untouched final chronological holdout",
+      "minimum_sample": 50,
+      "boundary_operator": ">",
+      "pass_condition": "Holdout Expectancy > 0.0R",
+      "fail_condition": "Holdout Expectancy <= 0.0R",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "HOLDOUT_PF_MINIMUM": {
+      "threshold_name": "HOLDOUT_PF_MINIMUM",
+      "threshold_value": 1.1,
+      "preferred_value": 1.2,
+      "unit": "ratio",
+      "input_variables": [
+        "holdout_gross_profit_r",
+        "holdout_gross_loss_r"
+      ],
+      "calculation_method": "holdout_gross_profit_r / holdout_gross_loss_r",
+      "denominator": "Holdout gross loss R",
+      "measurement_window": "Untouched final holdout",
+      "minimum_sample": 50,
+      "boundary_operator": ">=",
+      "pass_condition": "Holdout PF >= 1.10",
+      "fail_condition": "Holdout PF < 1.10",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "WINNER_RETENTION_MINIMUM": {
+      "threshold_name": "WINNER_RETENTION_MINIMUM",
+      "threshold_value": 0.4,
+      "preferred_value": 0.6,
+      "unit": "ratio",
+      "input_variables": [
+        "retained_winning_trades",
+        "all_base_winning_trades"
+      ],
+      "calculation_method": "retained_winning_trades / all_base_winning_trades",
+      "denominator": "Total base winning trades",
+      "measurement_window": "Evaluation cohort",
+      "minimum_sample": 100,
+      "boundary_operator": ">=",
+      "pass_condition": "Winner retention >= 40%",
+      "fail_condition": "Winner retention < 40%",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "LOSER_REDUCTION_MINIMUM": {
+      "threshold_name": "LOSER_REDUCTION_MINIMUM",
+      "threshold_value": 0.5,
+      "preferred_value": 0.65,
+      "unit": "ratio",
+      "input_variables": [
+        "removed_losing_trades",
+        "all_base_losing_trades"
+      ],
+      "calculation_method": "removed_losing_trades / all_base_losing_trades",
+      "denominator": "Total base losing trades",
+      "measurement_window": "Evaluation cohort",
+      "minimum_sample": 100,
+      "boundary_operator": ">=",
+      "pass_condition": "Loser reduction >= 50%",
+      "fail_condition": "Loser reduction < 50%",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "CALIBRATION_ECE_MAX": {
+      "threshold_name": "CALIBRATION_ECE_MAX",
+      "threshold_value": 0.1,
+      "preferred_value": 0.05,
+      "unit": "error_rate",
+      "input_variables": [
+        "bucket_probabilities",
+        "bucket_empirical_rates",
+        "bucket_counts"
+      ],
+      "calculation_method": "sum(N_bucket / N_total * abs(pred_prob - emp_rate))",
+      "denominator": "Total resolved probabilistic signals",
+      "measurement_window": "Calibration evaluation sample",
+      "minimum_sample": 100,
+      "boundary_operator": "<=",
+      "pass_condition": "ECE <= 0.10 (Preferred <= 0.05)",
+      "fail_condition": "ECE > 0.10",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "CALIBRATION_BRIER_MAX": {
+      "threshold_name": "CALIBRATION_BRIER_MAX",
+      "threshold_value": 0.25,
+      "preferred_value": 0.2,
+      "unit": "score",
+      "input_variables": [
+        "predicted_probabilities",
+        "binary_outcomes"
+      ],
+      "calculation_method": "mean((pred_prob - actual_outcome)^2)",
+      "denominator": "Total resolved probabilistic signals",
+      "measurement_window": "Evaluation sample",
+      "minimum_sample": 100,
+      "boundary_operator": "<=",
+      "pass_condition": "Brier <= 0.25 (Below no-skill benchmark)",
+      "fail_condition": "Brier > 0.25 (Worse than random coin flip)",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "REGIME_SAMPLE_MINIMUM": {
+      "threshold_name": "REGIME_SAMPLE_MINIMUM",
+      "threshold_value": 100.0,
+      "preferred_value": 200.0,
+      "unit": "trades",
+      "input_variables": [
+        "regime_trade_count"
+      ],
+      "calculation_method": "count(trades within market regime)",
+      "denominator": "Trades within specific regime",
+      "measurement_window": "Regime partition",
+      "minimum_sample": 100,
+      "boundary_operator": ">=",
+      "pass_condition": "N_regime >= 100",
+      "fail_condition": "N_regime < 100 -> INSUFFICIENT_SAMPLE",
+      "insufficient_data_behavior": "INSUFFICIENT_SAMPLE",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "SESSION_SAMPLE_MINIMUM": {
+      "threshold_name": "SESSION_SAMPLE_MINIMUM",
+      "threshold_value": 100.0,
+      "preferred_value": 200.0,
+      "unit": "trades",
+      "input_variables": [
+        "session_trade_count"
+      ],
+      "calculation_method": "count(trades within session)",
+      "denominator": "Trades within specific session",
+      "measurement_window": "Session partition",
+      "minimum_sample": 100,
+      "boundary_operator": ">=",
+      "pass_condition": "N_session >= 100",
+      "fail_condition": "N_session < 100 -> INSUFFICIENT_SAMPLE",
+      "insufficient_data_behavior": "INSUFFICIENT_SAMPLE",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "DATA_QUALITY_LOOKAHEAD_VIOLATIONS": {
+      "threshold_name": "DATA_QUALITY_LOOKAHEAD_VIOLATIONS",
+      "threshold_value": 0.0,
+      "preferred_value": 0.0,
+      "unit": "violations",
+      "input_variables": [
+        "lookahead_violations_count"
+      ],
+      "calculation_method": "count(temporal sequence, future feature, calibration overlap violations)",
+      "denominator": "All records audited",
+      "measurement_window": "Full historical dataset",
+      "minimum_sample": 1,
+      "boundary_operator": "==",
+      "pass_condition": "Lookahead violations == 0",
+      "fail_condition": "Lookahead violations > 0 (Immediate experiment invalidation)",
+      "insufficient_data_behavior": "FAIL",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    },
+    "STATISTICAL_ALPHA": {
+      "threshold_name": "STATISTICAL_ALPHA",
+      "threshold_value": 0.05,
+      "preferred_value": 0.01,
+      "unit": "significance_level",
+      "input_variables": [
+        "raw_p_value",
+        "bonferroni_corrected_alpha"
+      ],
+      "calculation_method": "alpha / N_comparisons for family-wide error control",
+      "denominator": "Number of simultaneously tested hypotheses",
+      "measurement_window": "Experiment hypothesis family",
+      "minimum_sample": 30,
+      "boundary_operator": "<",
+      "pass_condition": "p < corrected_alpha",
+      "fail_condition": "p >= corrected_alpha",
+      "insufficient_data_behavior": "INSUFFICIENT_DATA",
+      "policy_version": "1.0",
+      "spec_version": "1.0"
+    }
+  }
+}

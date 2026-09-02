@@ -1,0 +1,10 @@
+{
+  "total_signals": 2438,
+  "btc_coverage_pct": 23.0,
+  "xau_coverage_pct": 60.6,
+  "overall_qualification_pct": 37.2,
+  "validation_support_pct": 37.2,
+  "validation_conflict_pct": 31.6,
+  "no_strategy_pct": 31.2,
+  "insufficient_data_pct": 0.0
+}

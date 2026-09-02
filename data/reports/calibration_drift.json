@@ -1,0 +1,337 @@
+{
+  "generated_at": "2026-09-02T19:27:40.406579+00:00",
+  "profiles": [
+    {
+      "strategy_id": "BTC-SELL-P40-REGIME_LOW_VOL",
+      "calibration_summary": {
+        "train_ece": 0.214,
+        "holdout_ece": 0.129,
+        "ece_drift": 0.085,
+        "train_brier_score": 0.281,
+        "holdout_brier_score": 0.265,
+        "bins": [
+          {
+            "bin_label": "35-40%",
+            "min_prob": 0.35,
+            "max_prob": 0.4,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "40-45%",
+            "min_prob": 0.4,
+            "max_prob": 0.45,
+            "train_count": 154,
+            "train_mean_prob": 0.409,
+            "train_actual_wr": 62.3,
+            "train_error": 0.214,
+            "holdout_count": 104,
+            "holdout_mean_prob": 0.409,
+            "holdout_actual_wr": 53.8,
+            "holdout_error": 0.129,
+            "drift_error_change": -0.085
+          },
+          {
+            "bin_label": "45-50%",
+            "min_prob": 0.45,
+            "max_prob": 0.5,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "50-55%",
+            "min_prob": 0.5,
+            "max_prob": 0.55,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "55%+",
+            "min_prob": 0.55,
+            "max_prob": 1.0,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          }
+        ],
+        "calibration_stability_verdict": "MODERATE DRIFT"
+      }
+    },
+    {
+      "strategy_id": "BTC-SELL-P40-HTF_SR_ALIGNED",
+      "calibration_summary": {
+        "train_ece": 0.115,
+        "holdout_ece": 0.105,
+        "ece_drift": 0.01,
+        "train_brier_score": 0.262,
+        "holdout_brier_score": 0.261,
+        "bins": [
+          {
+            "bin_label": "35-40%",
+            "min_prob": 0.35,
+            "max_prob": 0.4,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "40-45%",
+            "min_prob": 0.4,
+            "max_prob": 0.45,
+            "train_count": 107,
+            "train_mean_prob": 0.408,
+            "train_actual_wr": 52.3,
+            "train_error": 0.115,
+            "holdout_count": 72,
+            "holdout_mean_prob": 0.409,
+            "holdout_actual_wr": 51.4,
+            "holdout_error": 0.105,
+            "drift_error_change": -0.01
+          },
+          {
+            "bin_label": "45-50%",
+            "min_prob": 0.45,
+            "max_prob": 0.5,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "50-55%",
+            "min_prob": 0.5,
+            "max_prob": 0.55,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "55%+",
+            "min_prob": 0.55,
+            "max_prob": 1.0,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          }
+        ],
+        "calibration_stability_verdict": "MODERATE DRIFT"
+      }
+    },
+    {
+      "strategy_id": "XAU-BUY-P42-VWAP_ALIGNED",
+      "calibration_summary": {
+        "train_ece": 0.033,
+        "holdout_ece": 0.064,
+        "ece_drift": 0.031,
+        "train_brier_score": 0.25,
+        "holdout_brier_score": 0.254,
+        "bins": [
+          {
+            "bin_label": "35-40%",
+            "min_prob": 0.35,
+            "max_prob": 0.4,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "40-45%",
+            "min_prob": 0.4,
+            "max_prob": 0.45,
+            "train_count": 310,
+            "train_mean_prob": 0.438,
+            "train_actual_wr": 47.1,
+            "train_error": 0.033,
+            "holdout_count": 207,
+            "holdout_mean_prob": 0.434,
+            "holdout_actual_wr": 49.8,
+            "holdout_error": 0.064,
+            "drift_error_change": 0.03
+          },
+          {
+            "bin_label": "45-50%",
+            "min_prob": 0.45,
+            "max_prob": 0.5,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "50-55%",
+            "min_prob": 0.5,
+            "max_prob": 0.55,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "55%+",
+            "min_prob": 0.55,
+            "max_prob": 1.0,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          }
+        ],
+        "calibration_stability_verdict": "STABLE"
+      }
+    },
+    {
+      "strategy_id": "XAU-BUY-P42-EMA_ALIGNED",
+      "calibration_summary": {
+        "train_ece": 0.02,
+        "holdout_ece": 0.048,
+        "ece_drift": 0.028,
+        "train_brier_score": 0.248,
+        "holdout_brier_score": 0.252,
+        "bins": [
+          {
+            "bin_label": "35-40%",
+            "min_prob": 0.35,
+            "max_prob": 0.4,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "40-45%",
+            "min_prob": 0.4,
+            "max_prob": 0.45,
+            "train_count": 328,
+            "train_mean_prob": 0.438,
+            "train_actual_wr": 45.7,
+            "train_error": 0.02,
+            "holdout_count": 220,
+            "holdout_mean_prob": 0.434,
+            "holdout_actual_wr": 48.2,
+            "holdout_error": 0.048,
+            "drift_error_change": 0.028
+          },
+          {
+            "bin_label": "45-50%",
+            "min_prob": 0.45,
+            "max_prob": 0.5,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "50-55%",
+            "min_prob": 0.5,
+            "max_prob": 0.55,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          },
+          {
+            "bin_label": "55%+",
+            "min_prob": 0.55,
+            "max_prob": 1.0,
+            "train_count": 0,
+            "train_mean_prob": 0.0,
+            "train_actual_wr": 0.0,
+            "train_error": 0.0,
+            "holdout_count": 0,
+            "holdout_mean_prob": 0.0,
+            "holdout_actual_wr": 0.0,
+            "holdout_error": 0.0,
+            "drift_error_change": 0.0
+          }
+        ],
+        "calibration_stability_verdict": "STABLE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "generated_at": "2026-09-01T16:06:34.018857+00:00",
+  "strategy_label": "Phase3_Research",
+  "dataset_version": "v1.0",
+  "decision": "REJECT",
+  "evidence_level": "WEAK",
+  "confidence": "MEDIUM",
+  "gates": [
+    {
+      "gate_name": "SAMPLE_SIZE",
+      "description": "\u2265100 resolved trades",
+      "required": true,
+      "passed": true,
+      "detail": "2049 trades"
+    },
+    {
+      "gate_name": "POSITIVE_EXPECTANCY",
+      "description": "Expectancy \u2265 +0.05R",
+      "required": true,
+      "passed": true,
+      "detail": "+0.1081R"
+    },
+    {
+      "gate_name": "OOS_POSITIVE",
+      "description": "OOS expectancy \u2265 +0.02R",
+      "required": true,
+      "passed": true,
+      "detail": "+0.1220R (n=410)"
+    },
+    {
+      "gate_name": "WALK_FORWARD",
+      "description": "\u226550% WF folds positive",
+      "required": true,
+      "passed": true,
+      "detail": "100% positive folds"
+    },
+    {
+      "gate_name": "PROFIT_FACTOR",
+      "description": "Profit Factor \u2265 1.1",
+      "required": true,
+      "passed": true,
+      "detail": "PF=1.19"
+    },
+    {
+      "gate_name": "MONTE_CARLO_DD",
+      "description": "MC 5th-pct drawdown \u2264 35.0R",
+      "required": true,
+      "passed": false,
+      "detail": "MC P5 DD = 43.0R"
+    },
+    {
+      "gate_name": "OVERFITTING_RISK",
+      "description": "Multiple-testing risk is LOW or MODERATE",
+      "required": true,
+      "passed": false,
+      "detail": "Risk = HIGH"
+    },
+    {
+      "gate_name": "HOLDOUT_POSITIVE",
+      "description": "Untouched holdout expectancy \u2265 0",
+      "required": false,
+      "passed": true,
+      "detail": "+0.1445R (n=308)"
+    },
+    {
+      "gate_name": "AI_CALIBRATION",
+      "description": "Brier score \u2264 0.23",
+      "required": false,
+      "passed": false,
+      "detail": "Brier=0.2472 (MIXED)"
+    },
+    {
+      "gate_name": "STRESS_TESTS",
+      "description": "Passes slippage stress test",
+      "required": false,
+      "passed": true,
+      "detail": "Slippage=OK"
+    },
+    {
+      "gate_name": "FILTER_BCR",
+      "description": "Filter benefit-cost ratio \u2265 1.0",
+      "required": false,
+      "passed": false,
+      "detail": "BCR=0.92"
+    },
+    {
+      "gate_name": "ROBUSTNESS_GRADE",
+      "description": "Robustness grade \u2265 B (score \u2265 70)",
+      "required": false,
+      "passed": false,
+      "detail": "Score=56, Grade=C"
+    }
+  ],
+  "gates_passed": 7,
+  "gates_failed": 2,
+  "supporting_evidence": [
+    "\u2705 SAMPLE_SIZE: 2049 trades",
+    "\u2705 POSITIVE_EXPECTANCY: +0.1081R",
+    "\u2705 OOS_POSITIVE: +0.1220R (n=410)",
+    "\u2705 WALK_FORWARD: 100% positive folds",
+    "\u2705 PROFIT_FACTOR: PF=1.19",
+    "\u2705 HOLDOUT_POSITIVE: +0.1445R (n=308)",
+    "\u2705 STRESS_TESTS: Slippage=OK"
+  ],
+  "counter_evidence": [
+    "\u274c MONTE_CARLO_DD: MC P5 DD = 43.0R \u2014 REQUIRED",
+    "\u274c OVERFITTING_RISK: Risk = HIGH \u2014 REQUIRED",
+    "\u26a0\ufe0f  AI_CALIBRATION: Brier=0.2472 (MIXED)",
+    "\u26a0\ufe0f  FILTER_BCR: BCR=0.92",
+    "\u26a0\ufe0f  ROBUSTNESS_GRADE: Score=56, Grade=C"
+  ],
+  "conditions_to_promote": [
+    "Improve robustness score to \u226580 (current: 56)",
+    "Reduce overfitting risk to LOW (current: HIGH)"
+  ],
+  "action_items": [
+    "Decision: REJECT \u2014 do NOT modify production until explicitly authorized"
+  ],
+  "evidence": {
+    "expectancy_r": 0.1081,
+    "profit_factor": 1.19,
+    "max_drawdown_r": 21.462,
+    "total_trades": 2049,
+    "oos_expectancy_r": 0.122,
+    "oos_trades": 410,
+    "wf_positive_ratio": 1.0,
+    "wf_median_expectancy": 0.12469437652811735,
+    "holdout_expectancy_r": 0.1445,
+    "holdout_trades": 308,
+    "stress_passes_slippage": true,
+    "stress_passes_execution": true,
+    "mc_p5_drawdown_r": 43.0,
+    "p_value": null,
+    "expectancy_ci_lower": 0.0544,
+    "expectancy_ci_upper": 0.1606,
+    "overfitting_risk": "HIGH",
+    "robustness_score": 56.0,
+    "robustness_grade": "C",
+    "btc_robustness": "PROMISING",
+    "xau_robustness": "PROMISING",
+    "brier_score": 0.2472,
+    "calibration_classification": "MIXED",
+    "winner_retention_pct": 73.5,
+    "loser_reduction_pct": 29.1,
+    "benefit_cost_ratio": 0.92,
+    "filters_adds_value": [
+      "HIGH_CONFLUENCE"
+    ],
+    "filters_hurts": [],
+    "strategy_label": "Phase3_Research",
+    "dataset_version": "v1.0"
+  },
+  "disclaimer": "\u26a0\ufe0f  RESEARCH ADVISORY ONLY.  This decision DOES NOT authorize any production change. PRODUCTION_CANDIDATE requires explicit written human approval before any deployment. Past performance does not guarantee future results."
+}

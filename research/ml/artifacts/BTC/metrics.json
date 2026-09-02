@@ -1,0 +1,677 @@
+{
+  "symbol": "BTC/USD",
+  "total_samples": 1519,
+  "best_model": "Logistic_Regression",
+  "overfitting_risk": "HIGH RISK",
+  "baselines": {
+    "train": {
+      "unfiltered_baseline": {
+        "n": 911,
+        "wins": 365,
+        "losses": 546,
+        "win_rate": 40.07,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.0016,
+        "profit_factor": 1.0,
+        "total_r": 1.5,
+        "max_drawdown": 75.0,
+        "sharpe_ratio": 0.001,
+        "sortino_ratio": 0.0
+      },
+      "rule_based_gated": {
+        "n": 366,
+        "wins": 161,
+        "losses": 205,
+        "win_rate": 43.99,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.0997,
+        "profit_factor": 1.18,
+        "total_r": 36.5,
+        "max_drawdown": 45.0,
+        "sharpe_ratio": 0.08,
+        "sortino_ratio": 0.0
+      }
+    },
+    "oos": {
+      "unfiltered_baseline": {
+        "n": 304,
+        "wins": 125,
+        "losses": 179,
+        "win_rate": 41.12,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.028,
+        "profit_factor": 1.05,
+        "total_r": 8.5,
+        "max_drawdown": 16.5,
+        "sharpe_ratio": 0.023,
+        "sortino_ratio": 0.0
+      },
+      "rule_based_gated": {
+        "n": 150,
+        "wins": 68,
+        "losses": 82,
+        "win_rate": 45.33,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.1333,
+        "profit_factor": 1.24,
+        "total_r": 20.0,
+        "max_drawdown": 12.5,
+        "sharpe_ratio": 0.107,
+        "sortino_ratio": 0.0
+      }
+    },
+    "holdout": {
+      "unfiltered_baseline": {
+        "n": 304,
+        "wins": 144,
+        "losses": 160,
+        "win_rate": 47.37,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.1842,
+        "profit_factor": 1.35,
+        "total_r": 56.0,
+        "max_drawdown": 10.0,
+        "sharpe_ratio": 0.148,
+        "sortino_ratio": 0.0
+      },
+      "rule_based_gated": {
+        "n": 148,
+        "wins": 68,
+        "losses": 80,
+        "win_rate": 45.95,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.1486,
+        "profit_factor": 1.27,
+        "total_r": 22.0,
+        "max_drawdown": 15.0,
+        "sharpe_ratio": 0.119,
+        "sortino_ratio": 0.0
+      }
+    },
+    "total": {
+      "unfiltered_baseline": {
+        "n": 1519,
+        "wins": 634,
+        "losses": 885,
+        "win_rate": 41.74,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.0434,
+        "profit_factor": 1.07,
+        "total_r": 66.0,
+        "max_drawdown": 75.0,
+        "sharpe_ratio": 0.035,
+        "sortino_ratio": 0.0
+      },
+      "rule_based_gated": {
+        "n": 664,
+        "wins": 297,
+        "losses": 367,
+        "win_rate": 44.73,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.1182,
+        "profit_factor": 1.21,
+        "total_r": 78.5,
+        "max_drawdown": 45.0,
+        "sharpe_ratio": 0.095,
+        "sortino_ratio": 0.0
+      }
+    }
+  },
+  "models": {
+    "Majority_Baseline": {
+      "classification": {
+        "train": {
+          "accuracy": 0.5993,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.4007
+        },
+        "oos": {
+          "accuracy": 0.5888,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.4112
+        },
+        "holdout": {
+          "accuracy": 0.5263,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.4737
+        }
+      },
+      "trading": {
+        "train": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": 0.0,
+          "avg_win_r": 0.0,
+          "avg_loss_r": 0.0,
+          "ev_r": 0.0,
+          "profit_factor": 0.0,
+          "total_r": 0.0,
+          "max_drawdown": 0.0,
+          "sharpe_ratio": 0.0,
+          "sortino_ratio": 0.0
+        },
+        "oos": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": 0.0,
+          "avg_win_r": 0.0,
+          "avg_loss_r": 0.0,
+          "ev_r": 0.0,
+          "profit_factor": 0.0,
+          "total_r": 0.0,
+          "max_drawdown": 0.0,
+          "sharpe_ratio": 0.0,
+          "sortino_ratio": 0.0
+        },
+        "holdout": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": 0.0,
+          "avg_win_r": 0.0,
+          "avg_loss_r": 0.0,
+          "ev_r": 0.0,
+          "profit_factor": 0.0,
+          "total_r": 0.0,
+          "max_drawdown": 0.0,
+          "sharpe_ratio": 0.0,
+          "sortino_ratio": 0.0
+        }
+      }
+    },
+    "Logistic_Regression": {
+      "classification": {
+        "train": {
+          "accuracy": 0.6729,
+          "precision": 0.6136,
+          "recall": 0.4959,
+          "f1": 0.5485,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.2097
+        },
+        "oos": {
+          "accuracy": 0.4934,
+          "precision": 0.4099,
+          "recall": 0.528,
+          "f1": 0.4615,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.2771
+        },
+        "holdout": {
+          "accuracy": 0.5526,
+          "precision": 0.5263,
+          "recall": 0.5556,
+          "f1": 0.5405,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.2577
+        }
+      },
+      "trading": {
+        "train": {
+          "n": 295,
+          "wins": 181,
+          "losses": 114,
+          "win_rate": 61.36,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": 0.5339,
+          "profit_factor": 2.38,
+          "total_r": 157.5,
+          "max_drawdown": 10.0,
+          "sharpe_ratio": 0.439,
+          "sortino_ratio": 0.0
+        },
+        "oos": {
+          "n": 161,
+          "wins": 66,
+          "losses": 95,
+          "win_rate": 40.99,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": 0.0248,
+          "profit_factor": 1.04,
+          "total_r": 4.0,
+          "max_drawdown": 12.5,
+          "sharpe_ratio": 0.02,
+          "sortino_ratio": 0.0
+        },
+        "holdout": {
+          "n": 152,
+          "wins": 80,
+          "losses": 72,
+          "win_rate": 52.63,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": 0.3158,
+          "profit_factor": 1.67,
+          "total_r": 48.0,
+          "max_drawdown": 5.0,
+          "sharpe_ratio": 0.253,
+          "sortino_ratio": 0.0
+        }
+      }
+    },
+    "Random_Forest": {
+      "classification": {
+        "train": {
+          "accuracy": 0.775,
+          "precision": 0.9167,
+          "recall": 0.4822,
+          "f1": 0.632,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.1773
+        },
+        "oos": {
+          "accuracy": 0.5592,
+          "precision": 0.3846,
+          "recall": 0.12,
+          "f1": 0.1829,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.2456
+        },
+        "holdout": {
+          "accuracy": 0.5197,
+          "precision": 0.48,
+          "recall": 0.1667,
+          "f1": 0.2474,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.2514
+        }
+      },
+      "trading": {
+        "train": {
+          "n": 192,
+          "wins": 176,
+          "losses": 16,
+          "win_rate": 91.67,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": 1.2917,
+          "profit_factor": 16.5,
+          "total_r": 248.0,
+          "max_drawdown": 2.0,
+          "sharpe_ratio": 1.869,
+          "sortino_ratio": 0.0
+        },
+        "oos": {
+          "n": 39,
+          "wins": 15,
+          "losses": 24,
+          "win_rate": 38.46,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": -0.0385,
+          "profit_factor": 0.94,
+          "total_r": -1.5,
+          "max_drawdown": 6.0,
+          "sharpe_ratio": -0.032,
+          "sortino_ratio": 0.0
+        },
+        "holdout": {
+          "n": 50,
+          "wins": 24,
+          "losses": 26,
+          "win_rate": 48.0,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": 0.2,
+          "profit_factor": 1.38,
+          "total_r": 10.0,
+          "max_drawdown": 7.0,
+          "sharpe_ratio": 0.16,
+          "sortino_ratio": 0.0
+        }
+      }
+    },
+    "Gradient_Boosting": {
+      "classification": {
+        "train": {
+          "accuracy": 0.7947,
+          "precision": 0.7543,
+          "recall": 0.7233,
+          "f1": 0.7385,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.1427
+        },
+        "oos": {
+          "accuracy": 0.4868,
+          "precision": 0.396,
+          "recall": 0.472,
+          "f1": 0.4307,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.2732
+        },
+        "holdout": {
+          "accuracy": 0.4934,
+          "precision": 0.4615,
+          "recall": 0.4167,
+          "f1": 0.438,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.2557
+        }
+      },
+      "trading": {
+        "train": {
+          "n": 350,
+          "wins": 264,
+          "losses": 86,
+          "win_rate": 75.43,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": 0.8857,
+          "profit_factor": 4.6,
+          "total_r": 310.0,
+          "max_drawdown": 10.0,
+          "sharpe_ratio": 0.823,
+          "sortino_ratio": 0.0
+        },
+        "oos": {
+          "n": 149,
+          "wins": 59,
+          "losses": 90,
+          "win_rate": 39.6,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": -0.0101,
+          "profit_factor": 0.98,
+          "total_r": -1.5,
+          "max_drawdown": 12.5,
+          "sharpe_ratio": -0.008,
+          "sortino_ratio": 0.0
+        },
+        "holdout": {
+          "n": 130,
+          "wins": 60,
+          "losses": 70,
+          "win_rate": 46.15,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": 0.1538,
+          "profit_factor": 1.29,
+          "total_r": 20.0,
+          "max_drawdown": 13.0,
+          "sharpe_ratio": 0.123,
+          "sortino_ratio": 0.0
+        }
+      }
+    },
+    "Hist_Gradient_Boosting": {
+      "classification": {
+        "train": {
+          "accuracy": 0.8057,
+          "precision": 0.7883,
+          "recall": 0.7041,
+          "f1": 0.7438,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.1455
+        },
+        "oos": {
+          "accuracy": 0.4836,
+          "precision": 0.3933,
+          "recall": 0.472,
+          "f1": 0.4291,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.266
+        },
+        "holdout": {
+          "accuracy": 0.5197,
+          "precision": 0.4918,
+          "recall": 0.4167,
+          "f1": 0.4511,
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "log_loss": 0.0,
+          "brier_score": 0.258
+        }
+      },
+      "trading": {
+        "train": {
+          "n": 326,
+          "wins": 257,
+          "losses": 69,
+          "win_rate": 78.83,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": 0.9709,
+          "profit_factor": 5.59,
+          "total_r": 316.5,
+          "max_drawdown": 12.0,
+          "sharpe_ratio": 0.951,
+          "sortino_ratio": 0.0
+        },
+        "oos": {
+          "n": 150,
+          "wins": 59,
+          "losses": 91,
+          "win_rate": 39.33,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": -0.0167,
+          "profit_factor": 0.97,
+          "total_r": -2.5,
+          "max_drawdown": 12.5,
+          "sharpe_ratio": -0.014,
+          "sortino_ratio": 0.0
+        },
+        "holdout": {
+          "n": 122,
+          "wins": 60,
+          "losses": 62,
+          "win_rate": 49.18,
+          "avg_win_r": 1.5,
+          "avg_loss_r": -1.0,
+          "ev_r": 0.2295,
+          "profit_factor": 1.45,
+          "total_r": 28.0,
+          "max_drawdown": 11.0,
+          "sharpe_ratio": 0.184,
+          "sortino_ratio": 0.0
+        }
+      }
+    }
+  },
+  "threshold_sensitivity": [
+    {
+      "threshold": 0.5,
+      "oos_metrics": {
+        "n": 161,
+        "wins": 66,
+        "losses": 95,
+        "win_rate": 40.99,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.0248,
+        "profit_factor": 1.04,
+        "total_r": 4.0,
+        "max_drawdown": 12.5,
+        "sharpe_ratio": 0.02,
+        "sortino_ratio": 0.0
+      },
+      "holdout_metrics": {
+        "n": 152,
+        "wins": 80,
+        "losses": 72,
+        "win_rate": 52.63,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.3158,
+        "profit_factor": 1.67,
+        "total_r": 48.0,
+        "max_drawdown": 5.0,
+        "sharpe_ratio": 0.253,
+        "sortino_ratio": 0.0
+      }
+    },
+    {
+      "threshold": 0.52,
+      "oos_metrics": {
+        "n": 154,
+        "wins": 64,
+        "losses": 90,
+        "win_rate": 41.56,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.039,
+        "profit_factor": 1.07,
+        "total_r": 6.0,
+        "max_drawdown": 11.5,
+        "sharpe_ratio": 0.032,
+        "sortino_ratio": 0.0
+      },
+      "holdout_metrics": {
+        "n": 141,
+        "wins": 75,
+        "losses": 66,
+        "win_rate": 53.19,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.3298,
+        "profit_factor": 1.7,
+        "total_r": 46.5,
+        "max_drawdown": 4.5,
+        "sharpe_ratio": 0.264,
+        "sortino_ratio": 0.0
+      }
+    },
+    {
+      "threshold": 0.55,
+      "oos_metrics": {
+        "n": 127,
+        "wins": 53,
+        "losses": 74,
+        "win_rate": 41.73,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.0433,
+        "profit_factor": 1.07,
+        "total_r": 5.5,
+        "max_drawdown": 7.0,
+        "sharpe_ratio": 0.035,
+        "sortino_ratio": 0.0
+      },
+      "holdout_metrics": {
+        "n": 117,
+        "wins": 61,
+        "losses": 56,
+        "win_rate": 52.14,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.3034,
+        "profit_factor": 1.63,
+        "total_r": 35.5,
+        "max_drawdown": 7.0,
+        "sharpe_ratio": 0.243,
+        "sortino_ratio": 0.0
+      }
+    },
+    {
+      "threshold": 0.58,
+      "oos_metrics": {
+        "n": 112,
+        "wins": 48,
+        "losses": 64,
+        "win_rate": 42.86,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.0714,
+        "profit_factor": 1.12,
+        "total_r": 8.0,
+        "max_drawdown": 7.0,
+        "sharpe_ratio": 0.058,
+        "sortino_ratio": 0.0
+      },
+      "holdout_metrics": {
+        "n": 101,
+        "wins": 52,
+        "losses": 49,
+        "win_rate": 51.49,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.2871,
+        "profit_factor": 1.59,
+        "total_r": 29.0,
+        "max_drawdown": 8.5,
+        "sharpe_ratio": 0.23,
+        "sortino_ratio": 0.0
+      }
+    },
+    {
+      "threshold": 0.6,
+      "oos_metrics": {
+        "n": 99,
+        "wins": 42,
+        "losses": 57,
+        "win_rate": 42.42,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.0606,
+        "profit_factor": 1.11,
+        "total_r": 6.0,
+        "max_drawdown": 7.0,
+        "sharpe_ratio": 0.049,
+        "sortino_ratio": 0.0
+      },
+      "holdout_metrics": {
+        "n": 89,
+        "wins": 49,
+        "losses": 40,
+        "win_rate": 55.06,
+        "avg_win_r": 1.5,
+        "avg_loss_r": -1.0,
+        "ev_r": 0.3764,
+        "profit_factor": 1.84,
+        "total_r": 33.5,
+        "max_drawdown": 5.0,
+        "sharpe_ratio": 0.303,
+        "sortino_ratio": 0.0
+      }
+    }
+  ]
+}

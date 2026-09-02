@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-09-02T19:27:40.406579+00:00",
+  "profiles": [
+    {
+      "strategy_id": "BTC-SELL-P40-REGIME_LOW_VOL",
+      "monte_carlo_stress": {
+        "simulations_count": 10000,
+        "sample_size": 258,
+        "mean_final_r": 121.84,
+        "median_final_r": 122.0,
+        "percentile_5th_r": 89.5,
+        "percentile_1st_r": 77.0,
+        "median_max_drawdown_r": 6.5,
+        "percentile_95th_max_drawdown_r": 10.5,
+        "percentile_99th_max_drawdown_r": 13.0,
+        "median_max_consecutive_losses": 6,
+        "percentile_99th_max_consecutive_losses": 10,
+        "prob_negative_final_r_pct": 0.0,
+        "prob_losing_month_sequence_pct": 70.6,
+        "monte_carlo_stability_verdict": "EXCELLENT STABILITY"
+      }
+    },
+    {
+      "strategy_id": "BTC-SELL-P40-HTF_SR_ALIGNED",
+      "monte_carlo_stress": {
+        "simulations_count": 10000,
+        "sample_size": 179,
+        "mean_final_r": 53.65,
+        "median_final_r": 53.5,
+        "percentile_5th_r": 26.0,
+        "percentile_1st_r": 16.0,
+        "median_max_drawdown_r": 8.0,
+        "percentile_95th_max_drawdown_r": 13.5,
+        "percentile_99th_max_drawdown_r": 17.5,
+        "median_max_consecutive_losses": 6,
+        "percentile_99th_max_consecutive_losses": 12,
+        "prob_negative_final_r_pct": 0.06,
+        "prob_losing_month_sequence_pct": 91.0,
+        "monte_carlo_stability_verdict": "EXCELLENT STABILITY"
+      }
+    },
+    {
+      "strategy_id": "XAU-BUY-P42-VWAP_ALIGNED",
+      "monte_carlo_stress": {
+        "simulations_count": 10000,
+        "sample_size": 517,
+        "mean_final_r": 105.36,
+        "median_final_r": 105.5,
+        "percentile_5th_r": 58.0,
+        "percentile_1st_r": 40.5,
+        "median_max_drawdown_r": 13.0,
+        "percentile_95th_max_drawdown_r": 22.0,
+        "percentile_99th_max_drawdown_r": 28.0,
+        "median_max_consecutive_losses": 8,
+        "percentile_99th_max_consecutive_losses": 14,
+        "prob_negative_final_r_pct": 0.0,
+        "prob_losing_month_sequence_pct": 100.0,
+        "monte_carlo_stability_verdict": "EXCELLENT STABILITY"
+      }
+    },
+    {
+      "strategy_id": "XAU-BUY-P42-EMA_ALIGNED",
+      "monte_carlo_stress": {
+        "simulations_count": 10000,
+        "sample_size": 548,
+        "mean_final_r": 91.75,
+        "median_final_r": 92.0,
+        "percentile_5th_r": 44.5,
+        "percentile_1st_r": 24.5,
+        "median_max_drawdown_r": 15.0,
+        "percentile_95th_max_drawdown_r": 25.0,
+        "percentile_99th_max_drawdown_r": 32.5,
+        "median_max_consecutive_losses": 9,
+        "percentile_99th_max_consecutive_losses": 15,
+        "prob_negative_final_r_pct": 0.15,
+        "prob_losing_month_sequence_pct": 100.0,
+        "monte_carlo_stability_verdict": "EXCELLENT STABILITY"
+      }
+    }
+  ]
+}

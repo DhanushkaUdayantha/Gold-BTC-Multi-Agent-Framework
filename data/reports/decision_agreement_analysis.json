@@ -1,0 +1,54 @@
+{
+  "matrix": [
+    {
+      "combination": "Base BUY + Validated BUY",
+      "count": 557,
+      "pct": 22.8
+    },
+    {
+      "combination": "Base BUY + Validated SELL",
+      "count": 771,
+      "pct": 31.6
+    },
+    {
+      "combination": "Base BUY + No Strategy",
+      "count": 0,
+      "pct": 0.0
+    },
+    {
+      "combination": "Base BUY + Not Qualified",
+      "count": 42,
+      "pct": 1.7
+    },
+    {
+      "combination": "Base SELL + Validated SELL",
+      "count": 349,
+      "pct": 14.3
+    },
+    {
+      "combination": "Base SELL + Validated BUY",
+      "count": 0,
+      "pct": 0.0
+    },
+    {
+      "combination": "Base SELL + No Strategy",
+      "count": 0,
+      "pct": 0.0
+    },
+    {
+      "combination": "Base SELL + Not Qualified",
+      "count": 719,
+      "pct": 29.5
+    },
+    {
+      "combination": "Base WAIT + Qualified",
+      "count": 0,
+      "pct": 0.0
+    },
+    {
+      "combination": "Base WAIT + No Strategy",
+      "count": 0,
+      "pct": 0.0
+    }
+  ]
+}

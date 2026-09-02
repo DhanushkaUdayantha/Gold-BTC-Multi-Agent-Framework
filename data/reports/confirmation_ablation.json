@@ -1,0 +1,114 @@
+{
+  "BTC": [
+    {
+      "combination": "Probability Only (P>=0.40)",
+      "trades": 738,
+      "win_rate_pct": 47.29,
+      "expectancy_r": 0.1822,
+      "profit_factor": 1.346,
+      "max_drawdown_r": 36.0,
+      "total_r": 134.5
+    },
+    {
+      "combination": "Prob + Regime (P>=0.40 + LOW_VOL)",
+      "trades": 258,
+      "win_rate_pct": 58.91,
+      "expectancy_r": 0.4729,
+      "profit_factor": 2.151,
+      "max_drawdown_r": 12.0,
+      "total_r": 122.0
+    },
+    {
+      "combination": "Prob + HTF (P>=0.40 + HTF)",
+      "trades": 627,
+      "win_rate_pct": 48.01,
+      "expectancy_r": 0.2002,
+      "profit_factor": 1.385,
+      "max_drawdown_r": 35.0,
+      "total_r": 125.5
+    },
+    {
+      "combination": "Prob + S/R (P>=0.40 + SR)",
+      "trades": 238,
+      "win_rate_pct": 49.16,
+      "expectancy_r": 0.229,
+      "profit_factor": 1.45,
+      "max_drawdown_r": 30.0,
+      "total_r": 54.5
+    },
+    {
+      "combination": "Prob + Regime + HTF",
+      "trades": 207,
+      "win_rate_pct": 58.94,
+      "expectancy_r": 0.4734,
+      "profit_factor": 2.153,
+      "max_drawdown_r": 10.0,
+      "total_r": 98.0
+    },
+    {
+      "combination": "Full Strategy (Prob + Regime + HTF + SR)",
+      "trades": 88,
+      "win_rate_pct": 64.77,
+      "expectancy_r": 0.6193,
+      "profit_factor": 2.758,
+      "max_drawdown_r": 10.0,
+      "total_r": 54.5
+    }
+  ],
+  "XAU": [
+    {
+      "combination": "Probability Only (P>=0.42)",
+      "trades": 597,
+      "win_rate_pct": 45.56,
+      "expectancy_r": 0.139,
+      "profit_factor": 1.255,
+      "max_drawdown_r": 16.0,
+      "total_r": 83.0
+    },
+    {
+      "combination": "Prob + VWAP (P>=0.42 + VWAP)",
+      "trades": 517,
+      "win_rate_pct": 48.16,
+      "expectancy_r": 0.2041,
+      "profit_factor": 1.394,
+      "max_drawdown_r": 14.0,
+      "total_r": 105.5
+    },
+    {
+      "combination": "Prob + EMA (P>=0.42 + EMA)",
+      "trades": 548,
+      "win_rate_pct": 46.72,
+      "expectancy_r": 0.1679,
+      "profit_factor": 1.315,
+      "max_drawdown_r": 16.0,
+      "total_r": 92.0
+    },
+    {
+      "combination": "Prob + HTF (P>=0.42 + HTF)",
+      "trades": 588,
+      "win_rate_pct": 45.92,
+      "expectancy_r": 0.148,
+      "profit_factor": 1.274,
+      "max_drawdown_r": 16.0,
+      "total_r": 87.0
+    },
+    {
+      "combination": "Prob + VWAP + EMA",
+      "trades": 508,
+      "win_rate_pct": 48.43,
+      "expectancy_r": 0.2106,
+      "profit_factor": 1.408,
+      "max_drawdown_r": 14.0,
+      "total_r": 107.0
+    },
+    {
+      "combination": "Full Strategy (Prob + VWAP + EMA + HTF)",
+      "trades": 508,
+      "win_rate_pct": 48.43,
+      "expectancy_r": 0.2106,
+      "profit_factor": 1.408,
+      "max_drawdown_r": 14.0,
+      "total_r": 107.0
+    }
+  ]
+}

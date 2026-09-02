@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-09-02T19:27:53.179775+00:00",
+  "btc_audit": {
+    "symbol": "BTC/USD",
+    "total_signals": 1519,
+    "train_count": 911,
+    "val_count": 304,
+    "holdout_count": 304,
+    "train_period_end": "2025-01-28T10:00:00+00:00",
+    "validation_period_start": "2025-01-28T20:45:00+00:00",
+    "validation_period_end": "2025-10-06T09:30:00+00:00",
+    "holdout_period_start": "2025-10-09T21:30:00+00:00",
+    "holdout_period_end": "2026-06-29T14:15:00+00:00",
+    "future_calibration_data_used": false,
+    "future_outcome_used": false,
+    "future_signal_used": false,
+    "violation_count": 0,
+    "audit_status": "PASSED",
+    "notes": [
+      "Zero lookahead bias detected across train, validation, and holdout splits.",
+      "Holdout data (latest 20%) completely isolated and untouched during calibration."
+    ]
+  },
+  "xau_audit": {
+    "symbol": "XAU/USD",
+    "total_signals": 919,
+    "train_count": 551,
+    "val_count": 184,
+    "holdout_count": 184,
+    "train_period_end": "2025-07-08T23:30:00+00:00",
+    "validation_period_start": "2025-07-09T04:15:00+00:00",
+    "validation_period_end": "2025-12-16T12:45:00+00:00",
+    "holdout_period_start": "2025-12-16T13:45:00+00:00",
+    "holdout_period_end": "2026-08-27T17:15:00+00:00",
+    "future_calibration_data_used": false,
+    "future_outcome_used": false,
+    "future_signal_used": false,
+    "violation_count": 0,
+    "audit_status": "PASSED",
+    "notes": [
+      "Zero lookahead bias detected across train, validation, and holdout splits.",
+      "Holdout data (latest 20%) completely isolated and untouched during calibration."
+    ]
+  },
+  "overall_verdict": "CLEAN - 0 VIOLATIONS"
+}

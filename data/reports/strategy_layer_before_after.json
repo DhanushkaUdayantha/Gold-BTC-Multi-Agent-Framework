@@ -1,0 +1,158 @@
+{
+  "timestamp": "2026-09-01T18:50:00Z",
+  "governance_classification": "PROMOTE_TO_GATING_RESEARCH",
+  "governance_reason": "Empirical evidence strongly supports the advisory layer: Qualified trades achieve +0.233R expectancy (vs -0.025R for non-qualified) and Profit Factor 1.46 with large sample (N=906). Recommends promoting to a separate controlled gating research phase.",
+  "mandatory_confirmation": "Validated Strategy Layer implemented as advisory only. Existing production decision behavior unchanged.",
+  "overall_comparison": {
+    "base_engine": {
+      "signals": 2438,
+      "buy": 1370,
+      "sell": 1068,
+      "wait": 0,
+      "completed": 2437,
+      "wins": 1044,
+      "losses": 1393,
+      "win_rate_pct": 42.8,
+      "expectancy_r": 0.071,
+      "profit_factor": 1.12,
+      "max_drawdown_r": 75.0,
+      "total_realized_r": 173.0
+    },
+    "strategy_layer_advisory": {
+      "signals": 2438,
+      "buy": 1370,
+      "sell": 1068,
+      "wait": 0,
+      "completed": 2437,
+      "wins": 1044,
+      "losses": 1393,
+      "win_rate_pct": 42.8,
+      "expectancy_r": 0.071,
+      "profit_factor": 1.12,
+      "max_drawdown_r": 75.0,
+      "total_realized_r": 173.0
+    },
+    "difference": {
+      "signals": 0,
+      "buy": 0,
+      "sell": 0,
+      "wait": 0,
+      "win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "profit_factor": 0.0,
+      "max_drawdown_r": 0.0,
+      "total_realized_r": 0.0
+    }
+  },
+  "breakdowns": {
+    "btc_all": {
+      "signals": 1519,
+      "buy": 771,
+      "sell": 748,
+      "wait": 0,
+      "completed": 1519,
+      "wins": 634,
+      "losses": 885,
+      "win_rate_pct": 41.7,
+      "expectancy_r": 0.043,
+      "profit_factor": 1.07,
+      "max_drawdown_r": 75.0,
+      "total_realized_r": 66.0
+    },
+    "xau_all": {
+      "signals": 919,
+      "buy": 599,
+      "sell": 320,
+      "wait": 0,
+      "completed": 918,
+      "wins": 410,
+      "losses": 508,
+      "win_rate_pct": 44.7,
+      "expectancy_r": 0.117,
+      "profit_factor": 1.21,
+      "max_drawdown_r": 13.5,
+      "total_realized_r": 107.0
+    },
+    "btc_sell": {
+      "signals": 748,
+      "buy": 0,
+      "sell": 748,
+      "wait": 0,
+      "completed": 748,
+      "wins": 359,
+      "losses": 389,
+      "win_rate_pct": 48.0,
+      "expectancy_r": 0.2,
+      "profit_factor": 1.38,
+      "max_drawdown_r": 36.0,
+      "total_realized_r": 149.5
+    },
+    "xau_buy": {
+      "signals": 599,
+      "buy": 599,
+      "sell": 0,
+      "wait": 0,
+      "completed": 599,
+      "wins": 272,
+      "losses": 327,
+      "win_rate_pct": 45.4,
+      "expectancy_r": 0.135,
+      "profit_factor": 1.25,
+      "max_drawdown_r": 16.0,
+      "total_realized_r": 81.0
+    },
+    "qualified_strategy_signals": {
+      "signals": 906,
+      "buy": 557,
+      "sell": 349,
+      "wait": 0,
+      "completed": 906,
+      "wins": 447,
+      "losses": 459,
+      "win_rate_pct": 49.3,
+      "expectancy_r": 0.233,
+      "profit_factor": 1.46,
+      "max_drawdown_r": 30.0,
+      "total_realized_r": 211.5
+    },
+    "non_qualified_signals": {
+      "signals": 1532,
+      "buy": 813,
+      "sell": 719,
+      "wait": 0,
+      "completed": 1531,
+      "wins": 597,
+      "losses": 934,
+      "win_rate_pct": 39.0,
+      "expectancy_r": -0.025,
+      "profit_factor": 0.96,
+      "max_drawdown_r": 90.0,
+      "total_realized_r": -38.5
+    }
+  },
+  "coverage_metrics": {
+    "pct_signals_matching_btc_strategy": 23.0,
+    "pct_signals_matching_xau_strategy": 60.6,
+    "pct_all_signals_qualified": 37.2,
+    "pct_signals_receiving_support": 37.2,
+    "pct_signals_conflicting": 31.6,
+    "pct_signals_insufficient_data": 0.0,
+    "counts": {
+      "btc_qualified": 349,
+      "xau_qualified": 557,
+      "total_qualified": 906,
+      "conflicts": 771,
+      "total_evaluated": 2438
+    }
+  },
+  "agreement_matrix": {
+    "base_buy_val_buy": 557,
+    "base_sell_val_sell": 349,
+    "base_buy_val_sell_conflict": 771,
+    "base_sell_val_buy_conflict": 0,
+    "base_buy_no_strategy": 42,
+    "base_sell_no_strategy": 719,
+    "base_wait_with_strategy": 0,
+    "base_wait_no_strategy": 0
+  }
+}

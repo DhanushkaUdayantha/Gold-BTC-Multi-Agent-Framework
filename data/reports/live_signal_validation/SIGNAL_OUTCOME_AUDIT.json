@@ -1,0 +1,12 @@
+{
+  "audited_at": "2026-09-01T18:41:07.802332+00:00",
+  "btc_total_signals": 0,
+  "btc_resolved_trades": 0,
+  "btc_pending_trades": 0,
+  "xau_total_signals": 0,
+  "xau_resolved_trades": 0,
+  "xau_pending_trades": 0,
+  "lookahead_violations": 0,
+  "immutability_passed": true,
+  "idempotency_passed": true
+}

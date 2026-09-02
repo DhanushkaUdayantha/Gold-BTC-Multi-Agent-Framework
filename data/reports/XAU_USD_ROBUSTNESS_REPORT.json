@@ -1,0 +1,118 @@
+{
+  "asset": "XAU/USD",
+  "generated_at": "2026-09-01T16:06:33.285798+00:00",
+  "dataset_version": "v1.0",
+  "total_signals": 906,
+  "total_trades": 906,
+  "buy_trades": 589,
+  "sell_trades": 317,
+  "wait_signals": 0,
+  "wins": 404,
+  "losses": 502,
+  "expired": 0,
+  "win_rate_pct": 44.59,
+  "win_rate_wilson_lower": 41.38,
+  "win_rate_wilson_upper": 47.84,
+  "expectancy_r": 0.1154,
+  "expectancy_ci_lower": 0.0381,
+  "expectancy_ci_upper": 0.2003,
+  "profit_factor": 1.208,
+  "total_r": 104.54,
+  "avg_win_r": 1.5,
+  "avg_loss_r": -0.999,
+  "max_drawdown_r": 13.5,
+  "avg_mfe_r": 1.159,
+  "avg_mae_r": 0.917,
+  "max_consecutive_losses": 11,
+  "max_consecutive_wins": 9,
+  "train_trades": 543,
+  "train_win_rate_pct": 43.8,
+  "train_expectancy_r": 0.0968,
+  "val_trades": 181,
+  "val_win_rate_pct": 48.6,
+  "val_expectancy_r": 0.2155,
+  "oos_trades": 182,
+  "oos_win_rate_pct": 42.9,
+  "oos_expectancy_r": 0.0714,
+  "holdout_trades": 136,
+  "holdout_win_rate_pct": 43.4,
+  "holdout_expectancy_r": 0.0846,
+  "wf_positive_windows": 4,
+  "wf_total_windows": 4,
+  "wf_median_expectancy": 46.15,
+  "wf_worst_expectancy": 43.1,
+  "by_regime": [
+    {
+      "regime": "HIGH_VOLATILITY",
+      "trade_count": 3,
+      "win_rate_pct": 33.3,
+      "expectancy_r": -0.1667,
+      "profit_factor": 0.75,
+      "max_drawdown_r": 1.0
+    },
+    {
+      "regime": "LOW_VOLATILITY",
+      "trade_count": 836,
+      "win_rate_pct": 44.6,
+      "expectancy_r": 0.1161,
+      "profit_factor": 1.21,
+      "max_drawdown_r": 16.5
+    },
+    {
+      "regime": "RANGING",
+      "trade_count": 4,
+      "win_rate_pct": 50.0,
+      "expectancy_r": 0.25,
+      "profit_factor": 1.5,
+      "max_drawdown_r": 1.0
+    },
+    {
+      "regime": "TRENDING",
+      "trade_count": 63,
+      "win_rate_pct": 44.4,
+      "expectancy_r": 0.1111,
+      "profit_factor": 1.2,
+      "max_drawdown_r": 4.0
+    }
+  ],
+  "by_session": [
+    {
+      "session": "ASIA",
+      "trade_count": 274,
+      "win_rate_pct": 48.5,
+      "expectancy_r": 0.2135,
+      "profit_factor": 1.41
+    },
+    {
+      "session": "LONDON",
+      "trade_count": 187,
+      "win_rate_pct": 36.9,
+      "expectancy_r": -0.0775,
+      "profit_factor": 0.88
+    },
+    {
+      "session": "NEW_YORK",
+      "trade_count": 158,
+      "win_rate_pct": 30.4,
+      "expectancy_r": -0.2371,
+      "profit_factor": 0.66
+    },
+    {
+      "session": "OVERLAP",
+      "trade_count": 287,
+      "win_rate_pct": 53.7,
+      "expectancy_r": 0.3415,
+      "profit_factor": 1.74
+    }
+  ],
+  "robustness_classification": "PROMISING",
+  "robustness_score": 67.0,
+  "findings": [
+    "XAU/USD: 906 trades, WR=44.6%, Exp=+0.1154R, PF=1.21, DD=13.5R",
+    "OOS (182 trades): WR=42.9%, Exp=+0.0714R",
+    "Walk-forward: 4/4 positive folds, median exp=+46.1500R",
+    "Best regime: RANGING (exp=+0.2500R)",
+    "Worst regime: HIGH_VOLATILITY (exp=-0.1667R)"
+  ],
+  "disclaimer": "Research only. Past performance does not guarantee future results."
+}

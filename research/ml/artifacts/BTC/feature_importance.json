@@ -1,0 +1,155 @@
+{
+  "tree_importance": [],
+  "permutation_importance": [
+    {
+      "feature": "score_RSI",
+      "importance_mean": 0.0315,
+      "importance_std": 0.01
+    },
+    {
+      "feature": "mtf_aligned",
+      "importance_mean": 0.0209,
+      "importance_std": 0.0106
+    },
+    {
+      "feature": "vol_aligned",
+      "importance_mean": 0.0134,
+      "importance_std": 0.0066
+    },
+    {
+      "feature": "score_ICT_Concepts",
+      "importance_mean": 0.0104,
+      "importance_std": 0.0053
+    },
+    {
+      "feature": "score_MTF_Alignment",
+      "importance_mean": 0.0075,
+      "importance_std": 0.0041
+    },
+    {
+      "feature": "score_Elliott_Wave",
+      "importance_mean": 0.006,
+      "importance_std": 0.0109
+    },
+    {
+      "feature": "vwap_aligned",
+      "importance_mean": 0.005,
+      "importance_std": 0.0031
+    },
+    {
+      "feature": "score_EMA_MA_Stack",
+      "importance_mean": 0.004,
+      "importance_std": 0.0054
+    },
+    {
+      "feature": "score_Breakout_Retest",
+      "importance_mean": 0.0036,
+      "importance_std": 0.0082
+    },
+    {
+      "feature": "score_Market_Structure",
+      "importance_mean": 0.0031,
+      "importance_std": 0.0011
+    },
+    {
+      "feature": "is_high_confluence",
+      "importance_mean": 0.0031,
+      "importance_std": 0.0017
+    },
+    {
+      "feature": "is_asia_buy",
+      "importance_mean": 0.0015,
+      "importance_std": 0.0203
+    },
+    {
+      "feature": "score_Momentum",
+      "importance_mean": 0.0011,
+      "importance_std": 0.0037
+    },
+    {
+      "feature": "score_HTF_Trend",
+      "importance_mean": 0.0009,
+      "importance_std": 0.0014
+    },
+    {
+      "feature": "score_Supply_Demand",
+      "importance_mean": 0.0006,
+      "importance_std": 0.0012
+    },
+    {
+      "feature": "day_of_week",
+      "importance_mean": 0.0004,
+      "importance_std": 0.0073
+    },
+    {
+      "feature": "momentum_aligned",
+      "importance_mean": 0.0001,
+      "importance_std": 0.0018
+    },
+    {
+      "feature": "gemini_score",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "score_MACD",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "score_Gemini_AI",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "score_Fibonacci_OTE",
+      "importance_mean": -0.0004,
+      "importance_std": 0.0005
+    },
+    {
+      "feature": "tp_sl_ratio",
+      "importance_mean": -0.0006,
+      "importance_std": 0.0059
+    },
+    {
+      "feature": "hour_of_day",
+      "importance_mean": -0.0042,
+      "importance_std": 0.0156
+    },
+    {
+      "feature": "confluence_score",
+      "importance_mean": -0.0066,
+      "importance_std": 0.0032
+    },
+    {
+      "feature": "technical_score",
+      "importance_mean": -0.0066,
+      "importance_std": 0.0032
+    },
+    {
+      "feature": "score_Volume_Confirmation",
+      "importance_mean": -0.0072,
+      "importance_std": 0.001
+    },
+    {
+      "feature": "score_SR_Price_Action",
+      "importance_mean": -0.0076,
+      "importance_std": 0.004
+    },
+    {
+      "feature": "score_VWAP",
+      "importance_mean": -0.0102,
+      "importance_std": 0.0047
+    },
+    {
+      "feature": "sl_dist_pct",
+      "importance_mean": -0.0134,
+      "importance_std": 0.0085
+    },
+    {
+      "feature": "score_SMC_ICT",
+      "importance_mean": -0.0159,
+      "importance_std": 0.0155
+    }
+  ]
+}

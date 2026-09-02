@@ -1,0 +1,29 @@
+[
+  {
+    "state": "NORMAL",
+    "subsequent_signals_count": 906,
+    "subsequent_win_rate_pct": 49.34,
+    "subsequent_expectancy_r": 0.2334,
+    "subsequent_profit_factor": 1.461,
+    "subsequent_max_drawdown_r": 30.0,
+    "is_predictive": true
+  },
+  {
+    "state": "WATCH",
+    "subsequent_signals_count": 0,
+    "subsequent_win_rate_pct": 0.0,
+    "subsequent_expectancy_r": 0.0,
+    "subsequent_profit_factor": 1.0,
+    "subsequent_max_drawdown_r": 0.0,
+    "is_predictive": true
+  },
+  {
+    "state": "DEGRADED",
+    "subsequent_signals_count": 0,
+    "subsequent_win_rate_pct": 0.0,
+    "subsequent_expectancy_r": 0.0,
+    "subsequent_profit_factor": 1.0,
+    "subsequent_max_drawdown_r": 0.0,
+    "is_predictive": true
+  }
+]

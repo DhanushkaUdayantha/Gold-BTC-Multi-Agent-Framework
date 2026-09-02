@@ -1,0 +1,109 @@
+{
+  "generated_at": "2026-09-01T16:06:34.016956+00:00",
+  "strategy_label": "Phase3_Research",
+  "total_score": 56.0,
+  "grade": "C",
+  "dimensions": [
+    {
+      "dimension": "expectancy_quality",
+      "max_points": 15,
+      "earned_points": 7.0,
+      "pct": 46.7,
+      "status": "ADEQUATE",
+      "detail": "Expectancy +0.1081R \u2265 0.05R"
+    },
+    {
+      "dimension": "oos_stability",
+      "max_points": 15,
+      "earned_points": 10.0,
+      "pct": 66.7,
+      "status": "ADEQUATE",
+      "detail": "OOS expectancy +0.1220R \u2265 0.05R"
+    },
+    {
+      "dimension": "wf_stability",
+      "max_points": 10,
+      "earned_points": 10.0,
+      "pct": 100.0,
+      "status": "STRONG",
+      "detail": "WF: 100% positive, median +0.1247R"
+    },
+    {
+      "dimension": "profit_factor",
+      "max_points": 10,
+      "earned_points": 4.0,
+      "pct": 40.0,
+      "status": "WEAK",
+      "detail": "PF 1.19 \u2265 1.1"
+    },
+    {
+      "dimension": "drawdown_quality",
+      "max_points": 10,
+      "earned_points": 3.0,
+      "pct": 30.0,
+      "status": "WEAK",
+      "detail": "Max DD 21.5R \u2264 35R"
+    },
+    {
+      "dimension": "calibration",
+      "max_points": 10,
+      "earned_points": 6.0,
+      "pct": 60.0,
+      "status": "ADEQUATE",
+      "detail": "Brier=0.2472, ECE=0.0226"
+    },
+    {
+      "dimension": "regime_stability",
+      "max_points": 8,
+      "earned_points": 8.0,
+      "pct": 100.0,
+      "status": "STRONG",
+      "detail": "75% regimes positive"
+    },
+    {
+      "dimension": "asset_stability",
+      "max_points": 8,
+      "earned_points": 3.0,
+      "pct": 37.5,
+      "status": "WEAK",
+      "detail": "Asset DD ratio 0.61 \u2014 one asset dominates drawdown"
+    },
+    {
+      "dimension": "session_stability",
+      "max_points": 5,
+      "earned_points": 5.0,
+      "pct": 100.0,
+      "status": "STRONG",
+      "detail": "75% sessions positive"
+    },
+    {
+      "dimension": "stress_robustness",
+      "max_points": 5,
+      "earned_points": 5.0,
+      "pct": 100.0,
+      "status": "STRONG",
+      "detail": "Passes slippage and execution stress tests"
+    },
+    {
+      "dimension": "statistical_evidence",
+      "max_points": 4,
+      "earned_points": 0.0,
+      "pct": 0.0,
+      "status": "UNAVAILABLE",
+      "detail": "p-value not computed or sample too small"
+    }
+  ],
+  "weak_areas": [
+    "profit_factor",
+    "drawdown_quality",
+    "asset_stability"
+  ],
+  "strong_areas": [
+    "wf_stability",
+    "regime_stability",
+    "session_stability",
+    "stress_robustness"
+  ],
+  "summary": "Total: 56/100 (Grade C). Strong: [wf_stability, regime_stability, session_stability, stress_robustness]. Weak: [profit_factor, drawdown_quality, asset_stability]. Overfitting risk: HIGH (5pt penalty).",
+  "disclaimer": "Research-only robustness score. Not a guarantee of future performance."
+}

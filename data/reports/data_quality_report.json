@@ -1,0 +1,22 @@
+{
+  "audit_timestamp": "2026-09-01T14:04:24.803309",
+  "total_records": 2438,
+  "btc_records": 1519,
+  "xau_records": 919,
+  "chronologically_ordered": true,
+  "earliest_timestamp": "2023-01-06T20:00:00+00:00",
+  "latest_timestamp": "2026-08-27T17:15:00+00:00",
+  "missing_timestamps": 0,
+  "duplicate_timestamps": 410,
+  "duplicate_signals": 0,
+  "missing_probabilities": 0,
+  "invalid_probability_range": 0,
+  "missing_regimes": 0,
+  "missing_sessions": 0,
+  "missing_alignment_fields": 0,
+  "invalid_outcomes": 0,
+  "impossible_r_values": 0,
+  "anomalies": [],
+  "is_valid_for_research": true,
+  "quality_grade": "A"
+}

@@ -1,0 +1,63 @@
+{
+  "btc_summary": {
+    "asset": "BTC/USD",
+    "overall": {
+      "n": 60,
+      "wr": 66.7,
+      "exp": 0.5333,
+      "pf": 3.0,
+      "dd": 0.8,
+      "tot_r": 32.0
+    },
+    "buy": {
+      "n": 20,
+      "wr": 0.0,
+      "exp": -0.8,
+      "pf": 0.0,
+      "dd": 16.0,
+      "tot_r": -16.0
+    },
+    "sell": {
+      "n": 40,
+      "wr": 100.0,
+      "exp": 1.2,
+      "pf": 99.0,
+      "dd": 0.0,
+      "tot_r": 48.0
+    }
+  },
+  "xau_summary": {
+    "asset": "XAU/USD",
+    "overall": {
+      "n": 60,
+      "wr": 66.7,
+      "exp": 0.6667,
+      "pf": 3.0,
+      "dd": 1.0,
+      "tot_r": 40.0
+    },
+    "buy": {
+      "n": 40,
+      "wr": 100.0,
+      "exp": 1.5,
+      "pf": 99.0,
+      "dd": 0.0,
+      "tot_r": 60.0
+    },
+    "sell": {
+      "n": 20,
+      "wr": 0.0,
+      "exp": -1.0,
+      "pf": 0.0,
+      "dd": 20.0,
+      "tot_r": -20.0
+    }
+  },
+  "tier_counts": {
+    "TIER_1": 56,
+    "TIER_2": 50,
+    "TIER_3": 14
+  },
+  "daily_selected_count": 24,
+  "asset_isolation_enforced": true
+}

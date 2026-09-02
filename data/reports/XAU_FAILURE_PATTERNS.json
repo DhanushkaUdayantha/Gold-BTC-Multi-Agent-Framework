@@ -1,0 +1,10 @@
+[
+  {
+    "failure_taxonomy": "FALSE_BREAKOUT",
+    "count": 20,
+    "failure_rate_pct": 100.0,
+    "total_loss_r": -20.0,
+    "average_loss_r": -1.0,
+    "largest_loss_r": -1.0
+  }
+]

@@ -1,0 +1,418 @@
+{
+  "generated_at": "2026-09-02T19:27:40.406579+00:00",
+  "profiles": [
+    {
+      "strategy_id": "BTC-SELL-P40-REGIME_LOW_VOL",
+      "regimes": [
+        {
+          "market_regime": "LOW_VOLATILITY",
+          "trades_count": 258,
+          "wins_count": 152,
+          "win_rate_pct": 58.9,
+          "expectancy_r": 0.473,
+          "profit_factor": 2.15,
+          "total_r": 122.0
+        }
+      ],
+      "sessions": [
+        {
+          "session": "LONDON",
+          "trades_count": 61,
+          "wins_count": 39,
+          "win_rate_pct": 63.9,
+          "expectancy_r": 0.598,
+          "profit_factor": 2.66,
+          "total_r": 36.5
+        },
+        {
+          "session": "NEW_YORK",
+          "trades_count": 42,
+          "wins_count": 22,
+          "win_rate_pct": 52.4,
+          "expectancy_r": 0.31,
+          "profit_factor": 1.65,
+          "total_r": 13.0
+        },
+        {
+          "session": "ASIA",
+          "trades_count": 80,
+          "wins_count": 46,
+          "win_rate_pct": 57.5,
+          "expectancy_r": 0.438,
+          "profit_factor": 2.03,
+          "total_r": 35.0
+        },
+        {
+          "session": "OVERLAP",
+          "trades_count": 75,
+          "wins_count": 45,
+          "win_rate_pct": 60.0,
+          "expectancy_r": 0.5,
+          "profit_factor": 2.25,
+          "total_r": 37.5
+        }
+      ],
+      "transitions": [
+        {
+          "from_regime": "LOW_VOLATILITY",
+          "to_regime": "LOW_VOLATILITY",
+          "transition_count": 257,
+          "wins_count": 151,
+          "win_rate_pct": 58.8,
+          "expectancy_r": 0.469,
+          "profit_factor": 2.14,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Consistent performance"
+        }
+      ]
+    },
+    {
+      "strategy_id": "BTC-SELL-P40-HTF_SR_ALIGNED",
+      "regimes": [
+        {
+          "market_regime": "LOW_VOLATILITY",
+          "trades_count": 88,
+          "wins_count": 57,
+          "win_rate_pct": 64.8,
+          "expectancy_r": 0.619,
+          "profit_factor": 2.76,
+          "total_r": 54.5
+        },
+        {
+          "market_regime": "TRENDING",
+          "trades_count": 89,
+          "wins_count": 36,
+          "win_rate_pct": 40.4,
+          "expectancy_r": 0.011,
+          "profit_factor": 1.02,
+          "total_r": 1.0
+        },
+        {
+          "market_regime": "RANGING",
+          "trades_count": 2,
+          "wins_count": 0,
+          "win_rate_pct": 0.0,
+          "expectancy_r": -1.0,
+          "profit_factor": 1.0,
+          "total_r": -2.0
+        }
+      ],
+      "sessions": [
+        {
+          "session": "LONDON",
+          "trades_count": 34,
+          "wins_count": 20,
+          "win_rate_pct": 58.8,
+          "expectancy_r": 0.471,
+          "profit_factor": 2.14,
+          "total_r": 16.0
+        },
+        {
+          "session": "NEW_YORK",
+          "trades_count": 38,
+          "wins_count": 25,
+          "win_rate_pct": 65.8,
+          "expectancy_r": 0.645,
+          "profit_factor": 2.88,
+          "total_r": 24.5
+        },
+        {
+          "session": "ASIA",
+          "trades_count": 49,
+          "wins_count": 15,
+          "win_rate_pct": 30.6,
+          "expectancy_r": -0.235,
+          "profit_factor": 0.66,
+          "total_r": -11.5
+        },
+        {
+          "session": "OVERLAP",
+          "trades_count": 58,
+          "wins_count": 33,
+          "win_rate_pct": 56.9,
+          "expectancy_r": 0.422,
+          "profit_factor": 1.98,
+          "total_r": 24.5
+        }
+      ],
+      "transitions": [
+        {
+          "from_regime": "TRENDING",
+          "to_regime": "TRENDING",
+          "transition_count": 67,
+          "wins_count": 24,
+          "win_rate_pct": 35.8,
+          "expectancy_r": -0.104,
+          "profit_factor": 0.84,
+          "is_edge_deteriorated": true,
+          "deterioration_note": "Degrades from base +0.30R to -0.10R"
+        },
+        {
+          "from_regime": "LOW_VOLATILITY",
+          "to_regime": "LOW_VOLATILITY",
+          "transition_count": 66,
+          "wins_count": 44,
+          "win_rate_pct": 66.7,
+          "expectancy_r": 0.667,
+          "profit_factor": 3.0,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Enhanced post-transition (+0.67R)"
+        },
+        {
+          "from_regime": "TRENDING",
+          "to_regime": "LOW_VOLATILITY",
+          "transition_count": 21,
+          "wins_count": 13,
+          "win_rate_pct": 61.9,
+          "expectancy_r": 0.548,
+          "profit_factor": 2.44,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Enhanced post-transition (+0.55R)"
+        },
+        {
+          "from_regime": "LOW_VOLATILITY",
+          "to_regime": "TRENDING",
+          "transition_count": 21,
+          "wins_count": 12,
+          "win_rate_pct": 57.1,
+          "expectancy_r": 0.429,
+          "profit_factor": 2.0,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Enhanced post-transition (+0.43R)"
+        }
+      ]
+    },
+    {
+      "strategy_id": "XAU-BUY-P42-VWAP_ALIGNED",
+      "regimes": [
+        {
+          "market_regime": "LOW_VOLATILITY",
+          "trades_count": 498,
+          "wins_count": 239,
+          "win_rate_pct": 48.0,
+          "expectancy_r": 0.2,
+          "profit_factor": 1.38,
+          "total_r": 99.5
+        },
+        {
+          "market_regime": "TRENDING",
+          "trades_count": 17,
+          "wins_count": 9,
+          "win_rate_pct": 52.9,
+          "expectancy_r": 0.324,
+          "profit_factor": 1.69,
+          "total_r": 5.5
+        },
+        {
+          "market_regime": "RANGING",
+          "trades_count": 2,
+          "wins_count": 1,
+          "win_rate_pct": 50.0,
+          "expectancy_r": 0.25,
+          "profit_factor": 1.5,
+          "total_r": 0.5
+        }
+      ],
+      "sessions": [
+        {
+          "session": "LONDON",
+          "trades_count": 109,
+          "wins_count": 39,
+          "win_rate_pct": 35.8,
+          "expectancy_r": -0.106,
+          "profit_factor": 0.84,
+          "total_r": -11.5
+        },
+        {
+          "session": "NEW_YORK",
+          "trades_count": 88,
+          "wins_count": 32,
+          "win_rate_pct": 36.4,
+          "expectancy_r": -0.091,
+          "profit_factor": 0.86,
+          "total_r": -8.0
+        },
+        {
+          "session": "ASIA",
+          "trades_count": 156,
+          "wins_count": 87,
+          "win_rate_pct": 55.8,
+          "expectancy_r": 0.394,
+          "profit_factor": 1.89,
+          "total_r": 61.5
+        },
+        {
+          "session": "OVERLAP",
+          "trades_count": 164,
+          "wins_count": 91,
+          "win_rate_pct": 55.5,
+          "expectancy_r": 0.387,
+          "profit_factor": 1.87,
+          "total_r": 63.5
+        }
+      ],
+      "transitions": [
+        {
+          "from_regime": "LOW_VOLATILITY",
+          "to_regime": "LOW_VOLATILITY",
+          "transition_count": 487,
+          "wins_count": 236,
+          "win_rate_pct": 48.5,
+          "expectancy_r": 0.211,
+          "profit_factor": 1.41,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Enhanced post-transition (+0.21R)"
+        },
+        {
+          "from_regime": "LOW_VOLATILITY",
+          "to_regime": "TRENDING",
+          "transition_count": 10,
+          "wins_count": 5,
+          "win_rate_pct": 50.0,
+          "expectancy_r": 0.25,
+          "profit_factor": 1.5,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Enhanced post-transition (+0.25R)"
+        },
+        {
+          "from_regime": "TRENDING",
+          "to_regime": "LOW_VOLATILITY",
+          "transition_count": 9,
+          "wins_count": 2,
+          "win_rate_pct": 22.2,
+          "expectancy_r": -0.444,
+          "profit_factor": 0.43,
+          "is_edge_deteriorated": true,
+          "deterioration_note": "Degrades from base +0.20R to -0.44R"
+        },
+        {
+          "from_regime": "TRENDING",
+          "to_regime": "TRENDING",
+          "transition_count": 6,
+          "wins_count": 3,
+          "win_rate_pct": 50.0,
+          "expectancy_r": 0.25,
+          "profit_factor": 1.5,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Enhanced post-transition (+0.25R)"
+        }
+      ]
+    },
+    {
+      "strategy_id": "XAU-BUY-P42-EMA_ALIGNED",
+      "regimes": [
+        {
+          "market_regime": "LOW_VOLATILITY",
+          "trades_count": 529,
+          "wins_count": 246,
+          "win_rate_pct": 46.5,
+          "expectancy_r": 0.163,
+          "profit_factor": 1.3,
+          "total_r": 86.0
+        },
+        {
+          "market_regime": "TRENDING",
+          "trades_count": 17,
+          "wins_count": 9,
+          "win_rate_pct": 52.9,
+          "expectancy_r": 0.324,
+          "profit_factor": 1.69,
+          "total_r": 5.5
+        },
+        {
+          "market_regime": "RANGING",
+          "trades_count": 2,
+          "wins_count": 1,
+          "win_rate_pct": 50.0,
+          "expectancy_r": 0.25,
+          "profit_factor": 1.5,
+          "total_r": 0.5
+        }
+      ],
+      "sessions": [
+        {
+          "session": "LONDON",
+          "trades_count": 114,
+          "wins_count": 42,
+          "win_rate_pct": 36.8,
+          "expectancy_r": -0.079,
+          "profit_factor": 0.88,
+          "total_r": -9.0
+        },
+        {
+          "session": "NEW_YORK",
+          "trades_count": 97,
+          "wins_count": 32,
+          "win_rate_pct": 33.0,
+          "expectancy_r": -0.175,
+          "profit_factor": 0.74,
+          "total_r": -17.0
+        },
+        {
+          "session": "ASIA",
+          "trades_count": 164,
+          "wins_count": 89,
+          "win_rate_pct": 54.3,
+          "expectancy_r": 0.357,
+          "profit_factor": 1.78,
+          "total_r": 58.5
+        },
+        {
+          "session": "OVERLAP",
+          "trades_count": 173,
+          "wins_count": 93,
+          "win_rate_pct": 53.8,
+          "expectancy_r": 0.344,
+          "profit_factor": 1.74,
+          "total_r": 59.5
+        }
+      ],
+      "transitions": [
+        {
+          "from_regime": "LOW_VOLATILITY",
+          "to_regime": "LOW_VOLATILITY",
+          "transition_count": 518,
+          "wins_count": 244,
+          "win_rate_pct": 47.1,
+          "expectancy_r": 0.178,
+          "profit_factor": 1.34,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Enhanced post-transition (+0.18R)"
+        },
+        {
+          "from_regime": "LOW_VOLATILITY",
+          "to_regime": "TRENDING",
+          "transition_count": 10,
+          "wins_count": 5,
+          "win_rate_pct": 50.0,
+          "expectancy_r": 0.25,
+          "profit_factor": 1.5,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Enhanced post-transition (+0.25R)"
+        },
+        {
+          "from_regime": "TRENDING",
+          "to_regime": "LOW_VOLATILITY",
+          "transition_count": 9,
+          "wins_count": 1,
+          "win_rate_pct": 11.1,
+          "expectancy_r": -0.722,
+          "profit_factor": 0.19,
+          "is_edge_deteriorated": true,
+          "deterioration_note": "Degrades from base +0.17R to -0.72R"
+        },
+        {
+          "from_regime": "TRENDING",
+          "to_regime": "TRENDING",
+          "transition_count": 6,
+          "wins_count": 3,
+          "win_rate_pct": 50.0,
+          "expectancy_r": 0.25,
+          "profit_factor": 1.5,
+          "is_edge_deteriorated": false,
+          "deterioration_note": "Enhanced post-transition (+0.25R)"
+        }
+      ]
+    }
+  ]
+}

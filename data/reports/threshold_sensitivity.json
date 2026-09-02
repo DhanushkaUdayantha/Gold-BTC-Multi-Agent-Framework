@@ -1,0 +1,146 @@
+{
+  "BTC": [
+    {
+      "threshold": 0.38,
+      "trades": 258,
+      "win_rate_pct": 58.91,
+      "expectancy_r": 0.4729,
+      "profit_factor": 2.151,
+      "max_drawdown_r": 12.0,
+      "total_r": 122.0,
+      "classification": "STABLE_PLATEAU"
+    },
+    {
+      "threshold": 0.39,
+      "trades": 258,
+      "win_rate_pct": 58.91,
+      "expectancy_r": 0.4729,
+      "profit_factor": 2.151,
+      "max_drawdown_r": 12.0,
+      "total_r": 122.0,
+      "classification": "STABLE_PLATEAU"
+    },
+    {
+      "threshold": 0.4,
+      "trades": 258,
+      "win_rate_pct": 58.91,
+      "expectancy_r": 0.4729,
+      "profit_factor": 2.151,
+      "max_drawdown_r": 12.0,
+      "total_r": 122.0,
+      "classification": "STABLE_PLATEAU"
+    },
+    {
+      "threshold": 0.41,
+      "trades": 60,
+      "win_rate_pct": 51.67,
+      "expectancy_r": 0.2917,
+      "profit_factor": 1.603,
+      "max_drawdown_r": 10.0,
+      "total_r": 17.5,
+      "classification": "DEGRADED"
+    },
+    {
+      "threshold": 0.42,
+      "trades": 0,
+      "win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "profit_factor": 1.0,
+      "max_drawdown_r": 0.0,
+      "total_r": 0.0,
+      "classification": "DEGRADED"
+    },
+    {
+      "threshold": 0.45,
+      "trades": 0,
+      "win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "profit_factor": 1.0,
+      "max_drawdown_r": 0.0,
+      "total_r": 0.0,
+      "classification": "DEGRADED"
+    },
+    {
+      "threshold": 0.5,
+      "trades": 0,
+      "win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "profit_factor": 1.0,
+      "max_drawdown_r": 0.0,
+      "total_r": 0.0,
+      "classification": "DEGRADED"
+    }
+  ],
+  "XAU": [
+    {
+      "threshold": 0.4,
+      "trades": 519,
+      "win_rate_pct": 47.98,
+      "expectancy_r": 0.1994,
+      "profit_factor": 1.383,
+      "max_drawdown_r": 14.0,
+      "total_r": 103.5,
+      "classification": "STABLE_PLATEAU"
+    },
+    {
+      "threshold": 0.41,
+      "trades": 519,
+      "win_rate_pct": 47.98,
+      "expectancy_r": 0.1994,
+      "profit_factor": 1.383,
+      "max_drawdown_r": 14.0,
+      "total_r": 103.5,
+      "classification": "STABLE_PLATEAU"
+    },
+    {
+      "threshold": 0.42,
+      "trades": 517,
+      "win_rate_pct": 48.16,
+      "expectancy_r": 0.2041,
+      "profit_factor": 1.394,
+      "max_drawdown_r": 14.0,
+      "total_r": 105.5,
+      "classification": "STABLE_PLATEAU"
+    },
+    {
+      "threshold": 0.43,
+      "trades": 471,
+      "win_rate_pct": 49.47,
+      "expectancy_r": 0.2367,
+      "profit_factor": 1.468,
+      "max_drawdown_r": 14.0,
+      "total_r": 111.5,
+      "classification": "STABLE_PLATEAU"
+    },
+    {
+      "threshold": 0.45,
+      "trades": 0,
+      "win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "profit_factor": 1.0,
+      "max_drawdown_r": 0.0,
+      "total_r": 0.0,
+      "classification": "DEGRADED"
+    },
+    {
+      "threshold": 0.48,
+      "trades": 0,
+      "win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "profit_factor": 1.0,
+      "max_drawdown_r": 0.0,
+      "total_r": 0.0,
+      "classification": "DEGRADED"
+    },
+    {
+      "threshold": 0.5,
+      "trades": 0,
+      "win_rate_pct": 0.0,
+      "expectancy_r": 0.0,
+      "profit_factor": 1.0,
+      "max_drawdown_r": 0.0,
+      "total_r": 0.0,
+      "classification": "DEGRADED"
+    }
+  ]
+}
