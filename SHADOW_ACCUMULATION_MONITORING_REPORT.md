@@ -3,7 +3,29 @@
 **Operational Mode**: Dual-Asset Shadow-Mode Validation (Accumulation Phase)  
 **Date**: September 3, 2026  
 **Git Baseline Commit**: `e5f5b7f8a239c059e13e3741ccf7a95222bacc8f`  
+**Integration Gap Closed Commit**: `12be30cc704daace0164922eafd6514dc47ec656` (September 3, 2026)  
 **System Status**: **HEALTHY & SECURE — ADVISORY RESEARCH ONLY**  
+
+---
+
+## ⚠️ Integration Gap Identified & Closed (September 3, 2026)
+
+During operational review, an architectural gap was identified and immediately closed:
+
+**Gap**: `BTCShadowRunner` and `XAUShadowRunner` were fully implemented with correct qualification logic, de-duplication, and isolated SQLite storage — but `evaluate_live_market_setup()` was never called from any live production path. The runners were only exercised in tests. No shadow trades would ever accumulate at runtime.
+
+**Fix**: Added **Hook 5** to `DecisionService._build_decision()` in [`decision_service.py`](file:///d:/Project/TRADE/src/services/decision_service.py), immediately after Hook 4 (BTC Production Gating Pre-Filter). The hook:
+- Feeds each qualifying `BUY`/`SELL` signal (post-pipeline, fully computed) into the correct asset's shadow runner.
+- Is **strictly additive** — it reads already-computed fields from `decision` and never modifies `decision`, `breakdown`, or any production output.
+- Is **fail-safe** — wrapped in `try/except Exception`. Any exception inside the shadow hook is silently logged as `DEBUG` and the production return is unaffected.
+- Routes by `display_symbol`: `"BTC"` → `get_btc_shadow_runner()`, `"XAU"` → `get_xau_shadow_runner()`.
+
+**Test coverage added** (`tests/test_shadow_hook_isolation.py`):
+1. `test_shadow_runner_exception_does_not_break_production_pipeline` — injects `RuntimeError` into the shadow runner and confirms the pipeline still returns the correct production result.
+2. `test_shadow_hook_uses_try_except_wrapping` — AST structural check that the try/except wrapper exists and covers the shadow runner calls.
+3. `test_shadow_hook_does_not_mutate_decision_value` — confirms Hook 5 cannot alter `decision.decision.value` or `decision.signal_strength`.
+
+**Full test suite after fix**: **622 passed, 0 failed**.
 
 ---
 
