@@ -467,6 +467,62 @@ class DecisionService:
             except Exception as _gate_exc:
                 logger.error(f"[BTC Gating] Error evaluating production gating: {_gate_exc}")
 
+        # Hook 5: Shadow Runner Integration — feed live qualifying signals into BTC/XAU shadow capture.
+        # ADDITIVE-ONLY: this hook NEVER modifies decision, breakdown, or any production output.
+        # Wrapped in its own try/except so shadow capture failure can NEVER propagate to the caller.
+        try:
+            if decision.decision.value in ("BUY", "SELL"):
+                _shadow_cal_prob = getattr(decision, "calibrated_probability", None) or 0.0
+                _shadow_session = "ASIA" if 0 <= datetime.now(timezone.utc).hour < 8 else (
+                    "LONDON" if 8 <= datetime.now(timezone.utc).hour < 14 else "NY"
+                )
+                _shadow_mtf_aligned = (
+                    "Full Bullish" in mtf_input.alignment_summary
+                    or "Full Bearish" in mtf_input.alignment_summary
+                )
+                _shadow_signal_strength = float(decision.signal_strength or 50)
+                _shadow_confluence = float(decision.signal_strength or 50)
+                _shadow_confidence = float(decision.confidence or 50)
+                _shadow_regime = decision.market_regime or "UNKNOWN"
+                _shadow_sl = float(decision.stop_loss) if decision.stop_loss else 0.0
+                _shadow_tp1 = float(decision.take_profit_1) if decision.take_profit_1 else 0.0
+                _shadow_tp2 = float(decision.take_profit_2) if decision.take_profit_2 else 0.0
+
+                if "BTC" in display_symbol.upper():
+                    from src.services.btc_shadow_runner import get_btc_shadow_runner
+                    get_btc_shadow_runner().evaluate_live_market_setup(
+                        current_price=current_price,
+                        direction=decision.decision.value,
+                        stop_loss=_shadow_sl,
+                        take_profit_1=_shadow_tp1,
+                        take_profit_2=_shadow_tp2,
+                        confluence_score=_shadow_confluence,
+                        confidence_score=_shadow_confidence,
+                        signal_strength=_shadow_signal_strength,
+                        market_regime=_shadow_regime,
+                        session=_shadow_session,
+                        mtf_aligned=_shadow_mtf_aligned,
+                        ml_calibrated_prob=_shadow_cal_prob,
+                    )
+                elif "XAU" in display_symbol.upper():
+                    from src.services.xau_shadow_runner import get_xau_shadow_runner
+                    get_xau_shadow_runner().evaluate_live_market_setup(
+                        current_price=current_price,
+                        direction=decision.decision.value,
+                        stop_loss=_shadow_sl,
+                        take_profit_1=_shadow_tp1,
+                        take_profit_2=_shadow_tp2,
+                        confluence_score=_shadow_confluence,
+                        confidence_score=_shadow_confidence,
+                        signal_strength=_shadow_signal_strength,
+                        market_regime=_shadow_regime,
+                        session=_shadow_session,
+                        mtf_aligned=_shadow_mtf_aligned,
+                        ml_calibrated_prob=_shadow_cal_prob,
+                    )
+        except Exception as _shadow_exc:
+            logger.debug(f"[Shadow Hook] Shadow capture skipped (non-blocking): {_shadow_exc}")
+
         logger.info(
             f"Decision ({display_symbol}): {decision.decision.value} | Score: {decision.composite_score:+.4f} | "
             f"Confidence: {decision.confidence}% | Evidence: {decision.historical_evidence_status} | AI: {ai_result.provider_used}"
