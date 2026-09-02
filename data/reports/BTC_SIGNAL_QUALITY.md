@@ -1,6 +1,6 @@
 # BTC Signal Quality & Directional Report
 
-**Generated:** 2026-09-02T19:53:22.968006+00:00
+**Generated:** 2026-09-02T21:18:42.249511+00:00
 **Asset:** BTC/USD (Strictly Isolated — Zero XAU Data)
 
 ## Directional Performance Summary

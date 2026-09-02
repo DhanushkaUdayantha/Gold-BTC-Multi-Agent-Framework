@@ -1,8 +1,8 @@
 {
   "date": "2026-09-02",
-  "requests_used_today": 223,
-  "requests_remaining_today": 1177,
-  "last_ai_request_time": 1788378844.2296743,
-  "next_allowed_ai_request_time": 1788378869.2296743,
-  "last_request_reason": "force_refresh | budget=ALLOWED_FORCE_REFRESH"
+  "requests_used_today": 237,
+  "requests_remaining_today": 1163,
+  "last_ai_request_time": 1788384754.6186745,
+  "next_allowed_ai_request_time": 1788384779.6186745,
+  "last_request_reason": "signal_strength_delta \u2014 50 -> 34 (delta=16 >= threshold=10) | budget=ALLOWED_NORMAL"
 }

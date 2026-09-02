@@ -1,6 +1,6 @@
 # True Point-in-Time Historical Strength Validation Report
 
-**Generated At:** `2026-09-02T19:54:24.301843+00:00`  
+**Generated At:** `2026-09-02T21:19:32.268021+00:00`  
 **Engine Version:** `PointInTimeValidator-v2.0`  
 **Replay Scope:** Strict Point-in-Time Information Isolation (Zero Lookahead)  
 **Evaluated Assets:** `BTC-USD` (1,519 trades) & `XAU-USD` (919 trades)  

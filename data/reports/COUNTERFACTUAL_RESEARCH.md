@@ -1,6 +1,6 @@
 # Counterfactual Research & Parameter Exploration Report — Phase 4
 
-**Generated:** 2026-09-02T19:53:36.751754+00:00
+**Generated:** 2026-09-02T21:18:49.918102+00:00
 **Trades Analyzed:** 60  |  **Scenarios Tested:** 4
 
 ## Summary

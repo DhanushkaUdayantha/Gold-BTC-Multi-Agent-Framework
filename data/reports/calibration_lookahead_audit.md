@@ -1,6 +1,6 @@
 # Calibration Lookahead Bias Audit Report
 
-**Generated:** `2026-09-02T19:54:45.447405+00:00`  
+**Generated:** `2026-09-02T21:19:51.227447+00:00`  
 **Engine Version:** `1.0.0-calibration-phase`  
 **Audit Verdict:** `CLEAN — ZERO LOOKAHEAD VIOLATIONS (100% TEMPORAL ISOLATION)`
 
