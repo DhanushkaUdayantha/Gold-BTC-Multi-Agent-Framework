@@ -260,22 +260,58 @@ def reset_trades():
 
 
 @router.get(
-    "/trade/shadow-status",
+    "/trade/shadow-status/btc",
     summary="Get BTC v2.1 Shadow Runner & Paper Simulation Status",
-    description=(
-        "Returns the live paper-trading performance metrics of the BTC v2.1 Shadow Runner, "
-        "including N resolved trades, win rate, EV in R, profit factor, open shadow positions, "
-        "and a side-by-side comparison against the backtest forward-shadow baseline."
-    ),
+    description="Returns live paper-trading metrics for the BTC v2.1 Shadow Runner vs backtest baseline.",
 )
-def get_shadow_trading_status():
-    """Return read-only shadow runner metrics and reference baseline comparison."""
+def get_btc_shadow_trading_status():
+    """Return read-only BTC shadow runner metrics and reference baseline comparison."""
     try:
         from src.services.btc_shadow_runner import get_btc_shadow_runner
         runner = get_btc_shadow_runner()
         return runner.get_shadow_status()
     except Exception as exc:
-        logger.error(f"Failed to fetch shadow status: {exc}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Failed to load shadow status: {str(exc)}")
+        logger.error(f"Failed to fetch BTC shadow status: {exc}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Failed to load BTC shadow status: {str(exc)}")
+
+
+@router.get(
+    "/trade/shadow-status/xau",
+    summary="Get XAU Shadow Runner & Paper Simulation Status",
+    description="Returns live paper-trading metrics for the XAU Shadow Runner vs backtest baseline.",
+)
+def get_xau_shadow_trading_status():
+    """Return read-only XAU shadow runner metrics and reference baseline comparison."""
+    try:
+        from src.services.xau_shadow_runner import get_xau_shadow_runner
+        runner = get_xau_shadow_runner()
+        return runner.get_shadow_status()
+    except Exception as exc:
+        logger.error(f"Failed to fetch XAU shadow status: {exc}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Failed to load XAU shadow status: {str(exc)}")
+
+
+@router.get(
+    "/trade/shadow-status",
+    summary="Get Dual-Asset (BTC + XAU) Shadow Runner Status",
+    description="Returns the combined live paper-trading metrics for both BTC and XAU shadow runners.",
+)
+def get_combined_shadow_trading_status():
+    """Return combined read-only shadow runner metrics for both BTC and XAU."""
+    try:
+        from src.services.btc_shadow_runner import get_btc_shadow_runner
+        from src.services.xau_shadow_runner import get_xau_shadow_runner
+        btc_runner = get_btc_shadow_runner()
+        xau_runner = get_xau_shadow_runner()
+        return {
+            "status": "success",
+            "disclaimer": "Advisory shadow analytics only. Zero real broker execution.",
+            "btc_shadow": btc_runner.get_shadow_status(),
+            "xau_shadow": xau_runner.get_shadow_status(),
+        }
+    except Exception as exc:
+        logger.error(f"Failed to fetch combined shadow status: {exc}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Failed to load combined shadow status: {str(exc)}")
+
 
 

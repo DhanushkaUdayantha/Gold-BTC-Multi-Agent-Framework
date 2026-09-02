@@ -1,6 +1,6 @@
 # Institutional Historical Backtesting & Directional Strength Calibration Report
 
-**Generated At:** `2026-09-02T19:27:51.074350+00:00`  
+**Generated At:** `2026-09-02T19:54:43.036648+00:00`  
 **Engine Version:** `HistoricalStrengthCalibrator-v2.0`  
 **Evaluation Scope:** Zero-Lookahead Historical Outcome Replay & Walk-Forward Cross-Validation  
 **Target Assets:** `BTC/USD` & `XAU/USD`  

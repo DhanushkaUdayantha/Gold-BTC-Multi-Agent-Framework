@@ -1,6 +1,6 @@
 # XAU Failure Patterns & Root-Cause Attribution
 
-**Generated:** 2026-09-02T19:26:25.243276+00:00
+**Generated:** 2026-09-02T19:53:22.968006+00:00
 **Asset:** XAU/USD (Strictly Isolated)
 
 ## Failure Taxonomy Decomposition

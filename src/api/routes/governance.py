@@ -178,3 +178,29 @@ def get_btc_shadow_comparison():
         logger.error(f"Error evaluating BTC shadow comparison: {exc}", exc_info=True)
         return {"status": "error", "message": str(exc)}
 
+
+@router.get(
+    "/xau-shadow-comparison",
+    summary="Get XAU Shadow-Mode vs Backtest Comparison Gate Report",
+    description=(
+        "Returns the pre-registered comparison report evaluating live XAU shadow paper trades "
+        "against the baseline backtest forward-shadow metrics, preserving the N>=50 holdout validation milestone. "
+        "Strictly read-only for human review. Zero write access to production gating flags."
+    ),
+)
+def get_xau_shadow_comparison():
+    """Return pre-registered XAU comparison gate report for human review."""
+    try:
+        from src.research.governance.shadow_comparison import get_xau_shadow_comparison_gate
+        gate = get_xau_shadow_comparison_gate()
+        report = gate.evaluate_shadow_confirmation()
+        return {
+            "status": "success",
+            "disclaimer": "Diagnostic comparison for human review only. No automatic flag mutation.",
+            "report": report.to_dict(),
+        }
+    except Exception as exc:
+        logger.error(f"Error evaluating XAU shadow comparison: {exc}", exc_info=True)
+        return {"status": "error", "message": str(exc)}
+
+

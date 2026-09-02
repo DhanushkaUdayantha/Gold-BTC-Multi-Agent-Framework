@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T19:27:51.074350+00:00",
+  "generated_at": "2026-09-02T19:54:43.036648+00:00",
   "engine_version": "HistoricalStrengthCalibrator-v2.0",
   "system_wide_summary": "Historical Strength Backtesting & Calibration completed across BTC/USD (1,519 trades) and XAU/USD (919 trades). BTC OOS Expectancy: +0.14R (PF 1.26) | XAU OOS Expectancy: +0.12R (PF 1.21).",
   "btc_report": {

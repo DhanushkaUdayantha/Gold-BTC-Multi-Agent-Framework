@@ -1,6 +1,6 @@
 # Out-of-Sample (OOS) Optimization & Validation Report
 
-**Generated:** 2026-09-02T19:26:25.243276+00:00
+**Generated:** 2026-09-02T19:53:22.968006+00:00
 **Total Candidates Evaluated:** 2
 
 ## Validation Performance Matrix

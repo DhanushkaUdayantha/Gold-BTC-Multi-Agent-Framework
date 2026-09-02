@@ -1,6 +1,6 @@
 # Strength Score Probability Calibration & Holdout Validation Report
 
-**Generated:** `2026-09-02T19:27:53.179775+00:00`  
+**Generated:** `2026-09-02T19:54:45.447405+00:00`  
 **Engine Version:** `1.0.0-calibration-phase`  
 **Research Status:** Complete — Zero Production Decision Logic Modified
 
