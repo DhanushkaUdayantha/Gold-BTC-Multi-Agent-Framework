@@ -624,3 +624,136 @@ class TestAutomatedHistoricalLearningEngine:
         assert pkg.recommendation_strength in ("HIGH", "MEDIUM", "LOW")
         assert len(pkg.historical_confirmations) > 0
 
+
+class TestTruePercentageNonInflation:
+    """Phase 1 Verification: Asserts true percentage pass-through without flooring, clamping, or 51% overrides."""
+
+    def test_low_confluence_passes_unclamped(self):
+        """Verify that low confluence (e.g. 15%) is NOT clamped to 50% or 10%."""
+        service = DecisionService()
+        now_iso = datetime.now(timezone.utc).isoformat()
+        
+        # Build minimal decision with signal_strength=15
+        dummy_ta = _make_dummy_ta()
+        mtf_input = MultiTimeframeTechnicalInput(
+            symbol="XAU/USD",
+            current_price=2750.0,
+            timestamp=now_iso,
+            timeframes={"15m": dummy_ta},
+            timeframe_count=1,
+            alignment_summary="Mixed",
+            regime="UNCLEAR",
+        )
+        
+        # Mock DecisionEngine breakdown and decision
+        breakdown = DecisionScoreBreakdown(
+            symbol="XAU/USD",
+            timestamp=now_iso,
+            total_score=0.15,
+            signal_candidate="WAIT",
+            final_signal=TradingSignal.WAIT,
+            confidence=15,
+            components=[],
+            wait_overrides_triggered=[],
+            weight_sum=1.0,
+        )
+        decision = TradingDecision(
+            symbol="XAU/USD",
+            decision=TradingSignal.WAIT,
+            confidence=15,
+            trend=DecisionTrend.NEUTRAL,
+            risk_level=DecisionRiskLevel.LOW,
+            composite_score=0.15,
+            signal_strength=15,
+            reasons=["Low confluence test"],
+            timestamp=now_iso,
+        )
+
+        ev_pkg = HistoricalEvidencePackage(
+            status="INSUFFICIENT_SAMPLE",
+            sample_size=5,
+            historical_bias="WAIT",
+        )
+
+        dummy_ai = _make_dummy_ai()
+        hist_sig, now_sig, overall_sig = service._build_three_layer_signals(
+            decision=decision,
+            breakdown=breakdown,
+            mtf_input=mtf_input,
+            ai_result=dummy_ai,
+            ev_pkg=ev_pkg,
+        )
+
+        # Must be exactly 15, not clamped to 10 or floored to 50
+        assert now_sig.percentage == 15
+        assert overall_sig.percentage == 15
+        assert overall_sig.percentage != 50
+        assert overall_sig.percentage != 10
+
+    def test_direction_conflict_sets_wait_and_none_percentage(self):
+        """Verify that a direction conflict sets WAIT, conflict_detected=True, and percentage=None (NOT 51%)."""
+        service = DecisionService()
+        now_iso = datetime.now(timezone.utc).isoformat()
+
+        dummy_ta = _make_dummy_ta()
+        dummy_ai = _make_dummy_ai()
+        mtf_input = MultiTimeframeTechnicalInput(
+            symbol="XAU/USD",
+            current_price=2750.0,
+            timestamp=now_iso,
+            timeframes={"15m": dummy_ta},
+            timeframe_count=1,
+            alignment_summary="Bullish",
+            regime="TRENDING_BULLISH",
+        )
+        breakdown = DecisionScoreBreakdown(
+            symbol="XAU/USD",
+            timestamp=now_iso,
+            total_score=0.75,
+            signal_candidate="BUY",
+            final_signal=TradingSignal.BUY,
+            confidence=75,
+            components=[],
+            wait_overrides_triggered=[],
+            weight_sum=1.0,
+        )
+        decision = TradingDecision(
+            symbol="XAU/USD",
+            decision=TradingSignal.BUY,
+            confidence=75,
+            trend=DecisionTrend.BULLISH,
+            risk_level=DecisionRiskLevel.LOW,
+            composite_score=0.75,
+            signal_strength=75,
+            reasons=["Bullish live confluence"],
+            timestamp=now_iso,
+        )
+
+        # Historical evidence indicates SELL (directional divergence)
+        ev_pkg = HistoricalEvidencePackage(
+            status="AVAILABLE",
+            sample_size=35,
+            historical_bias="SELL",
+            win_rate=68.0,
+            calibrated_probability=65.0,
+            expectancy=0.45,
+            sell_strength=70,
+        )
+
+        hist_sig, now_sig, overall_sig = service._build_three_layer_signals(
+            decision=decision,
+            breakdown=breakdown,
+            mtf_input=mtf_input,
+            ai_result=dummy_ai,
+            ev_pkg=ev_pkg,
+        )
+
+        assert hist_sig.signal == "SELL"
+        assert now_sig.signal == "BUY"
+        assert overall_sig.conflict_detected is True
+        assert overall_sig.signal == "WAIT"
+        assert overall_sig.percentage is None
+        assert overall_sig.percentage != 51
+        assert overall_sig.strength == "CONFLICT"
+
+

@@ -567,23 +567,26 @@ class DecisionService:
             else:
                 hist_dir = "WAIT"
 
-            if hist_prob is not None and hist_prob > 0:
-                hist_pct = max(10, min(95, round(hist_prob)))
-            elif hist_win_rate is not None and hist_win_rate > 0:
-                hist_pct = max(10, min(95, round(hist_win_rate)))
-            elif hist_dir == "BUY" and buy_str:
+            if hist_prob is not None and hist_prob >= 0:
+                hist_pct = round(hist_prob)
+            elif hist_win_rate is not None and hist_win_rate >= 0:
+                hist_pct = round(hist_win_rate)
+            elif hist_dir == "BUY" and buy_str is not None:
                 hist_pct = buy_str
-            elif hist_dir == "SELL" and sell_str:
+            elif hist_dir == "SELL" and sell_str is not None:
                 hist_pct = sell_str
             else:
-                hist_pct = 50
+                hist_pct = None
 
-            if hist_pct >= 80:
-                hist_strength_label = "VERY STRONG"
-            elif hist_pct >= 60:
-                hist_strength_label = "STRONG"
-            elif hist_pct >= 40:
-                hist_strength_label = "MODERATE"
+            if hist_pct is not None:
+                if hist_pct >= 80:
+                    hist_strength_label = "VERY STRONG"
+                elif hist_pct >= 60:
+                    hist_strength_label = "STRONG"
+                elif hist_pct >= 40:
+                    hist_strength_label = "MODERATE"
+                else:
+                    hist_strength_label = "WEAK"
             else:
                 hist_strength_label = "WEAK"
 
@@ -591,7 +594,9 @@ class DecisionService:
             if hist_win_rate is not None:
                 hist_reasons.append(f"Historical {hist_dir} win rate on matching setups: {hist_win_rate:.1f}% ({hist_sample} trades).")
             if hist_exp is not None:
-                hist_reasons.append(f"Empirical expectancy: {hist_exp:+.2f}R (Profit factor: {getattr(ev_pkg, 'profit_factor', 1.0):.2f}).")
+                pf_val = getattr(ev_pkg, 'profit_factor', None)
+                pf_str = f" (Profit factor: {pf_val:.2f})" if pf_val is not None else ""
+                hist_reasons.append(f"Empirical expectancy: {hist_exp:+.2f}R{pf_str}.")
             if getattr(ev_pkg, "historical_confirmations", None):
                 hist_reasons.extend(ev_pkg.historical_confirmations[:2])
 
@@ -620,7 +625,7 @@ class DecisionService:
             )
 
         # --- Layer 2: Now Market Signal ---
-        now_pct = max(10, min(95, decision.signal_strength if decision.signal_strength else 50))
+        now_pct = round(decision.signal_strength) if decision.signal_strength is not None else None
         if breakdown.signal_candidate in ("BUY", "SELL"):
             now_dir = breakdown.signal_candidate
         elif decision.decision.value in ("BUY", "SELL"):
@@ -636,14 +641,17 @@ class DecisionService:
         else:
             now_dir = "WAIT"
 
-        if now_pct >= 80:
-            now_strength_label = "VERY STRONG"
-        elif now_pct >= 60:
-            now_strength_label = "STRONG"
-        elif now_pct >= 40:
-            now_strength_label = "MODERATE"
+        if now_pct is not None:
+            if now_pct >= 80:
+                now_strength_label = "VERY STRONG"
+            elif now_pct >= 60:
+                now_strength_label = "STRONG"
+            elif now_pct >= 40:
+                now_strength_label = "MODERATE"
+            else:
+                now_strength_label = "WEAK"
         else:
-            now_strength_label = "WEAK"
+            now_strength_label = "AWAITING_EVALUATION"
 
         now_reasons = []
         if decision.top_confirmations:
@@ -659,7 +667,7 @@ class DecisionService:
             signal=now_dir,
             percentage=now_pct,
             strength=now_strength_label,
-            technical_score=decision.technical_score if decision.technical_score is not None else int(now_pct * 0.9),
+            technical_score=decision.technical_score if decision.technical_score is not None else (int(now_pct * 0.9) if now_pct is not None else 0),
             gemini_score=decision.gemini_score if decision.gemini_score is not None else 0,
             mtf_alignment=decision.mtf_alignment_summary or mtf_input.alignment_summary,
             market_regime=decision.market_regime or "UNCLEAR",
@@ -674,27 +682,32 @@ class DecisionService:
         if hist_sig.status != "INSUFFICIENT_SAMPLE" and hist_sig.signal in ("BUY", "SELL") and now_sig.signal in ("BUY", "SELL") and hist_sig.signal != now_sig.signal:
             conflict_detected = True
             overall_dir = "WAIT"
-            overall_pct = 51
-            overall_strength_label = "MODERATE"
+            overall_pct = None
+            overall_strength_label = "CONFLICT"
             overall_reasons = [
                 f"Direction Conflict: Historical evidence favors {hist_sig.signal} ({hist_sig.percentage}%) while live market indicates {now_sig.signal} ({now_sig.percentage}%).",
-                "DecisionEngine safety protocol enforces conservative WAIT on directional divergence.",
+                "DecisionEngine safety protocol enforces conservative WAIT on directional divergence (CONFLICT=TRUE).",
             ]
         else:
-            if hist_sig.status != "INSUFFICIENT_SAMPLE" and hist_sig.percentage is not None:
+            if hist_sig.status != "INSUFFICIENT_SAMPLE" and hist_sig.percentage is not None and now_sig.percentage is not None:
                 # Reliability-weighted combination: 40% historical evidence + 60% real-time technicals
-                overall_pct = max(10, min(95, round(0.40 * hist_sig.percentage + 0.60 * now_sig.percentage)))
-            else:
+                overall_pct = round(0.40 * hist_sig.percentage + 0.60 * now_sig.percentage)
+            elif now_sig.percentage is not None:
                 overall_pct = now_sig.percentage
-
-            if overall_pct >= 80:
-                overall_strength_label = "VERY STRONG"
-            elif overall_pct >= 60:
-                overall_strength_label = "STRONG"
-            elif overall_pct >= 40:
-                overall_strength_label = "MODERATE"
             else:
-                overall_strength_label = "WEAK"
+                overall_pct = None
+
+            if overall_pct is not None:
+                if overall_pct >= 80:
+                    overall_strength_label = "VERY STRONG"
+                elif overall_pct >= 60:
+                    overall_strength_label = "STRONG"
+                elif overall_pct >= 40:
+                    overall_strength_label = "MODERATE"
+                else:
+                    overall_strength_label = "WEAK"
+            else:
+                overall_strength_label = "AWAITING_EVALUATION"
 
             overall_reasons = decision.reasons[:3] or [
                 f"Fused overall {overall_dir} decision aligning live confluence ({now_sig.percentage}%) with historical evidence."
@@ -786,13 +799,13 @@ class DecisionService:
             ),
             now_signal=NowMarketSignal(
                 signal="WAIT",
-                percentage=50,
+                percentage=None,
                 strength="WEAK",
                 reasons=[f"Pipeline error: {reason}"],
             ),
             overall_signal=OverallTradingSignal(
                 signal="WAIT",
-                percentage=50,
+                percentage=None,
                 strength="WEAK",
                 reasons=[f"Pipeline error: {reason}"],
             ),

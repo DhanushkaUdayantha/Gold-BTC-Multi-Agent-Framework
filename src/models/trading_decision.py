@@ -438,7 +438,7 @@ class HistoricalMarketSignal(BaseModel):
 class NowMarketSignal(BaseModel):
     """Layer 2: Real-time current market analysis signal."""
     signal: str = Field(default="WAIT", description="BUY | SELL | WAIT")
-    percentage: int = Field(default=50, description="0-100% current confluence / technical strength")
+    percentage: Optional[int] = Field(default=None, description="0-100% current confluence / technical strength or None if evaluating")
     strength: str = Field(default="MODERATE", description="WEAK | MODERATE | STRONG | VERY STRONG")
     technical_score: int = Field(default=50, description="Technical score 0-100")
     gemini_score: int = Field(default=0, description="Gemini score 0-10")
@@ -450,7 +450,7 @@ class NowMarketSignal(BaseModel):
 class OverallTradingSignal(BaseModel):
     """Layer 3: Evidence fusion combining Historical + Now signals (Primary)."""
     signal: str = Field(default="WAIT", description="BUY | SELL | WAIT")
-    percentage: int = Field(default=50, description="0-100% combined evidence percentage")
+    percentage: Optional[int] = Field(default=None, description="0-100% combined evidence percentage or None if evaluating/conflict")
     strength: str = Field(default="MODERATE", description="WEAK | MODERATE | STRONG | VERY STRONG")
     conflict_detected: bool = Field(default=False, description="True if Historical and Now signals conflict")
     primary_highlight: bool = Field(default=True, description="Primary visual hierarchy flag")
