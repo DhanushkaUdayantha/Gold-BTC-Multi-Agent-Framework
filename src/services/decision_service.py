@@ -358,44 +358,9 @@ class DecisionService:
         except Exception as _strat_exc:
             logger.debug(f"Validated strategy layer skipped: {_strat_exc}")
 
-        # Step 8: Build 3-Layer AI Trading Signal System & Hourly Opportunity Tracking
-        try:
-            hist_sig, now_sig, overall_sig = self._build_three_layer_signals(
-                decision=decision,
-                breakdown=breakdown,
-                mtf_input=mtf_input,
-                ai_result=ai_result,
-                ev_pkg=ev_pkg,
-            )
-            decision.historical_signal = hist_sig
-            decision.now_signal = now_sig
-            decision.overall_signal = overall_sig
-
-            self._update_hourly_strong_signal(decision, symbol)
-            decision.hourly_strong_signal = self.get_hourly_strong_signal(symbol)
-        except Exception as _three_layer_exc:
-            logger.error(f"3-Layer signal synthesis error for {symbol}: {_three_layer_exc}", exc_info=True)
-
-        # ---- Empirical performance hooks (additive, non-blocking) ----
-        # Hook 1: Record this signal if it is actionable (BUY or SELL)
-        if decision.decision.value in ("BUY", "SELL"):
-            try:
-                get_signal_repository().record_signal(decision)
-            except Exception as _exc:
-                logger.debug(f"Signal recording skipped: {_exc}")
-
-        # Hook 2: Label outcomes for previously open signals (uses current price and symbol)
-        try:
-            _candles_5m = candles_dict.get("5m", [])
-            get_outcome_tracker().label_outcomes(
-                current_price=current_price,
-                candles_history=_candles_5m,
-                symbol=display_symbol,
-            )
-        except Exception as _exc:
-            logger.debug(f"Outcome tracking skipped: {_exc}")
-
-        # Hook 3: ML Shadow Validation Observer (Downstream Research Only — Zero Decision Gating)
+        # Step 7.5: ML Shadow Validation Observer (T0 Point-in-Time Prediction for Aggregator)
+        shadow_pred = None
+        shadow_svc = None
         try:
             from src.research.ml_shadow.shadow_service import get_ml_shadow_service
             shadow_svc = get_ml_shadow_service()
@@ -431,11 +396,53 @@ class DecisionService:
                 gate_direction=decision.gate_direction or "NONE",
                 quality_gate_passed=bool(getattr(decision, "quality_gate_status", "") in ("PASSED", "CONFIRMED"))
             )
+        except Exception as _shadow_exc:
+            logger.debug(f"ML shadow prediction generation skipped: {_shadow_exc}")
 
-            # Resolve forward outcomes for previously pending ML shadow observations
-            _candles_15m = candles_dict.get("15m", [])
-            if _candles_15m:
-                shadow_svc.resolve_pending_observations(
+        # Step 8: Build 3-Layer AI Trading Signal System & Hourly Opportunity Tracking
+        try:
+            hist_sig, now_sig, overall_sig = self._build_three_layer_signals(
+                decision=decision,
+                breakdown=breakdown,
+                mtf_input=mtf_input,
+                ai_result=ai_result,
+                ev_pkg=ev_pkg,
+                shadow_pred=shadow_pred,
+            )
+            decision.historical_signal = hist_sig
+            decision.now_signal = now_sig
+            decision.overall_signal = overall_sig
+
+            self._update_hourly_strong_signal(decision, symbol)
+            decision.hourly_strong_signal = self.get_hourly_strong_signal(symbol)
+        except Exception as _three_layer_exc:
+            logger.error(f"3-Layer signal synthesis error for {symbol}: {_three_layer_exc}", exc_info=True)
+
+        # ---- Empirical performance hooks (additive, non-blocking) ----
+        # Hook 1: Record this signal if it is actionable (BUY or SELL)
+        if decision.decision.value in ("BUY", "SELL"):
+            try:
+                get_signal_repository().record_signal(decision)
+            except Exception as _exc:
+                logger.debug(f"Signal recording skipped: {_exc}")
+
+        # Hook 2: Label outcomes for previously open signals (uses current price and symbol)
+        try:
+            _candles_5m = candles_dict.get("5m", [])
+            get_outcome_tracker().label_outcomes(
+                current_price=current_price,
+                candles_history=_candles_5m,
+                symbol=display_symbol,
+            )
+        except Exception as _exc:
+            logger.debug(f"Outcome tracking skipped: {_exc}")
+
+        # Hook 3: ML Shadow Forward Outcome Resolution
+        try:
+            if shadow_svc is not None:
+                _candles_15m = candles_dict.get("15m", [])
+                if _candles_15m:
+                    shadow_svc.resolve_pending_observations(
                     symbol=display_symbol,
                     forward_candles=[
                         {
@@ -541,6 +548,7 @@ class DecisionService:
         mtf_input: MultiTimeframeTechnicalInput,
         ai_result: AIAnalysisResponse,
         ev_pkg: Any,
+        shadow_pred: Optional[Any] = None,
     ) -> Tuple[HistoricalMarketSignal, NowMarketSignal, OverallTradingSignal]:
         """
         Synthesize the 3 distinct AI signal layers:
@@ -675,55 +683,24 @@ class DecisionService:
             reasons=now_reasons,
         )
 
-        # --- Layer 3: Overall Trading Signal (Evidence Fusion) ---
-        overall_dir = decision.decision.value
-        conflict_detected = False
+        # --- Layer 3: Overall Trading Signal (Evidence Fusion via SignalAggregator) ---
+        from src.services.signal_aggregator import SignalAggregator
 
-        # Direction Conflict Detection
-        if hist_sig.status != "INSUFFICIENT_SAMPLE" and hist_sig.signal in ("BUY", "SELL") and now_sig.signal in ("BUY", "SELL") and hist_sig.signal != now_sig.signal:
-            conflict_detected = True
-            overall_dir = "WAIT"
-            overall_pct = None
-            overall_strength_label = "CONFLICT"
-            hist_pct_str = f"{hist_sig.percentage}%" if hist_sig.percentage is not None else "N/A"
-            now_pct_str = f"{now_sig.percentage}%" if now_sig.percentage is not None else "N/A"
-            overall_reasons = [
-                f"Direction Conflict: Historical evidence favors {hist_sig.signal} ({hist_pct_str}) while live market indicates {now_sig.signal} ({now_pct_str}).",
-                "DecisionEngine safety protocol enforces conservative WAIT on directional divergence (CONFLICT=TRUE).",
-            ]
-        else:
-            if hist_sig.status != "INSUFFICIENT_SAMPLE" and hist_sig.percentage is not None and now_sig.percentage is not None:
-                # Reliability-weighted combination: 40% historical evidence + 60% real-time technicals
-                overall_pct = round(0.40 * hist_sig.percentage + 0.60 * now_sig.percentage)
-            elif now_sig.percentage is not None:
-                overall_pct = now_sig.percentage
-            else:
-                overall_pct = None
+        ml_prob = getattr(shadow_pred, "ml_probability", None) if shadow_pred else None
+        ml_class = getattr(shadow_pred, "ml_predicted_class", None) if shadow_pred else None
+        ml_name = getattr(shadow_pred, "ml_model_name", None) if shadow_pred else None
+        ml_ver = getattr(shadow_pred, "ml_model_version", None) if shadow_pred else None
 
-            if overall_pct is not None:
-                if overall_pct >= 80:
-                    overall_strength_label = "VERY STRONG"
-                elif overall_pct >= 60:
-                    overall_strength_label = "STRONG"
-                elif overall_pct >= 40:
-                    overall_strength_label = "MODERATE"
-                else:
-                    overall_strength_label = "WEAK"
-            else:
-                overall_strength_label = "AWAITING_EVALUATION"
-
-            now_str = f" ({now_sig.percentage}%)" if now_sig.percentage is not None else ""
-            overall_reasons = decision.reasons[:3] or [
-                f"Fused overall {overall_dir} decision aligning live confluence{now_str} with historical evidence."
-            ]
-
-        overall_sig = OverallTradingSignal(
-            signal=overall_dir,
-            percentage=overall_pct,
-            strength=overall_strength_label,
-            conflict_detected=conflict_detected,
-            primary_highlight=True,
-            reasons=overall_reasons,
+        overall_sig = SignalAggregator.aggregate(
+            symbol=decision.symbol,
+            now_signal=now_sig,
+            historical_signal=hist_sig,
+            ml_probability=ml_prob,
+            ml_predicted_class=ml_class,
+            ml_model_name=ml_name,
+            ml_model_version=ml_ver,
+            validated_strategy=decision.validated_strategy,
+            timestamp=getattr(decision, "timestamp", None),
         )
 
         return hist_sig, now_sig, overall_sig

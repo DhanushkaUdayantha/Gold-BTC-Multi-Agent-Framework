@@ -213,7 +213,7 @@ $$\text{Bullish Weight } W_{bull} = \sum_{i: d_i = +1} W_i' \times m_i$$
 $$\text{Bearish Weight } W_{bear} = \sum_{i: d_i = -1} W_i' \times m_i$$
 
 **Mandatory Conflict Rule:**
-If both $W_{bull} \ge 0.25$ and $W_{bear} \ge 0.25$ simultaneously:
+If both $W_{bull} \ge 0.20$ and $W_{bear} \ge 0.20$ simultaneously:
 - Overall Direction $\rightarrow \mathbf{WAIT}$
 - Percentage $\rightarrow \mathbf{None}$ (Rendered as `--%` or `N/A`, NEVER 51%)
 - Overall Strength $\rightarrow \mathbf{"CONFLICT"}$

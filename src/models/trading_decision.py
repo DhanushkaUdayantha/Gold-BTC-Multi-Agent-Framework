@@ -1,6 +1,6 @@
 """Data models for the Trading Decision Engine output."""
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 
@@ -448,12 +448,21 @@ class NowMarketSignal(BaseModel):
 
 
 class OverallTradingSignal(BaseModel):
-    """Layer 3: Evidence fusion combining Historical + Now signals (Primary)."""
+    """Layer 3: Evidence fusion combining all 4 analytical components (Primary)."""
     signal: str = Field(default="WAIT", description="BUY | SELL | WAIT")
     percentage: Optional[int] = Field(default=None, description="0-100% combined evidence percentage or None if evaluating/conflict")
-    strength: str = Field(default="MODERATE", description="WEAK | MODERATE | STRONG | VERY STRONG")
-    conflict_detected: bool = Field(default=False, description="True if Historical and Now signals conflict")
+    strength: str = Field(default="MODERATE", description="WEAK | MODERATE | STRONG | VERY STRONG | CONFLICT")
+    conflict_detected: bool = Field(default=False, description="True if directional conflict is detected")
     primary_highlight: bool = Field(default=True, description="Primary visual hierarchy flag")
+    calibrated_probability: Optional[float] = Field(default=None, description="Calibrated win probability (0.0 to 1.0) synthesized from probabilistic components")
+    overall_evidence_score: Optional[int] = Field(default=None, description="Final composite directional evidence score (0-100)")
+    component_scores: Optional[Dict[str, Optional[float]]] = Field(default=None, description="Raw normalized scores per component")
+    component_weights: Optional[Dict[str, float]] = Field(default=None, description="Effective normalized weights per component summing to 1.0")
+    component_contributions: Optional[Dict[str, float]] = Field(default=None, description="Effective points contributed per component")
+    contributors: Optional[List[Dict[str, Any]]] = Field(default=None, description="Traceable contributor breakdown ledger")
+    methodology_version: Optional[str] = Field(default="1.1.0-PROPOSAL", description="Aggregation methodology version")
+    asset: Optional[str] = Field(default=None, description="Asset symbol (e.g. BTC/USD or XAU/USD)")
+    timestamp: Optional[str] = Field(default=None, description="ISO 8601 UTC timestamp of aggregation")
     reasons: List[str] = Field(default_factory=list, description="Combined evidence reasoning")
 
 
