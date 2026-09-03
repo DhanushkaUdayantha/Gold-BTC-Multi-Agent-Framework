@@ -684,11 +684,12 @@ class TestTruePercentageNonInflation:
             ev_pkg=ev_pkg,
         )
 
-        # Must be exactly 15, not clamped to 10 or floored to 50
+        # Must be exactly 15 in overall_evidence_score, while percentage is None for WAIT per methodology
         assert now_sig.percentage == 15
-        assert overall_sig.percentage == 15
-        assert overall_sig.percentage != 50
-        assert overall_sig.percentage != 10
+        assert overall_sig.overall_evidence_score == 15
+        assert overall_sig.overall_evidence_score != 50
+        assert overall_sig.overall_evidence_score != 10
+        assert overall_sig.percentage is None
 
     def test_direction_conflict_sets_wait_and_none_percentage(self):
         """Verify that a direction conflict sets WAIT, conflict_detected=True, and percentage=None (NOT 51%)."""

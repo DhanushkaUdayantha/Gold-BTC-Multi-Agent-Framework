@@ -83,8 +83,35 @@ def test_overall_hero_exact_signal_and_percentage_unaltered():
     assert sig.component_contributions is not None
 
 
-def test_overall_hero_preserves_sub_50_evidence_no_flooring():
-    """Evidence below 50% (e.g. 7%) must never be floored or forced to 50%+."""
+def test_overall_hero_actionable_sub_50_evidence():
+    """Actionable evidence below 50% (e.g. 28%) must never be floored to 50%+."""
+    now_sig = NowMarketSignal(
+        signal="BUY",
+        percentage=55,
+        strength="MODERATE",
+        technical_score=55,
+        gemini_score=6,
+    )
+    sig = SignalAggregator.aggregate(
+        symbol="BTC/USD",
+        now_signal=now_sig,
+        historical_signal=None,
+        ml_probability=0.50,
+        ml_predicted_class=1,
+        validated_strategy=None,
+        timestamp="2026-09-03T12:03:00Z",
+    )
+
+    # Net score is ~27-28% (>= 20 threshold, actionable BUY)
+    assert sig.signal == "BUY"
+    assert sig.overall_evidence_score is not None
+    assert sig.overall_evidence_score < 50
+    assert sig.percentage == sig.overall_evidence_score
+    assert sig.conflict_detected is False
+
+
+def test_overall_hero_sub_threshold_wait_state():
+    """Sub-threshold net score (-20 < net_score < 20) yields WAIT with percentage=None and score preserved."""
     now_sig = NowMarketSignal(
         signal="WAIT",
         percentage=40,
@@ -92,7 +119,7 @@ def test_overall_hero_preserves_sub_50_evidence_no_flooring():
         technical_score=39,
         gemini_score=4,
     )
-    # Weak ML sell leaning
+    # Weak ML sell leaning yields net score around -7
     sig = SignalAggregator.aggregate(
         symbol="XAU/USD",
         now_signal=now_sig,
@@ -103,16 +130,14 @@ def test_overall_hero_preserves_sub_50_evidence_no_flooring():
         timestamp="2026-09-03T12:03:00Z",
     )
 
-    assert sig.signal == "SELL"
-    assert sig.overall_evidence_score is not None
-    # Must be less than 50% — strictly un-floored
-    assert sig.overall_evidence_score < 50
-    assert sig.percentage == sig.overall_evidence_score
-    assert sig.overall_evidence_score == 7
+    assert sig.signal == "WAIT"
+    assert sig.conflict_detected is False
+    assert sig.percentage is None  # No actionable percentage for WAIT
+    assert sig.overall_evidence_score == 7  # Underlying score preserved for audit
 
 
 def test_overall_hero_conflict_wait_percentage_none():
-    """Opposing primary forces force WAIT with percentage=None."""
+    """Opposing primary forces force WAIT with percentage=None and overall_evidence_score=None."""
     now_sig = NowMarketSignal(
         signal="BUY",
         percentage=80,

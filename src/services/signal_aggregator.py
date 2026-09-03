@@ -354,18 +354,18 @@ class SignalAggregator:
                 "DecisionEngine safety protocol enforces conservative WAIT on opposing analytical evidence (CONFLICT=TRUE).",
             ]
         else:
-            if net_score > 0:
+            if net_score >= DIRECTIONAL_THRESHOLD:
                 final_dir = "BUY"
                 final_pct = min(100, max(1, round(abs(net_score))))
                 overall_evidence_score = round(abs(net_score))
-            elif net_score < 0:
+            elif net_score <= -DIRECTIONAL_THRESHOLD:
                 final_dir = "SELL"
                 final_pct = min(100, max(1, round(abs(net_score))))
                 overall_evidence_score = round(abs(net_score))
             else:
                 final_dir = "WAIT"
-                final_pct = total_confluence if total_confluence > 0 else None
-                overall_evidence_score = total_confluence
+                final_pct = None
+                overall_evidence_score = round(abs(net_score)) if abs(net_score) > 0 else (total_confluence if total_confluence > 0 else None)
 
             if final_pct is not None:
                 if final_pct >= 80:
@@ -377,12 +377,18 @@ class SignalAggregator:
                 else:
                     strength_label = "WEAK"
             else:
-                strength_label = "MODERATE"
+                strength_label = "WEAK" if (overall_evidence_score is not None and overall_evidence_score < 20) else "MODERATE"
 
             active_count = sum(1 for v in available_map.values() if v)
-            reasons = [
-                f"Synthesized {final_dir} signal across {active_count}/4 active components with Net Directional Score {net_score:+.1f}.",
-            ]
+            if final_dir == "WAIT":
+                reasons = [
+                    f"Overall WAIT on {canonical_symbol}: Net Directional Score {net_score:+.1f} is below actionable directional threshold (±{DIRECTIONAL_THRESHOLD:.0f}).",
+                    "Directional evidence is balanced or weak; waiting for high-confluence catalyst.",
+                ]
+            else:
+                reasons = [
+                    f"Synthesized {final_dir} signal across {active_count}/4 active components with Net Directional Score {net_score:+.1f}.",
+                ]
             if calibrated_prob is not None:
                 reasons.append(f"Bayesian calibrated win probability: {calibrated_prob*100:.1f}%.")
             if c4_available and c4_strategy_id != "NONE":
