@@ -1,9 +1,17 @@
 """
 API Routes for ML Shadow Validation Layer (Research & Observational Only).
+
+Symbol is REQUIRED on /observations and /metrics — never omitted.
+This prevents the API from silently returning an interleaved BTC+XAU
+response when a caller forgets to specify an asset.
+
+If a genuinely cross-asset aggregate endpoint is ever needed, it must
+be a separately named, clearly-labelled route (e.g. /metrics/combined).
 """
-from fastapi import APIRouter, Query
-from typing import Optional, Dict, Any, List
+from fastapi import APIRouter, Query, HTTPException
+from typing import Dict, Any, List
 from src.research.ml_shadow.shadow_service import get_ml_shadow_service
+from src.research.ml_shadow.symbol_utils import normalize_ml_symbol
 
 router = APIRouter(prefix="/api/v1/ml/shadow", tags=["ML Shadow Research"])
 
@@ -43,17 +51,49 @@ def get_shadow_status() -> Dict[str, Any]:
     }
 
 @router.get("/metrics")
-def get_shadow_metrics(symbol: Optional[str] = Query(None, description="BTC/USD or XAU/USD")) -> Dict[str, Any]:
-    """Returns forward validation metrics on resolved live observations."""
+def get_shadow_metrics(
+    symbol: str = Query(
+        ...,
+        description="Required. Asset symbol — 'BTC/USD' or 'XAU/USD'. "
+                    "Variants like 'BTC-USD' and 'XAU-USD-SPOT' are also accepted. "
+                    "Never omit: a cross-asset aggregate is misleading and unsupported."
+    )
+) -> Dict[str, Any]:
+    """
+    Returns forward validation metrics on resolved live observations.
+
+    symbol is REQUIRED — pass 'BTC/USD' or 'XAU/USD'.
+    If you omit symbol, FastAPI returns HTTP 422.
+    """
+    try:
+        canonical = normalize_ml_symbol(symbol)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+
     svc = get_ml_shadow_service()
-    return svc.get_forward_validation_metrics(symbol=symbol)
+    return svc.get_forward_validation_metrics(symbol=canonical)
 
 @router.get("/observations")
 def get_shadow_observations(
-    symbol: Optional[str] = Query(None, description="Filter by symbol"),
+    symbol: str = Query(
+        ...,
+        description="Required. Asset symbol — 'BTC/USD' or 'XAU/USD'. "
+                    "Variants like 'BTC-USD' and 'XAU-USD-SPOT' are also accepted. "
+                    "Never omit: the endpoint must not silently return interleaved BTC+XAU data."
+    ),
     limit: int = Query(50, ge=1, le=500)
 ) -> List[Dict[str, Any]]:
-    """Returns recent point-in-time shadow observations."""
+    """
+    Returns recent point-in-time shadow observations for a single asset.
+
+    symbol is REQUIRED — pass 'BTC/USD' or 'XAU/USD'.
+    If you omit symbol, FastAPI returns HTTP 422.
+    """
+    try:
+        canonical = normalize_ml_symbol(symbol)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+
     svc = get_ml_shadow_service()
-    all_obs = svc.store.get_all_observations(symbol=symbol)
+    all_obs = svc.store.get_all_observations(symbol=canonical)
     return all_obs[-limit:]

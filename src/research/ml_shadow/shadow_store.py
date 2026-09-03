@@ -9,6 +9,7 @@ import logging
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timezone
 from src.research.ml_shadow.models import MLShadowPrediction
+from src.research.ml_shadow.symbol_utils import normalize_ml_symbol
 
 logger = logging.getLogger("ml_shadow_store")
 
@@ -152,7 +153,11 @@ class MLShadowStore:
             conn = self._get_connection()
             cur = conn.cursor()
             if symbol:
-                cur.execute("SELECT * FROM ml_shadow_observations WHERE outcome = 'PENDING' AND symbol = ? ORDER BY timestamp_t0 ASC", (symbol,))
+                canonical = normalize_ml_symbol(symbol)
+                cur.execute(
+                    "SELECT * FROM ml_shadow_observations WHERE outcome = 'PENDING' AND symbol = ? ORDER BY timestamp_t0 ASC",
+                    (canonical,),
+                )
             else:
                 cur.execute("SELECT * FROM ml_shadow_observations WHERE outcome = 'PENDING' ORDER BY timestamp_t0 ASC")
             rows = cur.fetchall()
@@ -162,17 +167,39 @@ class MLShadowStore:
             logger.error(f"[ML SHADOW] Error fetching pending observations: {e}")
             return []
 
-    def get_all_observations(self, symbol: Optional[str] = None) -> List[Dict[str, Any]]:
+    def get_all_observations(self, symbol: str) -> List[Dict[str, Any]]:
+        """
+        Returns all observations for a specific asset symbol.
+
+        Parameters
+        ----------
+        symbol:
+            Required. Must be a recognizable BTC or XAU variant.
+            Normalized internally via normalize_ml_symbol().
+
+        Raises
+        ------
+        ValueError
+            If symbol is None, empty, or unrecognizable.
+        """
+        if not symbol:
+            raise ValueError(
+                "MLShadowStore.get_all_observations: symbol is required. "
+                "Pass 'BTC/USD' or 'XAU/USD' — never omit the symbol."
+            )
+        canonical = normalize_ml_symbol(symbol)
         try:
             conn = self._get_connection()
             cur = conn.cursor()
-            if symbol:
-                cur.execute("SELECT * FROM ml_shadow_observations WHERE symbol = ? ORDER BY timestamp_t0 ASC", (symbol,))
-            else:
-                cur.execute("SELECT * FROM ml_shadow_observations ORDER BY timestamp_t0 ASC")
+            cur.execute(
+                "SELECT * FROM ml_shadow_observations WHERE symbol = ? ORDER BY timestamp_t0 ASC",
+                (canonical,),
+            )
             rows = cur.fetchall()
             conn.close()
             return [dict(r) for r in rows]
+        except ValueError:
+            raise
         except Exception as e:
             logger.error(f"[ML SHADOW] Error fetching all observations: {e}")
             return []

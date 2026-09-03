@@ -41,6 +41,7 @@ from src.models.market_data import Timeframe
 from src.models.ai_analysis import MultiTimeframeTechnicalInput, AIAnalysisResponse
 from src.services.signal_repository import get_signal_repository
 from src.services.outcome_tracker import get_outcome_tracker
+from src.research.ml_shadow.symbol_utils import normalize_ml_symbol
 
 logger = logging.getLogger(__name__)
 
@@ -165,7 +166,7 @@ class DecisionService:
                 f"{total - bullish - bearish} sideways)"
             )
 
-        display_symbol = "BTC/USD" if "BTC" in symbol.upper() else "XAU/USD"
+        display_symbol = normalize_ml_symbol(symbol)
 
         mtf_input = MultiTimeframeTechnicalInput(
             symbol=display_symbol,
@@ -779,7 +780,7 @@ class DecisionService:
     ) -> Tuple[TradingDecision, DecisionScoreBreakdown]:
         """Return a safe WAIT decision when the pipeline fails completely."""
         now = datetime.now(timezone.utc).isoformat()
-        display_symbol = "BTC/USD" if "BTC" in symbol.upper() else "XAU/USD"
+        display_symbol = normalize_ml_symbol(symbol)
         decision = TradingDecision(
             symbol=display_symbol,
             decision=TradingSignal.WAIT,
@@ -846,3 +847,4 @@ def get_decision_service() -> DecisionService:
     if _decision_service_instance is None:
         _decision_service_instance = DecisionService()
     return _decision_service_instance
+

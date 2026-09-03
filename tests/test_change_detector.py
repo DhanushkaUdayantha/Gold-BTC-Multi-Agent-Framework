@@ -1,4 +1,4 @@
-﻿"""Unit tests for MeaningfulChangeDetector — AI refresh gate logic."""
+"""Unit tests for MeaningfulChangeDetector — AI refresh gate logic."""
 import time
 import pytest
 

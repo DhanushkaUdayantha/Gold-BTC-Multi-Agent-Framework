@@ -307,9 +307,20 @@ class MLShadowService:
 
         return resolved_count
 
-    def get_forward_validation_metrics(self, symbol: Optional[str] = None) -> Dict[str, Any]:
-        """Calculates forward validation performance on resolved live observations."""
-        all_obs = self.store.get_all_observations(symbol=symbol)
+    def get_forward_validation_metrics(self, symbol: str) -> Dict[str, Any]:
+        """
+        Calculates forward validation performance on resolved live observations.
+
+        Parameters
+        ----------
+        symbol:
+            Required. Must be a recognizable BTC or XAU variant.
+            Normalized internally via normalize_ml_symbol().
+            Cross-asset aggregation is not supported — never pass None.
+        """
+        from src.research.ml_shadow.symbol_utils import normalize_ml_symbol
+        canonical = normalize_ml_symbol(symbol)
+        all_obs = self.store.get_all_observations(symbol=canonical)
         total_n = len(all_obs)
         pending_n = sum(1 for o in all_obs if o["outcome"] == "PENDING")
         resolved_trades = [o for o in all_obs if o["outcome"] in ["WIN", "LOSS"]]
@@ -317,7 +328,7 @@ class MLShadowService:
 
         if resolved_n == 0:
             return {
-                "symbol": symbol or "ALL",
+                "symbol": canonical,
                 "status": "FORWARD VALIDATION IN PROGRESS",
                 "total_observations": total_n,
                 "pending_observations": pending_n,
@@ -335,12 +346,12 @@ class MLShadowService:
         realized_r = df["realized_r"].values
 
         calib = ProbabilityCalibrator.evaluate_calibration(y_true, y_prob, realized_r=realized_r)
-        
+
         wins = int(np.sum(y_true))
         losses = resolved_n - wins
         wr = round(float((wins / resolved_n) * 100.0), 2)
         ev_r = round(float(np.mean(realized_r)), 4)
-        
+
         tot_win_r = float(np.sum(realized_r[realized_r > 0]))
         tot_loss_r = abs(float(np.sum(realized_r[realized_r < 0])))
         pf = round(tot_win_r / tot_loss_r, 2) if tot_loss_r > 0 else (99.0 if tot_win_r > 0 else 0.0)
@@ -356,7 +367,7 @@ class MLShadowService:
             milestone = f"{resolved_n}/25 (Early Observation Phase)"
 
         return {
-            "symbol": symbol or "ALL",
+            "symbol": canonical,
             "status": "FORWARD VALIDATION IN PROGRESS",
             "total_observations": total_n,
             "pending_observations": pending_n,
