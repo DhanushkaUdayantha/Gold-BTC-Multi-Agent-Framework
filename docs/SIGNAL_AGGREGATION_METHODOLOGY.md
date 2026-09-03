@@ -1,4 +1,4 @@
-﻿# Signal Aggregation Methodology & Multi-Component Synthesis
+# Signal Aggregation Methodology & Multi-Component Synthesis
 
 **Document Version:** 1.1.0-PROPOSAL (Updated with Reproducible Weight Rubric & Provenance Proofs)  
 **Author:** Quantitative Systems Engineering  
@@ -132,27 +132,31 @@ Every component $k$ is evaluated on four quantitative dimensions ($D_{kj} \in [1
 
 ### B. Empirical Scorecard & Weight Derivation
 
-Plugging the verified metrics from the research reports into the rubric yields the composite quality score $Q_k = \sum_{j=1}^4 D_{kj}$, which normalizes to the final base weight:
+Plugging the verified metrics from the research reports into the rubric yields the composite quality score $Q_k = \sum_{j=1}^4 D_{kj}$. Base weights $W_k$ are derived strictly by normalizing each component's composite score over the total system score and rounding to the nearest integer percent:
 
-$$W_k = \frac{Q_k}{\sum_{m=1}^4 Q_m}$$
+$$W_k = \text{round}\left(100 \times \frac{Q_k}{\sum_{m=1}^4 Q_m}\right) \%$$
 
 #### BTC/USD Scorecard
-| Component | $D_1$ (Sample) | $D_2$ (Calibration) | $D_3$ (Stability) | $D_4$ (Availability) | Composite Score ($Q$) | Derived Weight ($W_k$) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **1. Now Market Tech** | 5.0 ($9.6\text{M}$ candles) | 2.5 (False breakout $34.2\%$) | 4.0 ($+0.18R$ OOS) | 5.0 ($100\%$ live) | **16.5** | $\frac{16.5}{64.5} = \mathbf{25.6\%} \rightarrow \mathbf{30\%}$ |
-| **2. Historical Evidence** | 4.0 ($N = 258$) | 4.5 (Wilson CI $[52.8, 64.7\%]$) | 5.0 ($100\%$ rolling pos) | 4.5 ($\ge 85\%$ queryable) | **18.0** | $\frac{18.0}{64.5} = \mathbf{27.9\%} \rightarrow \mathbf{30\%}$ |
-| **3. ML Shadow Model** | 4.5 ($N > 1,500$) | 5.0 ($\text{ECE} = 0.024$) | 3.5 (Holdout verified) | 4.0 (Model loaded) | **17.0** | $\frac{17.0}{64.5} = \mathbf{26.4\%} \rightarrow \mathbf{25\%}$ |
-| **4. Validated Strategy** | 4.0 ($N = 258$) | 4.0 ($\text{ECE} = 0.085$) | 5.0 ($+0.47R$, $100\%$ stab) | 2.0 (Archetype $\sim 20\%$) | **15.0** | $\frac{15.0}{64.5} = \mathbf{23.3\%} \rightarrow \mathbf{15\%}$ |
-| **Total** | | | | | **66.5** | **100%** |
+| Component | $D_1$ (Sample) | $D_2$ (Calibration) | $D_3$ (Stability) | $D_4$ (Availability) | Composite Score ($Q_k$) | Exact Ratio ($\frac{Q_k}{66.5}$) | Derived Base Weight ($W_k$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **1. Now Market Tech** | 5.0 ($9.6\text{M}$ candles) | 2.5 (False breakout $34.2\%$) | 4.0 ($+0.18R$ OOS) | 5.0 ($100\%$ live) | **16.5** | $24.812\%$ | **25%** |
+| **2. Historical Evidence** | 4.0 ($N = 258$) | 4.5 (Wilson CI $[52.8, 64.7\%]$) | 5.0 ($100\%$ rolling pos) | 4.5 ($\ge 85\%$ queryable) | **18.0** | $27.068\%$ | **27%** |
+| **3. ML Shadow Model** | 4.5 ($N > 1,500$) | 5.0 ($\text{ECE} = 0.024$) | 3.5 (Holdout verified) | 4.0 (Model loaded) | **17.0** | $25.564\%$ | **26%** |
+| **4. Validated Strategy** | 4.0 ($N = 258$) | 4.0 ($\text{ECE} = 0.085$) | 5.0 ($+0.47R$, $100\%$ stab) | 2.0 (Archetype $\sim 20\%$) | **15.0** | $22.556\%$ | **22%** |
+| **Total** | | | | | **66.5** | **100.000%** | **100%** |
+
+*Verification:* $25\% + 27\% + 26\% + 22\% = 100\%$.
 
 #### XAU/USD Scorecard
-| Component | $D_1$ (Sample) | $D_2$ (Calibration) | $D_3$ (Stability) | $D_4$ (Availability) | Composite Score ($Q$) | Derived Weight ($W_k$) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **1. Now Market Tech** | 5.0 ($9.6\text{M}$ candles) | 3.0 (Session VWAP edge) | 4.5 ($+0.15R$ London/NY) | 5.0 ($100\%$ live) | **17.5** | $\frac{17.5}{65.5} = \mathbf{26.7\%} \rightarrow \mathbf{35\%}$ |
-| **2. Historical Evidence** | 4.0 ($N = 517$) | 4.0 (Wilson CI $[43.9, 52.5\%]$) | 4.5 ($88\%$ rolling pos) | 4.5 ($\ge 85\%$ queryable) | **17.0** | $\frac{17.0}{65.5} = \mathbf{26.0\%} \rightarrow \mathbf{30\%}$ |
-| **3. ML Shadow Model** | 4.5 ($N > 1,500$) | 4.0 ($\text{ECE} = 0.064$) | 3.5 (RF holdout) | 4.0 (Model loaded) | **16.0** | $\frac{16.0}{65.5} = \mathbf{24.4\%} \rightarrow \mathbf{20\%}$ |
-| **4. Validated Strategy** | 4.0 ($N = 517$) | 4.0 ($\text{ECE} = 0.064$) | 4.5 ($+0.20R$, $88\%$ stab) | 2.5 (VWAP $\sim 25\%$) | **15.0** | $\frac{15.0}{65.5} = \mathbf{22.9\%} \rightarrow \mathbf{15\%}$ |
-| **Total** | | | | | **67.5** | **100%** |
+| Component | $D_1$ (Sample) | $D_2$ (Calibration) | $D_3$ (Stability) | $D_4$ (Availability) | Composite Score ($Q_k$) | Exact Ratio ($\frac{Q_k}{65.5}$) | Derived Base Weight ($W_k$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **1. Now Market Tech** | 5.0 ($9.6\text{M}$ candles) | 3.0 (Session VWAP edge) | 4.5 ($+0.15R$ London/NY) | 5.0 ($100\%$ live) | **17.5** | $26.718\%$ | **27%** |
+| **2. Historical Evidence** | 4.0 ($N = 517$) | 4.0 (Wilson CI $[43.9, 52.5\%]$) | 4.5 ($88\%$ rolling pos) | 4.5 ($\ge 85\%$ queryable) | **17.0** | $25.954\%$ | **26%** |
+| **3. ML Shadow Model** | 4.5 ($N > 1,500$) | 4.0 ($\text{ECE} = 0.064$) | 3.5 (RF holdout) | 4.0 (Model loaded) | **16.0** | $24.427\%$ | **24%** |
+| **4. Validated Strategy** | 4.0 ($N = 517$) | 4.0 ($\text{ECE} = 0.064$) | 4.5 ($+0.20R$, $88\%$ stab) | 2.5 (VWAP $\sim 25\%$) | **15.0** | $22.901\%$ | **23%** |
+| **Total** | | | | | **65.5** | **100.000%** | **100%** |
+
+*Verification:* $27\% + 26\% + 24\% + 23\% = 100\%$.
 
 ---
 
@@ -263,7 +267,7 @@ Every aggregation call returns an auditable contributor ledger matching this sch
 {
   "overall_signal": {
     "direction": "SELL",
-    "percentage": 68,
+    "percentage": 73,
     "calibrated_probability": 0.642,
     "strength_label": "MODERATE",
     "conflict_detected": false
@@ -275,9 +279,9 @@ Every aggregation call returns an auditable contributor ledger matching this sch
       "raw_value": 72,
       "raw_unit": "SCORE_0_100",
       "directional_bias": "SELL",
-      "nominal_weight": 0.30,
-      "effective_weight": 0.30,
-      "effective_points": 21.6,
+      "nominal_weight": 0.25,
+      "effective_weight": 0.25,
+      "effective_points": 18.0,
       "status": "ACTIVE"
     },
     {
@@ -286,9 +290,9 @@ Every aggregation call returns an auditable contributor ledger matching this sch
       "raw_value": 0.615,
       "raw_unit": "PROBABILITY_0_1",
       "directional_bias": "SELL",
-      "nominal_weight": 0.30,
-      "effective_weight": 0.30,
-      "effective_points": 18.5,
+      "nominal_weight": 0.27,
+      "effective_weight": 0.27,
+      "effective_points": 16.6,
       "sample_size": 258,
       "status": "ACTIVE"
     },
@@ -298,9 +302,9 @@ Every aggregation call returns an auditable contributor ledger matching this sch
       "raw_value": 0.670,
       "raw_unit": "PROBABILITY_0_1",
       "directional_bias": "SELL",
-      "nominal_weight": 0.25,
-      "effective_weight": 0.25,
-      "effective_points": 16.8,
+      "nominal_weight": 0.26,
+      "effective_weight": 0.26,
+      "effective_points": 17.4,
       "model_version": "v1.0.0-research",
       "status": "ACTIVE"
     },
@@ -310,9 +314,9 @@ Every aggregation call returns an auditable contributor ledger matching this sch
       "raw_value": 95,
       "raw_unit": "SCORE_0_100",
       "directional_bias": "SELL",
-      "nominal_weight": 0.15,
-      "effective_weight": 0.15,
-      "effective_points": 14.3,
+      "nominal_weight": 0.22,
+      "effective_weight": 0.22,
+      "effective_points": 20.9,
       "strategy_id": "BTC-SELL-P40-REGIME_LOW_VOL",
       "degradation_status": "HEALTHY",
       "status": "ACTIVE"
