@@ -167,15 +167,17 @@ class MLShadowStore:
             logger.error(f"[ML SHADOW] Error fetching pending observations: {e}")
             return []
 
-    def get_all_observations(self, symbol: str) -> List[Dict[str, Any]]:
+    def get_all_observations(self, symbol: str, model_version: Optional[str] = None) -> List[Dict[str, Any]]:
         """
-        Returns all observations for a specific asset symbol.
+        Returns all observations for a specific asset symbol and optional model version.
 
         Parameters
         ----------
         symbol:
             Required. Must be a recognizable BTC or XAU variant.
             Normalized internally via normalize_ml_symbol().
+        model_version:
+            Optional. Specific ML model version to filter by (e.g. 'v1.0.0-research').
 
         Raises
         ------
@@ -191,10 +193,16 @@ class MLShadowStore:
         try:
             conn = self._get_connection()
             cur = conn.cursor()
-            cur.execute(
-                "SELECT * FROM ml_shadow_observations WHERE symbol = ? ORDER BY timestamp_t0 ASC",
-                (canonical,),
-            )
+            if model_version:
+                cur.execute(
+                    "SELECT * FROM ml_shadow_observations WHERE symbol = ? AND ml_model_version = ? ORDER BY timestamp_t0 ASC",
+                    (canonical, model_version),
+                )
+            else:
+                cur.execute(
+                    "SELECT * FROM ml_shadow_observations WHERE symbol = ? ORDER BY timestamp_t0 ASC",
+                    (canonical,),
+                )
             rows = cur.fetchall()
             conn.close()
             return [dict(r) for r in rows]

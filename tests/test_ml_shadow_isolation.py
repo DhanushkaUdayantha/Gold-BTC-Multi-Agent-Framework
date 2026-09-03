@@ -191,3 +191,46 @@ class TestAPISymbolEnforcement:
             f"Body: {response.text[:200]}"
         )
 
+
+# ─── Test 6: Strict Asset & Model Version Query Scoping ───────────────────────
+
+class TestMLShadowQueryCrossAssetIsolation:
+    """Proves BTC page queries cannot return XAU rows and vice versa, including model_version."""
+
+    def test_btc_query_with_model_version_returns_only_btc_rows(self, temp_store_with_both):
+        rows = temp_store_with_both.get_all_observations("BTC/USD", model_version="v1.0.0-research")
+        assert len(rows) == 1
+        assert rows[0]["symbol"] == "BTC/USD"
+        assert rows[0]["ml_model_version"] == "v1.0.0-research"
+        assert not any("XAU" in r["symbol"] for r in rows)
+
+    def test_xau_query_with_model_version_returns_only_xau_rows(self, temp_store_with_both):
+        rows = temp_store_with_both.get_all_observations("XAU/USD", model_version="v1.0.0-research")
+        assert len(rows) == 1
+        assert rows[0]["symbol"] == "XAU/USD"
+        assert rows[0]["ml_model_version"] == "v1.0.0-research"
+        assert not any("BTC" in r["symbol"] for r in rows)
+
+    def test_nonexistent_model_version_returns_empty_without_leaking(self, temp_store_with_both):
+        rows = temp_store_with_both.get_all_observations("BTC/USD", model_version="nonexistent-version")
+        assert len(rows) == 0
+
+    def test_api_observations_btc_query_never_returns_xau(self):
+        from src.api.main import app
+        client = TestClient(app)
+        res = client.get("/api/v1/ml/shadow/observations?symbol=BTC/USD&limit=50")
+        assert res.status_code == 200
+        data = res.json()
+        for item in data:
+            assert item["symbol"] == "BTC/USD", f"Leakage: found {item['symbol']} in BTC query"
+            assert "XAU" not in item["symbol"], "XAU row leaked into BTC observations"
+
+    def test_api_observations_xau_query_never_returns_btc(self):
+        from src.api.main import app
+        client = TestClient(app)
+        res = client.get("/api/v1/ml/shadow/observations?symbol=XAU/USD&limit=50")
+        assert res.status_code == 200
+        data = res.json()
+        for item in data:
+            assert item["symbol"] == "XAU/USD", f"Leakage: found {item['symbol']} in XAU query"
+            assert "BTC" not in item["symbol"], "BTC row leaked into XAU observations"

@@ -9,7 +9,7 @@ If a genuinely cross-asset aggregate endpoint is ever needed, it must
 be a separately named, clearly-labelled route (e.g. /metrics/combined).
 """
 from fastapi import APIRouter, Query, HTTPException
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from src.research.ml_shadow.shadow_service import get_ml_shadow_service
 from src.research.ml_shadow.symbol_utils import normalize_ml_symbol
 
@@ -81,7 +81,11 @@ def get_shadow_observations(
                     "Variants like 'BTC-USD' and 'XAU-USD-SPOT' are also accepted. "
                     "Never omit: the endpoint must not silently return interleaved BTC+XAU data."
     ),
-    limit: int = Query(50, ge=1, le=500)
+    limit: int = Query(50, ge=1, le=500),
+    model_version: Optional[str] = Query(
+        None,
+        description="Optional. Filter by specific ML model version (e.g. 'v1.0.0-research')."
+    ),
 ) -> List[Dict[str, Any]]:
     """
     Returns recent point-in-time shadow observations for a single asset.
@@ -95,5 +99,5 @@ def get_shadow_observations(
         raise HTTPException(status_code=422, detail=str(exc))
 
     svc = get_ml_shadow_service()
-    all_obs = svc.store.get_all_observations(symbol=canonical)
+    all_obs = svc.store.get_all_observations(symbol=canonical, model_version=model_version)
     return all_obs[-limit:]
