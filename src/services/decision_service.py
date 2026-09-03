@@ -684,8 +684,10 @@ class DecisionService:
             overall_dir = "WAIT"
             overall_pct = None
             overall_strength_label = "CONFLICT"
+            hist_pct_str = f"{hist_sig.percentage}%" if hist_sig.percentage is not None else "N/A"
+            now_pct_str = f"{now_sig.percentage}%" if now_sig.percentage is not None else "N/A"
             overall_reasons = [
-                f"Direction Conflict: Historical evidence favors {hist_sig.signal} ({hist_sig.percentage}%) while live market indicates {now_sig.signal} ({now_sig.percentage}%).",
+                f"Direction Conflict: Historical evidence favors {hist_sig.signal} ({hist_pct_str}) while live market indicates {now_sig.signal} ({now_pct_str}).",
                 "DecisionEngine safety protocol enforces conservative WAIT on directional divergence (CONFLICT=TRUE).",
             ]
         else:
@@ -709,8 +711,9 @@ class DecisionService:
             else:
                 overall_strength_label = "AWAITING_EVALUATION"
 
+            now_str = f" ({now_sig.percentage}%)" if now_sig.percentage is not None else ""
             overall_reasons = decision.reasons[:3] or [
-                f"Fused overall {overall_dir} decision aligning live confluence ({now_sig.percentage}%) with historical evidence."
+                f"Fused overall {overall_dir} decision aligning live confluence{now_str} with historical evidence."
             ]
 
         overall_sig = OverallTradingSignal(
