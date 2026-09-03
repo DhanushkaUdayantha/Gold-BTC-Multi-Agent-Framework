@@ -58,5 +58,8 @@ frontend/out/
 New folder/
 *.csv
 *.db
+*.db-wal
+*.db-shm
 *.sqlite
 data/*.db
+data/historical/*.db*
