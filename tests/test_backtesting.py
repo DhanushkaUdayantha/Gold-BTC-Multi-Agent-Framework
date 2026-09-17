@@ -51,6 +51,7 @@ from src.models.signal_record import (
     PerformanceReport,
     _score_band,
 )
+from src.models.market_data import OHLCVCandle
 from src.services.signal_repository import SignalRepository
 from src.services.outcome_tracker import OutcomeTracker
 from src.services.performance_engine import PerformanceEngine, _safe_mean, _pearson
@@ -281,6 +282,65 @@ class TestFutureOutcomeLabeling:
         # Candle was before signal_ts → not used → no hits
         assert not hit_sl
         assert not hit_tp
+
+    def test_candle_pydantic_model_evaluation(self):
+        """OHLCVCandle Pydantic model objects must be correctly scanned without AttributeError."""
+        signal_ts = datetime.now(timezone.utc) - timedelta(hours=1)
+        post_signal_ts = (signal_ts + timedelta(minutes=15)).isoformat()
+
+        # Test BUY TP hit with real OHLCVCandle model
+        candle_tp = OHLCVCandle(
+            timestamp=post_signal_ts,
+            open=2700.0,
+            high=2745.0,  # exceeds TP1 2740.0
+            low=2695.0,
+            close=2730.0,
+            volume=100.0,
+        )
+        hit_sl, hit_tp = OutcomeTracker._scan_candles(
+            direction="BUY",
+            sl=2680.0,
+            tp1=2740.0,
+            candles=[candle_tp],
+            after_ts=signal_ts,
+        )
+        assert not hit_sl
+        assert hit_tp
+
+        # Test BUY SL hit with real OHLCVCandle model
+        candle_sl = OHLCVCandle(
+            timestamp=post_signal_ts,
+            open=2700.0,
+            high=2710.0,
+            low=2675.0,  # below SL 2680.0
+            close=2685.0,
+            volume=100.0,
+        )
+        hit_sl, hit_tp = OutcomeTracker._scan_candles(
+            direction="BUY",
+            sl=2680.0,
+            tp1=2740.0,
+            candles=[candle_sl],
+            after_ts=signal_ts,
+        )
+        assert hit_sl
+        assert not hit_tp
+
+        # Test dictionary compatibility remains intact
+        candle_dict = {
+            "timestamp": post_signal_ts,
+            "high": 2745.0,
+            "low": 2695.0,
+        }
+        hit_sl, hit_tp = OutcomeTracker._scan_candles(
+            direction="BUY",
+            sl=2680.0,
+            tp1=2740.0,
+            candles=[candle_dict],
+            after_ts=signal_ts,
+        )
+        assert not hit_sl
+        assert hit_tp
 
 
 # ===========================================================================

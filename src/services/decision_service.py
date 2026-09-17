@@ -74,7 +74,11 @@ class DecisionService:
     # ------------------------------------------------------------------
 
     def get_decision(
-        self, symbol: Optional[str] = None, force_refresh: bool = False
+        self,
+        symbol: Optional[str] = None,
+        force_refresh: bool = False,
+        persist: bool = False,
+        persist_ml_observation: bool = True,
     ) -> Tuple[TradingDecision, DecisionScoreBreakdown]:
         """
         Return the latest trading decision and score breakdown for the requested symbol.
@@ -87,7 +91,7 @@ class DecisionService:
         now = time.monotonic()
 
         # Fast path — serve from cache without acquiring the lock
-        if not force_refresh and sym in self._cache:
+        if not force_refresh and not persist and sym in self._cache:
             cache_time, cached_res = self._cache[sym]
             if (now - cache_time) < self._ttl:
                 logger.debug(f"Returning cached decision for {sym}.")
@@ -97,14 +101,19 @@ class DecisionService:
         with self._build_lock:
             # Re-check under lock (another thread may have just built it)
             now = time.monotonic()
-            if not force_refresh and sym in self._cache:
+            if not force_refresh and not persist and sym in self._cache:
                 cache_time, cached_res = self._cache[sym]
                 if (now - cache_time) < self._ttl:
                     logger.debug(f"Returning cached decision for {sym} (built by concurrent thread).")
                     return cached_res
 
             try:
-                result = self._build_decision(symbol=sym, force_refresh=force_refresh)
+                result = self._build_decision(
+                    symbol=sym,
+                    force_refresh=force_refresh,
+                    persist=persist,
+                    persist_ml_observation=persist_ml_observation,
+                )
             except Exception as exc:
                 logger.error(f"DecisionService pipeline error for {sym}: {exc}", exc_info=True)
                 result = self._emergency_wait(str(exc), symbol=sym)
@@ -117,7 +126,11 @@ class DecisionService:
     # ------------------------------------------------------------------
 
     def _build_decision(
-        self, symbol: str = "XAU-USD-SPOT", force_refresh: bool = False
+        self,
+        symbol: str = "XAU-USD-SPOT",
+        force_refresh: bool = False,
+        persist: bool = False,
+        persist_ml_observation: bool = True,
     ) -> Tuple[TradingDecision, DecisionScoreBreakdown]:
         """Collect data, run AI analysis, run decision engine."""
 
@@ -377,9 +390,31 @@ class DecisionService:
             utc_hour = datetime.now(timezone.utc).hour
             session_str = "ASIA" if 0 <= utc_hour < 8 else ("LONDON" if 8 <= utc_hour < 14 else "NY")
 
+            # Extract T0 strictly from latest fully closed candle timestamp
+            # Primary preference: 15m closed candle; Secondary fallback: 5m closed candle
+            closed_candle_t0: Optional[str] = None
+            for tf_key in ("15m", "5m"):
+                candles_list = candles_dict.get(tf_key, [])
+                if candles_list and isinstance(candles_list, list):
+                    for c in reversed(candles_list):
+                        is_closed = getattr(c, "is_closed", True) if not isinstance(c, dict) else c.get("is_closed", True)
+                        c_ts = getattr(c, "timestamp", None) if not isinstance(c, dict) else c.get("timestamp")
+                        if is_closed and isinstance(c_ts, str) and c_ts.strip():
+                            closed_candle_t0 = c_ts.strip()
+                            break
+                if closed_candle_t0:
+                    break
+
+            can_persist_ml = persist_ml_observation and bool(closed_candle_t0)
+            if persist_ml_observation and not closed_candle_t0:
+                logger.warning(
+                    f"[ML SHADOW] ML_SHADOW_OBSERVATION_SKIPPED_NO_VALID_T0 for {display_symbol}: "
+                    f"No closed candle timestamp found in candles_dict"
+                )
+
             shadow_pred = shadow_svc.generate_prediction(
                 symbol=display_symbol,
-                timestamp_t0=datetime.now(timezone.utc).isoformat(),
+                timestamp_t0=closed_candle_t0 or datetime.now(timezone.utc).isoformat(),
                 production_decision=decision.decision.value,
                 confluence_score=decision.signal_strength,
                 technical_score=decision.technical_score if decision.technical_score is not None else int(decision.signal_strength * 0.9),
@@ -394,7 +429,8 @@ class DecisionService:
                 contributor_biases=c_biases,
                 data_quality=decision.data_quality or "HIGH",
                 gate_direction=decision.gate_direction or "NONE",
-                quality_gate_passed=bool(getattr(decision, "quality_gate_status", "") in ("PASSED", "CONFIRMED"))
+                quality_gate_passed=bool(getattr(decision, "quality_gate_status", "") in ("PASSED", "CONFIRMED")),
+                persist=can_persist_ml
             )
         except Exception as _shadow_exc:
             logger.debug(f"ML shadow prediction generation skipped: {_shadow_exc}")
@@ -420,42 +456,47 @@ class DecisionService:
 
         # ---- Empirical performance hooks (additive, non-blocking) ----
         # Hook 1: Record this signal if it is actionable (BUY or SELL)
-        if decision.decision.value in ("BUY", "SELL"):
+        if persist and decision.decision.value in ("BUY", "SELL"):
             try:
                 get_signal_repository().record_signal(decision)
             except Exception as _exc:
                 logger.debug(f"Signal recording skipped: {_exc}")
 
         # Hook 2: Label outcomes for previously open signals (uses current price and symbol)
-        try:
-            _candles_5m = candles_dict.get("5m", [])
-            get_outcome_tracker().label_outcomes(
-                current_price=current_price,
-                candles_history=_candles_5m,
-                symbol=display_symbol,
-            )
-        except Exception as _exc:
-            logger.debug(f"Outcome tracking skipped: {_exc}")
+        if persist:
+            try:
+                _candles_5m = candles_dict.get("5m", [])
+                get_outcome_tracker().label_outcomes(
+                    current_price=current_price,
+                    candles_history=_candles_5m,
+                    symbol=display_symbol,
+                )
+            except Exception as _exc:
+                logger.debug(f"Outcome tracking skipped: {_exc}")
 
         # Hook 3: ML Shadow Forward Outcome Resolution
-        try:
-            if shadow_svc is not None:
-                _candles_15m = candles_dict.get("15m", [])
-                if _candles_15m:
-                    shadow_svc.resolve_pending_observations(
-                    symbol=display_symbol,
-                    forward_candles=[
-                        {
-                            "timestamp": getattr(c, "timestamp", ""),
-                            "high": getattr(c, "high", 0.0),
-                            "low": getattr(c, "low", 0.0),
-                            "close": getattr(c, "close", 0.0)
-                        }
-                        for c in _candles_15m
-                    ]
-                )
-        except Exception as _ml_shadow_exc:
-            logger.debug(f"[ML SHADOW] Observer hook skipped: {_ml_shadow_exc}")
+        if persist or persist_ml_observation:
+            try:
+                if shadow_svc is not None:
+                    _candles_15m = candles_dict.get("15m", [])
+                    if _candles_15m and isinstance(_candles_15m, list):
+                        valid_candles = [
+                            {
+                                "timestamp": getattr(c, "timestamp", "") if not isinstance(c, dict) else c.get("timestamp", ""),
+                                "high": getattr(c, "high", 0.0) if not isinstance(c, dict) else c.get("high", 0.0),
+                                "low": getattr(c, "low", 0.0) if not isinstance(c, dict) else c.get("low", 0.0),
+                                "close": getattr(c, "close", 0.0) if not isinstance(c, dict) else c.get("close", 0.0)
+                            }
+                            for c in _candles_15m
+                            if (getattr(c, "timestamp", None) or (isinstance(c, dict) and c.get("timestamp")))
+                        ]
+                        if valid_candles:
+                            shadow_svc.resolve_pending_observations(
+                                symbol=display_symbol,
+                                forward_candles=valid_candles
+                            )
+            except Exception as _ml_shadow_exc:
+                logger.debug(f"[ML SHADOW] Observer hook skipped: {_ml_shadow_exc}")
 
         # Hook 4: BTC Production Gating Pre-Filter (Policy B: Calibrated Prob >= 50%)
         # Applied ONLY when PRODUCTION_GATING_BTC is explicitly enabled by authenticated admin action.
@@ -479,7 +520,7 @@ class DecisionService:
         # ADDITIVE-ONLY: this hook NEVER modifies decision, breakdown, or any production output.
         # Wrapped in its own try/except so shadow capture failure can NEVER propagate to the caller.
         try:
-            if decision.decision.value in ("BUY", "SELL"):
+            if persist and decision.decision.value in ("BUY", "SELL"):
                 _shadow_cal_prob = getattr(decision, "calibrated_probability", None) or 0.0
                 _shadow_session = "ASIA" if 0 <= datetime.now(timezone.utc).hour < 8 else (
                     "LONDON" if 8 <= datetime.now(timezone.utc).hour < 14 else "NY"

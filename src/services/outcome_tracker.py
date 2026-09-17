@@ -55,7 +55,7 @@ class OutcomeTracker:
         self,
         current_price: float,
         current_timestamp: Optional[datetime] = None,
-        candles_history: Optional[List[Dict[str, Any]]] = None,
+        candles_history: Optional[List[Any]] = None,
         symbol: Optional[str] = None,
     ) -> int:
         """
@@ -90,7 +90,7 @@ class OutcomeTracker:
         signal: SignalRecord,
         current_price: float,
         now: datetime,
-        candles_history: Optional[List[Dict[str, Any]]],
+        candles_history: Optional[List[Any]],
     ) -> bool:
         """Evaluate one signal. Returns True if outcome was set."""
 
@@ -287,7 +287,7 @@ class OutcomeTracker:
         direction: str,
         sl: float,
         tp1: Optional[float],
-        candles: List[Dict[str, Any]],
+        candles: List[Any],
         after_ts: datetime,
     ) -> tuple:
         """
@@ -298,9 +298,14 @@ class OutcomeTracker:
         hit_sl = False
         hit_tp = False
 
+        def _candle_value(candle: Any, field: str, default: Any = None) -> Any:
+            if isinstance(candle, dict):
+                return candle.get(field, default)
+            return getattr(candle, field, default)
+
         for c in candles:
             # Enforce look-ahead barrier
-            c_ts_str = c.get("timestamp", "")
+            c_ts_str = _candle_value(c, "timestamp", "")
             if c_ts_str:
                 try:
                     c_ts = datetime.fromisoformat(
@@ -311,8 +316,8 @@ class OutcomeTracker:
                 except Exception:
                     pass  # If can't parse, include it (conservative)
 
-            high = float(c.get("high", 0) or 0)
-            low = float(c.get("low", 0) or 0)
+            high = float(_candle_value(c, "high", 0) or 0)
+            low = float(_candle_value(c, "low", 0) or 0)
 
             if direction == "BUY":
                 if low <= sl:

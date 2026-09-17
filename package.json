@@ -1,0 +1,15 @@
+{
+  "name": "trade-matrix-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gold and Bitcoin AI Trading Analysis - Root Workspace Runner",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend start",
+    "test": "npm --prefix frontend test",
+    "lint": "npm --prefix frontend run lint",
+    "backend": ".\\.venv\\Scripts\\python.exe -m uvicorn src.main:app --reload --host 127.0.0.1 --port 8000",
+    "backend:8001": ".\\.venv\\Scripts\\python.exe -m uvicorn src.main:app --reload --host 127.0.0.1 --port 8001"
+  }
+}

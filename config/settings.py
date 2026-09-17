@@ -18,6 +18,12 @@ class Settings(BaseSettings):
     PORT: int = 8000
     HOST: str = "127.0.0.1"
 
+    # Security & CORS Settings
+    ADMIN_AUTH_TOKEN: str = Field(default="", description="Admin authentication token for privileged endpoints")
+    ALLOWED_ORIGINS: str = Field(default="", description="Comma-separated allowed CORS origins for production")
+    RATE_LIMITING_ENABLED: bool = Field(default=True, description="Enable API rate limiting")
+    RESET_AUTH_REQUIRED: bool = Field(default=False, description="Require admin token for demo reset even in dev")
+
     # Market Data Provider
     # Options: "goldprice_dev", "yahoo_finance", "hybrid"
     MARKET_DATA_PROVIDER: Literal["goldprice_dev", "yahoo_finance", "hybrid"] = "hybrid"
@@ -32,7 +38,7 @@ class Settings(BaseSettings):
     # AI Provider Settings
     # Options: "auto" (uses gemini if key present, else fallback), "gemini", "openai", "fallback"
     AI_PROVIDER: Literal["auto", "gemini", "openai", "fallback"] = "auto"
-    AI_MODEL: str = "gemini-3.5-flash-lite"
+    AI_MODEL: str = "gemini-3.1-flash-lite"
     GEMINI_API_KEY: str = Field(
         default="",
         validation_alias=AliasChoices("GEMINI_API_KEY", "GOOGLE_API_KEY"),
@@ -77,6 +83,16 @@ class Settings(BaseSettings):
             "Must be >= frontend polling interval (45s) to prevent every poll triggering a rebuild. "
             "120s default means at most ~720 rebuilds/day maximum."
         )
+    )
+
+    # Historical Empirical Evidence — Canonical Run Pinning
+    HISTORICAL_CANONICAL_RUN_BTC: str = Field(
+        default="RUN-BTC-USD-20260831-173607",
+        description="Canonical backtest run ID for BTC/USD empirical evidence baseline"
+    )
+    HISTORICAL_CANONICAL_RUN_XAU: str = Field(
+        default="RUN-XAU-USD-20260831-174452",
+        description="Canonical backtest run ID for XAU/USD empirical evidence baseline"
     )
 
     model_config = SettingsConfigDict(

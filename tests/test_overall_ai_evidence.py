@@ -225,11 +225,27 @@ def _insert_test_signal(
     confluence_score: int,
     outcome: str,
     realized_r: float = 1.0,
-    run_id: str = "run_1",
+    run_id: str = None,
     dataset_id: str = "ds_1",
     timestamp: str = None,
 ):
+    norm_symbol = "BTC/USD" if "BTC" in symbol.upper() else "XAU/USD"
+    default_run = "RUN-BTC-USD-20260831-173607" if "BTC" in norm_symbol else "RUN-XAU-USD-20260831-174452"
+    effective_run_id = run_id or default_run
     ts = timestamp or datetime.now(timezone.utc).isoformat()
+
+    # Ensure canonical run and report exist in test database for validation
+    cur.execute("""
+        INSERT OR IGNORE INTO backtest_runs (
+            run_id, dataset_id, dataset_version, engine_version, symbol,
+            config_json, status, progress_pct, current_step, created_at
+        ) VALUES (?, 'ds_1', '1.0', '1.0', ?, '{}', 'COMPLETED', 100.0, 'COMPLETE', ?)
+    """, (effective_run_id, norm_symbol, ts))
+    cur.execute("""
+        INSERT OR IGNORE INTO backtest_reports (run_id, report_json, created_at)
+        VALUES (?, '{}', ?)
+    """, (effective_run_id, ts))
+
     cur.execute("""
         INSERT INTO historical_signals (
             signal_id, run_id, dataset_id, symbol, source_symbol,
@@ -238,7 +254,7 @@ def _insert_test_signal(
             outcome, realized_r, is_in_sample
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
-        signal_id, run_id, dataset_id, symbol, symbol,
+        signal_id, effective_run_id, dataset_id, symbol, symbol,
         ts, "snap_1", 2700.0, direction,
         confluence_score, int(confluence_score * 0.9), 8,
         outcome, realized_r, 1

@@ -36,7 +36,13 @@ class BTCShadowRunner:
         forward_engine: Optional[ForwardShadowEngine] = None,
     ):
         self.store = shadow_store or get_shadow_trading_store()
-        self.forward_engine = forward_engine or get_forward_shadow_engine()
+        if forward_engine is not None:
+            self.forward_engine = forward_engine
+        elif shadow_store is not None:
+            # Test or custom runner isolation: NEVER write to production DB when a custom shadow_store is provided
+            self.forward_engine = ForwardShadowEngine(db_path=shadow_store.db_path)
+        else:
+            self.forward_engine = get_forward_shadow_engine()
         self._is_running = False
         self._loop_task: Optional[asyncio.Task] = None
 
@@ -103,6 +109,7 @@ class BTCShadowRunner:
                 "mtf_aligned": mtf_aligned,
             },
             timestamp_utc=ts,
+            evidence_generation="CLEAN_FORWARD",
         )
 
         if not snapshot:

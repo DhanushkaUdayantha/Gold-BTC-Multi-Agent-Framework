@@ -74,7 +74,7 @@ class MLShadowStore:
         try:
             conn = self._get_connection()
             with conn:
-                conn.execute("""
+                cursor = conn.execute("""
                     INSERT OR IGNORE INTO ml_shadow_observations (
                         observation_id, symbol, timestamp_t0, production_decision,
                         confluence_score, technical_score, quality_gate_passed,
@@ -93,6 +93,10 @@ class MLShadowStore:
                     pred.take_profit_2, pred.session, pred.market_regime,
                     json.dumps(pred.features_snapshot), pred.created_at
                 ))
+                if cursor.rowcount > 0:
+                    logger.info(f"[ML SHADOW] observation_saved: {pred.observation_id} for {pred.symbol} at {pred.timestamp_t0}")
+                else:
+                    logger.debug(f"[ML SHADOW] duplicate_skipped (idempotent): {pred.observation_id} for {pred.symbol} at {pred.timestamp_t0}")
             conn.close()
             return True
         except Exception as e:

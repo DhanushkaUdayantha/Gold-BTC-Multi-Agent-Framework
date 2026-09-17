@@ -47,6 +47,7 @@ class ForwardSignalSnapshot:
     strategy_version: str
     features_payload_json: str
     snapshot_hash: str
+    evidence_generation: str = "CLEAN_FORWARD"
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -103,7 +104,7 @@ class ForwardShadowEngine:
         self._init_forward_tables()
 
     def _init_forward_tables(self) -> None:
-        """Create forward shadow tables if not present."""
+        """Create forward shadow tables if not present, and ensure schema migration."""
         try:
             with sqlite3.connect(self.db_path) as conn:
                 conn.execute("""
@@ -139,10 +140,24 @@ class ForwardShadowEngine:
                         duration_minutes REAL,
                         failure_class TEXT,
                         success_class TEXT,
-                        created_at_utc TEXT NOT NULL
+                        created_at_utc TEXT NOT NULL,
+                        evidence_generation TEXT DEFAULT 'FORENSIC_CONTAMINATED_TEST_FIXTURE',
+                        entry_filled_at TEXT,
+                        entry_distance_pct REAL DEFAULT 0.0
                     )
                 """)
                 conn.execute("CREATE INDEX IF NOT EXISTS idx_fwd_asset_status ON forward_shadow_signals(asset, status)")
+
+                # Automatic schema migration for existing tables:
+                cursor = conn.cursor()
+                cursor.execute("PRAGMA table_info(forward_shadow_signals)")
+                existing_cols = {c[1] for c in cursor.fetchall()}
+                if "evidence_generation" not in existing_cols:
+                    conn.execute("ALTER TABLE forward_shadow_signals ADD COLUMN evidence_generation TEXT DEFAULT 'FORENSIC_CONTAMINATED_TEST_FIXTURE'")
+                if "entry_filled_at" not in existing_cols:
+                    conn.execute("ALTER TABLE forward_shadow_signals ADD COLUMN entry_filled_at TEXT DEFAULT NULL")
+                if "entry_distance_pct" not in existing_cols:
+                    conn.execute("ALTER TABLE forward_shadow_signals ADD COLUMN entry_distance_pct REAL DEFAULT 0.0")
         except Exception as exc:
             logger.error(f"Error initializing forward shadow tables: {exc}")
 
@@ -167,6 +182,8 @@ class ForwardShadowEngine:
         strategy_version: str = "STRATEGY_v1.0",
         features_dict: Optional[Dict[str, Any]] = None,
         timestamp_utc: Optional[str] = None,
+        evidence_generation: str = "CLEAN_FORWARD",
+        entry_distance_pct: float = 0.0,
     ) -> Optional[ForwardSignalSnapshot]:
         """
         Idempotently capture a pre-trade signal with immutable cryptographic hash.
@@ -199,6 +216,7 @@ class ForwardShadowEngine:
             strategy_version=strategy_version,
             features_payload_json=payload_str,
             snapshot_hash=snap_hash,
+            evidence_generation=evidence_generation,
         )
 
         try:
@@ -209,8 +227,9 @@ class ForwardShadowEngine:
                         take_profit_1, take_profit_2, confluence_score, confidence_score,
                         signal_strength, market_regime, session, mtf_aligned, ai_bias,
                         ai_confidence, ml_raw_probability, ml_calibrated_probability,
-                        strategy_version, features_payload, snapshot_hash, status, created_at_utc
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'PENDING', ?)
+                        strategy_version, features_payload, snapshot_hash, status, created_at_utc,
+                        evidence_generation, entry_filled_at, entry_distance_pct
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'PENDING', ?, ?, NULL, ?)
                 """, (
                     snapshot.signal_id, snapshot.asset, snapshot.signal_timestamp_utc,
                     snapshot.direction, snapshot.entry_price, snapshot.stop_loss,
@@ -219,12 +238,115 @@ class ForwardShadowEngine:
                     snapshot.session, 1 if snapshot.mtf_aligned else 0, snapshot.ai_bias,
                     snapshot.ai_confidence, snapshot.ml_raw_probability, snapshot.ml_calibrated_probability,
                     snapshot.strategy_version, snapshot.features_payload_json, snapshot.snapshot_hash,
-                    datetime.now(timezone.utc).isoformat()
+                    datetime.now(timezone.utc).isoformat(),
+                    evidence_generation, entry_distance_pct
                 ))
             return snapshot
         except Exception as exc:
             logger.error(f"Error persisting forward signal: {exc}")
             return None
+
+    def mark_entry_filled(
+        self,
+        signal_id: str,
+        entry_filled_at_utc: str,
+        fill_price: Optional[float] = None,
+    ) -> bool:
+        """
+        Transition a forward shadow signal from PENDING/PENDING_ENTRY to ACTIVE_POSITION.
+        Enforces that limit order touch has been verified before any TP/SL evaluation.
+        """
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cur = conn.cursor()
+                cur.execute("""
+                    UPDATE forward_shadow_signals
+                    SET status = 'ACTIVE_POSITION',
+                        entry_filled_at = ?
+                    WHERE signal_id = ? AND status IN ('PENDING', 'PENDING_ENTRY')
+                """, (entry_filled_at_utc, signal_id))
+                return cur.rowcount > 0
+        except Exception as exc:
+            logger.error(f"Error marking entry filled for {signal_id}: {exc}")
+            return False
+
+    def resolve_forward_signal(
+        self,
+        signal_id: str,
+        resolution_status: str,  # "RESOLVED_WIN", "RESOLVED_LOSS", "RESOLVED_EXPIRED", "NOT_TRIGGERED", "AMBIGUOUS"
+        outcome_timestamp_utc: str,
+        exit_price: float,
+        realized_r: float,
+        mfe_r: Optional[float] = None,
+        mae_r: Optional[float] = None,
+        duration_minutes: Optional[float] = None,
+        failure_class: Optional[str] = None,
+        success_class: Optional[str] = None,
+    ) -> bool:
+        """
+        Deterministically resolve a forward shadow signal.
+        Enforces temporal integrity: outcome_timestamp must be strictly > signal_timestamp.
+        Idempotent: once resolved, returns True without overwriting.
+        """
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cur = conn.cursor()
+                row = cur.execute(
+                    "SELECT signal_timestamp, status FROM forward_shadow_signals WHERE signal_id = ?",
+                    (signal_id,)
+                ).fetchone()
+                if not row:
+                    logger.warning(f"Cannot resolve unknown forward signal: {signal_id}")
+                    return False
+
+                sig_ts, status = row[0], row[1]
+                if status not in ("PENDING", "PENDING_ENTRY", "ACTIVE_POSITION"):
+                    # Already resolved (idempotent)
+                    return True
+
+                # Strict temporal integrity check: outcome must be after signal
+                if outcome_timestamp_utc <= sig_ts:
+                    logger.error(
+                        f"Temporal violation: outcome_timestamp ({outcome_timestamp_utc}) "
+                        f"<= signal_timestamp ({sig_ts}) for {signal_id}"
+                    )
+                    return False
+
+                if "WIN" in resolution_status:
+                    outcome_str = "WIN"
+                elif "LOSS" in resolution_status:
+                    outcome_str = "LOSS"
+                elif "EXPIRED" in resolution_status:
+                    outcome_str = "EXPIRED"
+                elif "NOT_TRIGGERED" in resolution_status:
+                    outcome_str = "NOT_TRIGGERED"
+                elif "AMBIGUOUS" in resolution_status:
+                    outcome_str = "AMBIGUOUS"
+                else:
+                    outcome_str = resolution_status
+
+                cur.execute("""
+                    UPDATE forward_shadow_signals
+                    SET status = ?,
+                        outcome = ?,
+                        outcome_timestamp = ?,
+                        exit_price = ?,
+                        realized_r = ?,
+                        mfe = ?,
+                        mae = ?,
+                        duration_minutes = ?,
+                        failure_class = ?,
+                        success_class = ?
+                    WHERE signal_id = ? AND status IN ('PENDING', 'PENDING_ENTRY', 'ACTIVE_POSITION')
+                """, (
+                    resolution_status, outcome_str, outcome_timestamp_utc,
+                    exit_price, realized_r, mfe_r, mae_r, duration_minutes,
+                    failure_class, success_class, signal_id
+                ))
+                return cur.rowcount > 0
+        except Exception as exc:
+            logger.error(f"Error resolving forward shadow signal {signal_id}: {exc}")
+            return False
 
     def get_forward_summary(self, symbol: str = "BTC/USD") -> ForwardShadowSummary:
         """
@@ -279,6 +401,142 @@ class ForwardShadowEngine:
             max_forward_drawdown_r=max_dd,
             evidence_status=evid,
         )
+
+    def get_forward_validation_metrics(
+        self, asset: Optional[str] = None, generation: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Dynamically query forward_shadow_signals table from self.db_path and compute
+        the 6 minimum metrics without hardcoding counts or win rates:
+        - total_signals
+        - resolved_signals
+        - pending_signals
+        - wins
+        - losses
+        - win_rate_pct = wins / (wins + losses) * 100 (pending excluded)
+        """
+        def _compute_for_sym(conn: sqlite3.Connection, sym: str, prov_note: str) -> Dict[str, Any]:
+            cur = conn.cursor()
+            cur.execute("PRAGMA table_info(forward_shadow_signals)")
+            cols = {c[1] for c in cur.fetchall()}
+            has_gen = "evidence_generation" in cols
+
+            # Legacy / overall table counts
+            cur.execute("SELECT COUNT(*) FROM forward_shadow_signals WHERE asset = ?", (sym,))
+            total = cur.fetchone()[0]
+
+            cur.execute("SELECT COUNT(*) FROM forward_shadow_signals WHERE asset = ? AND outcome = 'WIN'", (sym,))
+            wins = cur.fetchone()[0]
+
+            cur.execute("SELECT COUNT(*) FROM forward_shadow_signals WHERE asset = ? AND outcome = 'LOSS'", (sym,))
+            losses = cur.fetchone()[0]
+
+            cur.execute(
+                "SELECT COUNT(*) FROM forward_shadow_signals WHERE asset = ? AND status IN ('PENDING', 'PENDING_ENTRY', 'ACTIVE_POSITION')",
+                (sym,)
+            )
+            pending = cur.fetchone()[0]
+
+            resolved = wins + losses
+            wr = round((wins / resolved) * 100.0, 1) if resolved > 0 else 0.0
+
+            # Clean forward lineage counts
+            if has_gen:
+                cur.execute(
+                    "SELECT COUNT(*) FROM forward_shadow_signals WHERE asset = ? AND evidence_generation = 'CLEAN_FORWARD'",
+                    (sym,)
+                )
+                clean_total = cur.fetchone()[0]
+                cur.execute(
+                    "SELECT COUNT(*) FROM forward_shadow_signals WHERE asset = ? AND evidence_generation = 'CLEAN_FORWARD' AND outcome = 'WIN'",
+                    (sym,)
+                )
+                clean_wins = cur.fetchone()[0]
+                cur.execute(
+                    "SELECT COUNT(*) FROM forward_shadow_signals WHERE asset = ? AND evidence_generation = 'CLEAN_FORWARD' AND outcome = 'LOSS'",
+                    (sym,)
+                )
+                clean_losses = cur.fetchone()[0]
+                cur.execute(
+                    "SELECT COUNT(*) FROM forward_shadow_signals WHERE asset = ? AND evidence_generation = 'CLEAN_FORWARD' AND status IN ('PENDING', 'PENDING_ENTRY', 'ACTIVE_POSITION')",
+                    (sym,)
+                )
+                clean_pending = cur.fetchone()[0]
+                clean_resolved = clean_wins + clean_losses
+                clean_wr = round((clean_wins / clean_resolved) * 100.0, 1) if clean_resolved > 0 else 0.0
+            else:
+                clean_total = clean_wins = clean_losses = clean_pending = clean_resolved = 0
+                clean_wr = 0.0
+
+            if generation and generation.upper() in ("CLEAN", "CLEAN_FORWARD"):
+                return {
+                    "asset": sym,
+                    "total_signals": int(clean_total),
+                    "resolved_signals": int(clean_resolved),
+                    "pending_signals": int(clean_pending),
+                    "wins": int(clean_wins),
+                    "losses": int(clean_losses),
+                    "win_rate_pct": float(clean_wr),
+                    "evidence_generation": "CLEAN_FORWARD",
+                    "provenance_note": f"{prov_note} [CLEAN_FORWARD lineage]",
+                }
+
+            return {
+                "asset": sym,
+                "total_signals": int(total),
+                "resolved_signals": int(resolved),
+                "pending_signals": int(pending),
+                "wins": int(wins),
+                "losses": int(losses),
+                "win_rate_pct": float(wr),
+                "provenance_note": prov_note,
+                "clean_forward": {
+                    "total_signals": int(clean_total),
+                    "resolved_signals": int(clean_resolved),
+                    "pending_signals": int(clean_pending),
+                    "wins": int(clean_wins),
+                    "losses": int(clean_losses),
+                    "win_rate_pct": float(clean_wr),
+                },
+                "quarantined_legacy": {
+                    "total_signals": int(total - clean_total),
+                    "resolved_signals": int(resolved - clean_resolved),
+                    "pending_signals": int(pending - clean_pending),
+                    "wins": int(wins - clean_wins),
+                    "losses": int(losses - clean_losses),
+                    "status": "FORENSIC_CONTAMINATED_TEST_FIXTURE",
+                },
+            }
+
+        btc_prov = "Captured via ForwardShadowEngine (BTC v2.1 Shadow Runner & Production Pipeline Hook 5)"
+        xau_prov = "Captured via ForwardShadowEngine (XAU Strategy v2.0 standalone shadow runner evaluation; not main DecisionService production path)"
+
+        with sqlite3.connect(self.db_path) as conn:
+            btc_metrics = _compute_for_sym(conn, "BTC/USD", btc_prov)
+            xau_metrics = _compute_for_sym(conn, "XAU/USD", xau_prov)
+
+        disclaimer = (
+            "Forward-shadow validation results are reported separately from "
+            "ML Shadow Observations and do not constitute live trading performance or production approval."
+        )
+
+        if asset:
+            is_btc = "BTC" in asset.upper()
+            target = btc_metrics if is_btc else xau_metrics
+            return {
+                "status": "success",
+                "authoritative_source": "forward_shadow_signals",
+                "disclaimer": disclaimer,
+                "data": target,
+            }
+
+        return {
+            "status": "success",
+            "authoritative_source": "forward_shadow_signals",
+            "disclaimer": disclaimer,
+            "btc": btc_metrics,
+            "xau": xau_metrics,
+        }
 
 
 _forward_shadow_engine: Optional[ForwardShadowEngine] = None

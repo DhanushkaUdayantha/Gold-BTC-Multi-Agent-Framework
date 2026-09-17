@@ -41,32 +41,7 @@ class DisableBTCGatingRequest(BaseModel):
     rationale: str = Field(..., description="Reason for disabling gating")
 
 
-def _verify_admin_token(x_admin_token: Optional[str] = Header(None, alias="X-Admin-Token")) -> None:
-    """Verify administrator authentication token securely."""
-    expected_token = os.environ.get("ADMIN_AUTH_TOKEN", "").strip()
-    if not expected_token:
-        try:
-            from dotenv import load_dotenv
-            load_dotenv()
-            expected_token = os.environ.get("ADMIN_AUTH_TOKEN", "").strip()
-        except Exception:
-            pass
-
-    if not expected_token:
-        logger.error("[Admin Gating] ADMIN_AUTH_TOKEN is not configured in the environment or .env.")
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Admin authentication token not configured on server",
-        )
-
-    if not x_admin_token or not secrets.compare_digest(
-        x_admin_token.encode("utf-8"), expected_token.encode("utf-8")
-    ):
-        logger.warning("[Admin Gating] Unauthorized access attempt to admin gating endpoint.")
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid or missing X-Admin-Token header",
-        )
+from src.core.security import verify_admin_token as _verify_admin_token
 
 
 @router.get("/status", summary="Get Production Gating Status & Invariants")

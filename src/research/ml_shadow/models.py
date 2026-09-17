@@ -4,6 +4,7 @@ Data structures for ML Shadow validation layer.
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional
 import uuid
+import hashlib
 from datetime import datetime, timezone
 
 @dataclass
@@ -48,10 +49,17 @@ class MLShadowPrediction:
         take_profit_2: Optional[float],
         session: str,
         market_regime: str,
-        features_snapshot: Dict[str, Any]
+        features_snapshot: Dict[str, Any],
+        observation_id: Optional[str] = None
     ) -> "MLShadowPrediction":
+        if not observation_id:
+            # Deterministic observation ID: ML-SHADOW-<12 HEX CHARS>
+            # Generated strictly from symbol, timestamp_t0, ml_model_version
+            seed = f"{symbol.upper()}|{timestamp_t0}|{ml_model_version}"
+            obs_hash = hashlib.sha256(seed.encode("utf-8")).hexdigest()[:12].upper()
+            observation_id = f"ML-SHADOW-{obs_hash}"
         return cls(
-            observation_id=f"ML-SHADOW-{uuid.uuid4().hex[:12].upper()}",
+            observation_id=observation_id,
             symbol=symbol,
             timestamp_t0=timestamp_t0,
             production_decision=production_decision,

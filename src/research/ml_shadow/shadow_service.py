@@ -75,7 +75,8 @@ class MLShadowService:
         contributor_biases: Dict[str, str],
         data_quality: str = "HIGH",
         gate_direction: str = "NONE",
-        quality_gate_passed: bool = False
+        quality_gate_passed: bool = False,
+        persist: bool = True
     ) -> Optional[MLShadowPrediction]:
         """
         Generates an isolated ML shadow prediction at T0.
@@ -192,8 +193,11 @@ class MLShadowService:
             )
 
             # Save immutable observation
-            self.store.save_observation(prediction)
-            logger.info(f"[ML SHADOW] prediction completed: {sym_key} prob={prob:.4f} class={pred_class}")
+            if persist:
+                self.store.save_observation(prediction)
+                logger.info(f"[ML SHADOW] prediction completed and saved: {sym_key} prob={prob:.4f} class={pred_class}")
+            else:
+                logger.info(f"[ML SHADOW] prediction completed (ephemeral/no-persist): {sym_key} prob={prob:.4f} class={pred_class}")
             return prediction
 
         except Exception as e:
@@ -219,12 +223,12 @@ class MLShadowService:
             obs_id = obs["observation_id"]
             obs_ts = obs["timestamp_t0"]
             dec = obs["production_decision"].upper()
-            entry_p = float(obs["entry_price"])
-            sl = float(obs["stop_loss"]) if obs["stop_loss"] else None
-            tp1 = float(obs["take_profit_1"]) if obs["take_profit_1"] else None
+            entry_p = float(obs["entry_price"]) if obs.get("entry_price") is not None else 0.0
+            sl = float(obs["stop_loss"]) if obs.get("stop_loss") else None
+            tp1 = float(obs["take_profit_1"]) if obs.get("take_profit_1") else None
 
-            # Skip resolution if WAIT decision (no trading TP/SL targets)
-            if "WAIT" in dec or sl is None or tp1 is None:
+            # Skip resolution if WAIT decision or missing SL/TP/Entry (no directional trading targets)
+            if "WAIT" in dec or sl is None or tp1 is None or entry_p <= 0:
                 self.store.resolve_observation_outcome(
                     observation_id=obs_id,
                     outcome="OBSERVED_WAIT",
@@ -257,33 +261,58 @@ class MLShadowService:
                         outcome = "LOSS"
                         exit_p = sl
                         outcome_ts = c_ts
-                        dur_min = (idx + 1) * 15.0
+                        try:
+                            t0_dt = datetime.fromisoformat(obs_ts.replace("Z", "+00:00"))
+                            out_dt = datetime.fromisoformat(c_ts.replace("Z", "+00:00"))
+                            dur_min = round(max(0.0, (out_dt - t0_dt).total_seconds() / 60.0), 2)
+                        except Exception:
+                            dur_min = (idx + 1) * 15.0
                         break
                     elif c_high >= tp1:
                         outcome = "WIN"
                         exit_p = tp1
                         outcome_ts = c_ts
-                        dur_min = (idx + 1) * 15.0
+                        try:
+                            t0_dt = datetime.fromisoformat(obs_ts.replace("Z", "+00:00"))
+                            out_dt = datetime.fromisoformat(c_ts.replace("Z", "+00:00"))
+                            dur_min = round(max(0.0, (out_dt - t0_dt).total_seconds() / 60.0), 2)
+                        except Exception:
+                            dur_min = (idx + 1) * 15.0
                         break
                 else: # SELL
                     if c_high >= sl:
                         outcome = "LOSS"
                         exit_p = sl
                         outcome_ts = c_ts
-                        dur_min = (idx + 1) * 15.0
+                        try:
+                            t0_dt = datetime.fromisoformat(obs_ts.replace("Z", "+00:00"))
+                            out_dt = datetime.fromisoformat(c_ts.replace("Z", "+00:00"))
+                            dur_min = round(max(0.0, (out_dt - t0_dt).total_seconds() / 60.0), 2)
+                        except Exception:
+                            dur_min = (idx + 1) * 15.0
                         break
                     elif c_low <= tp1:
                         outcome = "WIN"
                         exit_p = tp1
                         outcome_ts = c_ts
-                        dur_min = (idx + 1) * 15.0
+                        try:
+                            t0_dt = datetime.fromisoformat(obs_ts.replace("Z", "+00:00"))
+                            out_dt = datetime.fromisoformat(c_ts.replace("Z", "+00:00"))
+                            dur_min = round(max(0.0, (out_dt - t0_dt).total_seconds() / 60.0), 2)
+                        except Exception:
+                            dur_min = (idx + 1) * 15.0
                         break
 
             if outcome is None and len(relevant_candles) >= max_horizon_candles:
                 outcome = "EXPIRED"
                 exit_p = float(relevant_candles[-1].get("close", entry_p))
                 outcome_ts = relevant_candles[-1].get("timestamp", obs_ts)
-                dur_min = max_horizon_candles * 15.0
+                try:
+                    t0_dt = datetime.fromisoformat(obs_ts.replace("Z", "+00:00"))
+                    out_dt = datetime.fromisoformat(outcome_ts.replace("Z", "+00:00"))
+                    dur_min = round(max(0.0, (out_dt - t0_dt).total_seconds() / 60.0), 2)
+                except Exception:
+                    dur_min = max_horizon_candles * 15.0
 
             if outcome is not None:
                 sl_dist = abs(entry_p - sl)
@@ -325,6 +354,24 @@ class MLShadowService:
         pending_n = sum(1 for o in all_obs if o["outcome"] == "PENDING")
         resolved_trades = [o for o in all_obs if o["outcome"] in ["WIN", "LOSS"]]
         resolved_n = len(resolved_trades)
+        wait_n = sum(1 for o in all_obs if o["outcome"] == "OBSERVED_WAIT")
+        expired_n = sum(1 for o in all_obs if o["outcome"] == "EXPIRED")
+        directional_candidates = sum(1 for o in all_obs if (o.get("production_decision") or "").upper() in ["BUY", "SELL"])
+        missing_entry_n = sum(1 for o in all_obs if (o.get("production_decision") or "").upper() in ["BUY", "SELL"] and not o.get("entry_price"))
+        missing_sl_n = sum(1 for o in all_obs if (o.get("production_decision") or "").upper() in ["BUY", "SELL"] and not o.get("stop_loss"))
+        missing_tp_n = sum(1 for o in all_obs if (o.get("production_decision") or "").upper() in ["BUY", "SELL"] and not o.get("take_profit_1"))
+
+        diagnostics = {
+            "total_observations": total_n,
+            "wait_non_trade_observations": wait_n,
+            "eligible_directional_candidates": directional_candidates,
+            "resolved_trades": resolved_n,
+            "pending_trades": pending_n,
+            "expired_trades": expired_n,
+            "missing_entry": missing_entry_n,
+            "missing_sl": missing_sl_n,
+            "missing_tp": missing_tp_n,
+        }
 
         if resolved_n == 0:
             return {
@@ -333,11 +380,13 @@ class MLShadowService:
                 "total_observations": total_n,
                 "pending_observations": pending_n,
                 "resolved_trades": 0,
+                "wait_observations": wait_n,
                 "milestone_reached": "0/25",
                 "brier_score": None,
                 "win_rate": None,
                 "ev_r": None,
-                "profit_factor": None
+                "profit_factor": None,
+                "diagnostics": diagnostics,
             }
 
         df = pd.DataFrame(resolved_trades)
@@ -372,12 +421,14 @@ class MLShadowService:
             "total_observations": total_n,
             "pending_observations": pending_n,
             "resolved_trades": resolved_n,
+            "wait_observations": wait_n,
             "milestone_reached": milestone,
             "win_rate": wr,
             "ev_r": ev_r,
             "profit_factor": pf,
             "brier_score": calib["brier_score"],
-            "calibration": calib
+            "calibration": calib,
+            "diagnostics": diagnostics,
         }
 
 _GLOBAL_ML_SHADOW_SERVICE: Optional[MLShadowService] = None

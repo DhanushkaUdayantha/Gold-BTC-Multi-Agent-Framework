@@ -32,6 +32,7 @@ settings = get_settings()
 import threading
 from src.services.historical_data_service import HistoricalDataService
 from src.services.live_candle_ingestion_service import LiveCandleIngestionService
+from src.services.forward_shadow_resolver_worker import ForwardShadowResolverWorker
 
 
 @asynccontextmanager
@@ -57,8 +58,18 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"LiveCandleIngestion startup warning: {e}")
 
+    # Start the forward shadow resolver background worker
+    try:
+        ForwardShadowResolverWorker.get_instance().start()
+    except Exception as e:
+        logger.warning(f"ForwardShadowResolver startup warning: {e}")
+
     yield
-    # Graceful shutdown: signal the ingestion daemon to stop
+    # Graceful shutdown: signal daemons to stop
+    try:
+        ForwardShadowResolverWorker.get_instance().stop()
+    except Exception:
+        pass
     try:
         LiveCandleIngestionService.get_instance().stop()
     except Exception:
@@ -79,22 +90,66 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Configure CORS for the Next.js dashboard (any local dev port)
+# Configure CORS for the Next.js dashboard
+_base_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+if settings.ALLOWED_ORIGINS:
+    for origin in settings.ALLOWED_ORIGINS.split(","):
+        clean_origin = origin.strip()
+        if clean_origin and clean_origin not in _base_origins:
+            _base_origins.append(clean_origin)
+
+# In production, require explicit allowlist; dev/testing permits local regex
+_origin_regex = (
+    r"^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$"
+    if settings.APP_ENV != "production"
+    else None
+)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:3001",
-        "http://127.0.0.1:3001",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-    ],
-    allow_origin_regex=r"^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$",
+    allow_origins=_base_origins,
+    allow_origin_regex=_origin_regex,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def add_security_headers(request, call_next):
+    """Add defensive HTTP response security headers."""
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(), camera=(), microphone=()"
+    if settings.APP_ENV == "production" and request.url.scheme == "https":
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    return response
+
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request, exc: Exception):
+    """Sanitize unhandled exceptions so internal paths and stacktraces are never exposed to clients."""
+    logger.error(
+        f"Unhandled server error processing {request.method} {request.url.path}: {exc}",
+        exc_info=True,
+    )
+    from fastapi.responses import JSONResponse
+    return JSONResponse(
+        status_code=500,
+        content={
+            "detail": "Internal server error encountered. Check server logs.",
+            "error_code": "INTERNAL_ERROR",
+        },
+    )
 
 
 # Register API routes

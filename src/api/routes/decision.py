@@ -9,8 +9,10 @@ No trades are executed. No broker connections are made.
 """
 import logging
 from typing import Optional
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 
+from src.core.rate_limiter import check_rate_limit
+from src.core.security import verify_demo_reset_auth
 from src.models.trading_decision import TradingDecision, DecisionScoreBreakdown
 from src.services.decision_service import get_decision_service
 
@@ -29,6 +31,7 @@ router = APIRouter(prefix="/decision", tags=["Trading Decision"])
     ),
 )
 def get_decision(
+    request: Request,
     symbol: Optional[str] = Query(
         default=None,
         description="Instrument symbol (e.g. XAU-USD-SPOT, BTC-USD)",
@@ -46,13 +49,16 @@ def get_decision(
     - ATR-based stop-loss and TP calculations
     - Multiple WAIT override rules (confidence threshold, proximity, R:R, market condition)
     """
+    check_rate_limit(request, limit=120, window_seconds=60, scope="decision")
     try:
         svc = get_decision_service()
         decision, _ = svc.get_decision(symbol=symbol, force_refresh=force_refresh)
         return decision
+    except HTTPException:
+        raise
     except Exception as exc:
         logger.error(f"Decision endpoint error: {exc}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Decision engine error: {str(exc)}")
+        raise HTTPException(status_code=500, detail="Decision engine error encountered. Check server logs.")
 
 
 @router.get(
@@ -248,15 +254,21 @@ def close_trade(req: CloseTradeRequest):
     summary="Reset demo paper trading account balance and history",
     description="Resets the simulated demo account history and returns to the default $10,000 balance."
 )
-def reset_trades():
+def reset_trades(
+    request: Request,
+    _auth: None = Depends(verify_demo_reset_auth),
+):
+    check_rate_limit(request, limit=10, window_seconds=60, scope="reset")
     try:
         from src.services.paper_trading_service import PaperTradingService
         pt = PaperTradingService()
         pt.reset_account()
         return {"status": "success", "message": "Demo paper trading account reset successfully."}
+    except HTTPException:
+        raise
     except Exception as exc:
         logger.error(f"Failed to reset account: {exc}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Failed to reset account: {str(exc)}")
+        raise HTTPException(status_code=500, detail="Failed to reset account due to internal error.")
 
 
 @router.get(

@@ -190,7 +190,13 @@ class HistoricalEvidenceService:
     _instance: Optional[HistoricalEvidenceService] = None
     _lock = threading.RLock()
 
-    def __init__(self, db_path: str = DB_PATH, auto_start_learning: bool = True):
+    def __init__(
+        self,
+        db_path: str = DB_PATH,
+        auto_start_learning: bool = True,
+        canonical_run_btc: Optional[str] = None,
+        canonical_run_xau: Optional[str] = None,
+    ):
         self.db_path = db_path
         self.data_service = HistoricalDataService(db_path=db_path)
         self.calibrator = ProbabilityCalibrator()
@@ -199,6 +205,8 @@ class HistoricalEvidenceService:
         self._auto_learning_started = False
         self._is_learning = False
         self._last_learning_completed_at: Optional[str] = None
+        self._canonical_run_btc = canonical_run_btc
+        self._canonical_run_xau = canonical_run_xau
 
         if auto_start_learning and not os.environ.get("PYTEST_CURRENT_TEST"):
             self.ensure_historical_learning_ready()
@@ -214,6 +222,67 @@ class HistoricalEvidenceService:
         conn = sqlite3.connect(self.db_path, timeout=15.0)
         conn.row_factory = sqlite3.Row
         return conn
+
+    def get_configured_canonical_run_id(self, symbol: str) -> Optional[str]:
+        """Return the configured canonical run ID for the given asset symbol."""
+        norm_symbol = "BTC/USD" if "BTC" in symbol.upper() else "XAU/USD"
+        if "BTC" in norm_symbol:
+            if self._canonical_run_btc is not None:
+                return self._canonical_run_btc
+            from config.settings import get_settings
+            return getattr(get_settings(), "HISTORICAL_CANONICAL_RUN_BTC", "RUN-BTC-USD-20260831-173607")
+        else:
+            if self._canonical_run_xau is not None:
+                return self._canonical_run_xau
+            from config.settings import get_settings
+            return getattr(get_settings(), "HISTORICAL_CANONICAL_RUN_XAU", "RUN-XAU-USD-20260831-174452")
+
+    def resolve_canonical_run(self, symbol: str) -> Optional[str]:
+        """
+        Resolve and validate the configured canonical backtest run ID for an asset.
+        Enforces human-controlled run pinning and fail-closed validation:
+          1. Configured run exists in backtest_runs.
+          2. Asset symbol matches exactly.
+          3. Status is 'COMPLETED'.
+          4. Corresponding backtest_reports entry exists.
+        Returns validated run_id, or None if invalid (fail-closed: NO auto-fallback or promotion).
+        """
+        norm_symbol = "BTC/USD" if "BTC" in symbol.upper() else "XAU/USD"
+        configured_id = self.get_configured_canonical_run_id(symbol)
+        if not configured_id:
+            logger.warning(f"No canonical run configured for {norm_symbol}. Fail-closed.")
+            return None
+
+        if not os.path.exists(self.db_path):
+            logger.warning(f"DB path {self.db_path} does not exist. Fail-closed.")
+            return None
+
+        try:
+            conn = self._get_connection()
+            try:
+                cur = conn.cursor()
+                cur.execute("""
+                    SELECT br.run_id
+                    FROM backtest_runs br
+                    JOIN backtest_reports rep ON br.run_id = rep.run_id
+                    WHERE br.run_id = ?
+                      AND br.symbol = ?
+                      AND br.status = 'COMPLETED'
+                """, (configured_id, norm_symbol))
+                row = cur.fetchone()
+                if row:
+                    return str(row["run_id"])
+                else:
+                    logger.warning(
+                        f"Configured canonical run '{configured_id}' for {norm_symbol} failed validation "
+                        "(missing, incomplete, wrong symbol, or missing report). Fail-closed: no auto-promotion."
+                    )
+                    return None
+            finally:
+                conn.close()
+        except Exception as exc:
+            logger.warning(f"Error validating canonical run '{configured_id}' for {norm_symbol}: {exc}. Fail-closed.")
+            return None
 
     # -----------------------------------------------------------------------
     # Automated Background Historical Learning & Maintenance
@@ -449,11 +518,19 @@ class HistoricalEvidenceService:
                 overall_reasoning="Historical market database not yet initialized.",
             )
 
+        canonical_run_id = self.resolve_canonical_run(target_symbol)
+        if not canonical_run_id:
+            return HistoricalEvidencePackage(
+                status="NOT_AVAILABLE",
+                evidence_quality="INSUFFICIENT",
+                overall_reasoning=f"No validated canonical backtest run available for {target_symbol}.",
+            )
+
         conn = self._get_connection()
         try:
             cur = conn.cursor()
 
-            # Query completed backtest signals for this exact symbol (Strict BTC/XAU separation)
+            # Query completed backtest signals for this exact symbol & canonical run (Strict BTC/XAU separation)
             cur.execute("""
                 SELECT 
                     signal_id, run_id, dataset_id, symbol, signal_timestamp, direction,
@@ -461,9 +538,9 @@ class HistoricalEvidenceService:
                     market_regime, outcome, realized_r, mfe, mae, is_in_sample,
                     success_reason, failure_reason
                 FROM historical_signals
-                WHERE symbol = ? AND outcome IN ('WIN', 'LOSS', 'BREAKEVEN', 'EXPIRED')
+                WHERE symbol = ? AND run_id = ? AND outcome IN ('WIN', 'LOSS', 'BREAKEVEN', 'EXPIRED')
                 ORDER BY signal_timestamp ASC
-            """, (target_symbol,))
+            """, (target_symbol, canonical_run_id))
 
             all_rows = cur.fetchall()
 
@@ -471,7 +548,7 @@ class HistoricalEvidenceService:
                 return HistoricalEvidencePackage(
                     status="NOT_AVAILABLE",
                     evidence_quality="INSUFFICIENT",
-                    overall_reasoning=f"No completed backtest trades found for {target_symbol}.",
+                    overall_reasoning=f"No completed backtest trades found for {target_symbol} under canonical run {canonical_run_id}.",
                 )
 
             # Extract run_id and dataset metadata

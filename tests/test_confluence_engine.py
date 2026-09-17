@@ -610,3 +610,83 @@ class TestSafeWaitOnError:
         # Should not raise
         result = engine.compute(broken)
         assert result.signal == "WAIT"
+
+
+class TestMTFAlignmentScaling:
+    """Rigorous tests proving the MTF Alignment scaling fix (Phase A)."""
+
+    def test_mtf_4_bullish_0_bearish_scores_8_bullish(self):
+        """4/4 agreement awards the full declared maximum of 8 points."""
+        engine = ConfluenceEngine()
+        snap = _build_snapshot(
+            ta_5m=_make_ta("BULLISH"),
+            ta_15m=_make_ta("BULLISH"),
+            ta_1h=_make_ta("BULLISH"),
+            ta_1d=_make_ta("BULLISH"),
+        )
+        res = engine._c_mtf_alignment(snap)
+        assert res.score == 8
+        assert res.bias == "BULLISH"
+        assert res.score <= CONTRIBUTOR_MAX_SCORES["MTF Alignment"]
+        assert len(res.conflicts) == 0
+
+    def test_mtf_3_bullish_1_bearish_scores_6_bullish(self):
+        """3/4 agreement awards round((3/4) * 8) = 6 points."""
+        engine = ConfluenceEngine()
+        snap = _build_snapshot(
+            ta_5m=_make_ta("BULLISH"),
+            ta_15m=_make_ta("BULLISH"),
+            ta_1h=_make_ta("BULLISH"),
+            ta_1d=_make_ta("BEARISH"),
+        )
+        res = engine._c_mtf_alignment(snap)
+        assert res.score == 6
+        assert res.bias == "BULLISH"
+        assert res.score <= CONTRIBUTOR_MAX_SCORES["MTF Alignment"]
+        assert len(res.conflicts) == 0
+
+    def test_mtf_2_bullish_2_bearish_neutral_split_with_penalty(self):
+        """2/4 tie triggers conflict penalty (round(2/4*8)=4, minus 2 penalty = 2 pts, NEUTRAL)."""
+        engine = ConfluenceEngine()
+        snap = _build_snapshot(
+            ta_5m=_make_ta("BULLISH"),
+            ta_15m=_make_ta("BULLISH"),
+            ta_1h=_make_ta("BEARISH"),
+            ta_1d=_make_ta("BEARISH"),
+        )
+        res = engine._c_mtf_alignment(snap)
+        assert res.score == 2
+        assert res.bias == "NEUTRAL"
+        assert len(res.conflicts) > 0
+        assert res.score <= CONTRIBUTOR_MAX_SCORES["MTF Alignment"]
+
+    def test_mtf_3_bearish_1_bullish_scores_6_bearish(self):
+        """3/4 bearish agreement awards 6 points with BEARISH bias."""
+        engine = ConfluenceEngine()
+        snap = _build_snapshot(
+            ta_5m=_make_ta("BEARISH"),
+            ta_15m=_make_ta("BEARISH"),
+            ta_1h=_make_ta("BEARISH"),
+            ta_1d=_make_ta("BULLISH"),
+        )
+        res = engine._c_mtf_alignment(snap)
+        assert res.score == 6
+        assert res.bias == "BEARISH"
+        assert res.score <= CONTRIBUTOR_MAX_SCORES["MTF Alignment"]
+        assert len(res.conflicts) == 0
+
+    def test_mtf_4_bearish_0_bullish_scores_8_bearish(self):
+        """4/4 bearish agreement awards full 8 points with BEARISH bias."""
+        engine = ConfluenceEngine()
+        snap = _build_snapshot(
+            ta_5m=_make_ta("BEARISH"),
+            ta_15m=_make_ta("BEARISH"),
+            ta_1h=_make_ta("BEARISH"),
+            ta_1d=_make_ta("BEARISH"),
+        )
+        res = engine._c_mtf_alignment(snap)
+        assert res.score == 8
+        assert res.bias == "BEARISH"
+        assert res.score <= CONTRIBUTOR_MAX_SCORES["MTF Alignment"]
+        assert len(res.conflicts) == 0
+

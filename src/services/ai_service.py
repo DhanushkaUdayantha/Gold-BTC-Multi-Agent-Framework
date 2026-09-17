@@ -58,9 +58,18 @@ class AIMarketAnalysisService:
 
         # Cache: market_context_key -> (timestamp, AIAnalysisResponse)
         self._analysis_cache: Dict[str, Tuple[float, AIAnalysisResponse]] = {}
-        # General fallback if context cache is empty
-        self._last_successful_analysis: Optional[AIAnalysisResponse] = None
+        # Symbol-scoped fallback if context cache is empty (prevents cross-asset leakage)
+        self._last_successful_by_symbol: Dict[str, AIAnalysisResponse] = {}
         self._cached_provider: Optional[BaseAIProvider] = None
+
+    @property
+    def _last_successful_analysis(self) -> Optional[AIAnalysisResponse]:
+        return self._last_successful_by_symbol.get(self.settings.DEFAULT_SYMBOL)
+
+    @_last_successful_analysis.setter
+    def _last_successful_analysis(self, val: Optional[AIAnalysisResponse]) -> None:
+        if val and hasattr(val, "symbol") and val.symbol:
+            self._last_successful_by_symbol[val.symbol] = val
 
     def _resolve_provider(self) -> BaseAIProvider:
         """Resolve the active AI provider based on settings and available API keys."""
@@ -197,7 +206,7 @@ class AIMarketAnalysisService:
                 analysis = provider.generate_analysis(raw_input)
                 analysis.generation_duration_ms = 0
                 self._analysis_cache[market_context] = (now, analysis)
-                self._last_successful_analysis = analysis
+                self._last_successful_by_symbol[symbol] = analysis
                 return analysis
 
             # 5. LAYER 1: MeaningfulChangeDetector gate
@@ -216,12 +225,13 @@ class AIMarketAnalysisService:
                     candle_timestamp=candle_ts,
                 )
                 if not should_call:
-                    # Nothing materially changed — serve cached or last-known result
-                    if cached_item:
+                    # Nothing materially changed — serve cached or symbol-scoped last-known result
+                    if cached_item and getattr(cached_item[1], "symbol", None) == symbol:
                         return cached_item[1]
-                    if self._last_successful_analysis:
-                        return self._last_successful_analysis
-                    # Edge case: no cache at all, fall through to live call anyway
+                    sym_last = self._last_successful_by_symbol.get(symbol)
+                    if sym_last and getattr(sym_last, "symbol", None) == symbol:
+                        return sym_last
+                    # Edge case: no cache at all for this symbol, fall through to live call anyway
 
             else:
                 change_reason = "force_refresh" if force_refresh else "testing_bypass"
@@ -248,8 +258,12 @@ class AIMarketAnalysisService:
                     f"Gemini request blocked by budget manager. Budget reason: {budget_reason}. "
                     f"Change reason was: {change_reason}. Serving cached analysis."
                 )
-                fallback_res = cached_item[1] if cached_item else self._last_successful_analysis
-                if fallback_res is None:
+                sym_last = self._last_successful_by_symbol.get(symbol)
+                if cached_item and getattr(cached_item[1], "symbol", None) == symbol:
+                    fallback_res = cached_item[1]
+                elif sym_last and getattr(sym_last, "symbol", None) == symbol:
+                    fallback_res = sym_last
+                else:
                     fallback_res = self.fallback_provider.generate_analysis(raw_input)
 
                 if budget_reason == "LIMIT_EXCEEDED":
@@ -257,6 +271,11 @@ class AIMarketAnalysisService:
                     fallback_res.provider_used = "AI: LIMIT REACHED"
                 else:
                     fallback_res.config_warning = f"AI Refresh Cooldown Active ({budget_reason.replace('_', ' ')})"
+
+                # Invariant defense: strictly ensure returned symbol equals requested symbol
+                if getattr(fallback_res, "symbol", None) != symbol:
+                    fallback_res = self.fallback_provider.generate_analysis(raw_input)
+
                 return fallback_res
 
             # 7. Execute live Gemini call
@@ -290,17 +309,23 @@ class AIMarketAnalysisService:
 
                 # Cache results
                 self._analysis_cache[market_context] = (now, analysis)
-                self._last_successful_analysis = analysis
+                self._last_successful_by_symbol[symbol] = analysis
+
+                # Invariant defense: strictly ensure returned symbol equals requested symbol
+                if getattr(analysis, "symbol", None) != symbol:
+                    analysis = self.fallback_provider.generate_analysis(raw_input)
+
                 return analysis
 
             except Exception as exc:
                 logger.error(f"AI provider '{provider.provider_name}' call failed: {exc}")
 
                 # Graceful fallback: return cached or local rule-based fallback
-                if cached_item:
+                sym_last = self._last_successful_by_symbol.get(symbol)
+                if cached_item and getattr(cached_item[1], "symbol", None) == symbol:
                     fallback_res = cached_item[1]
-                elif self._last_successful_analysis:
-                    fallback_res = self._last_successful_analysis
+                elif sym_last and getattr(sym_last, "symbol", None) == symbol:
+                    fallback_res = sym_last
                 else:
                     fallback_res = self.fallback_provider.generate_analysis(raw_input)
 
@@ -310,6 +335,11 @@ class AIMarketAnalysisService:
                 )
                 fallback_res.provider_used = "AI: FALLBACK"
                 fallback_res.is_fallback = True
+
+                # Invariant defense: strictly ensure returned symbol equals requested symbol
+                if getattr(fallback_res, "symbol", None) != symbol:
+                    fallback_res = self.fallback_provider.generate_analysis(raw_input)
+
                 return fallback_res
 
 

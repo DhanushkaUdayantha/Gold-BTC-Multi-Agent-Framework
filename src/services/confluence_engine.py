@@ -744,7 +744,7 @@ class ConfluenceEngine:
         status = "STALE" if freshness == "STALE" else "OK"
         return self._make_state(name, score, bias, evidence, "5m/15m", status)
 
-    # 4. MTF Alignment — 7pt max (5m/15m/1h/1d agreeing)
+    # 4. MTF Alignment — 8pt max (5m/15m/1h/1d agreeing)
     def _c_mtf_alignment(self, snap: MarketSnapshot) -> ContributorState:
         name = "MTF Alignment"
         tfs = {
@@ -776,7 +776,7 @@ class ConfluenceEngine:
         bias = "BULLISH" if bull_count > bear_count else ("BEARISH" if bear_count > bull_count else "NEUTRAL")
 
         # Proportional score: aligned / total * max_pts
-        score = round((dominant / total) * 7) if total > 0 else 0
+        score = round((dominant / total) * 8) if total > 0 else 0
         # Conflict: no clear majority
         conflicts = []
         if abs(bull_count - bear_count) <= 1 and total >= 3:
